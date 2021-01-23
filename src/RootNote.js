@@ -12,7 +12,7 @@ export default function RootNote(props) {
 
   const buttons = notes.map(note =>
     <Button text={note} onClick={onClick}
-      selected={props.selected === note.toString()} />
+      selected={props.selected.toString() === note} />
   )
 
   return (
