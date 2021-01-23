@@ -1,25 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react'
+import OptionList from './OptionList.js'
+import Piano from './Piano.js'
+import RootNote from './RootNote.js'
 
-function App() {
+export default function App() {
+
+  const [notes, setNotes] = useState(['C'])
+
+  function rootChange(note, prev=undefined) {
+    setNotes(state => [note])
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Piano notes={notes}></Piano>
+      <br /><br />
+      <RootNote selected={notes[0]} onChange={rootChange}></RootNote>
+      <br /><br />
+      <OptionList name="Scales" root={notes[0]}></OptionList>
+      <br /><br />
+      <OptionList name="Chords" root={notes[0]}></OptionList>
     </div>
   );
 }
-
-export default App;
