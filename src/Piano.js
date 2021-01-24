@@ -5,11 +5,15 @@ export default function Piano(props) {
                  'C4', 'C#4', 'D4', 'D#4', 'E4', 'F4', 'F#4', 'G4', 'G#4', 'A4', 'A#4', 'B4',
                  'C5', 'C#5', 'D5', 'D#5', 'E5', 'F5', 'F#5', 'G5', 'G#5', 'A5', 'A#5', 'B5',]
 
+  function handleClick(note, wasPressed) {
+    props.onClick(note, wasPressed)
+  }
+
   const keys = notes.map(note => {
     if (props.notes.includes(note, true)) {
-      return <span><strong>{note}</strong></span>
+      return <span onClick={() => handleClick(note, true)}><strong>{note}</strong></span>
     } else {
-      return <span>{note}</span>
+      return <span onClick={() => handleClick(note, false)}>{note}</span>
     }
   })
 

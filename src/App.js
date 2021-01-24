@@ -10,6 +10,14 @@ export default function App() {
   const [notes, setNotes] = useState(new NoteList([new Note('C', '', 4)]))
   const root = notes.notes[0]
 
+  function pianoChange(note, wasPressed) {
+    if (wasPressed) {
+      setNotes(state => new NoteList(state.notes.filter(n => !n.isEnharmonic(note))).sort())
+    } else {
+      setNotes(state => new NoteList(state.notes.concat([Note.fromString(note)])).sort())
+    }
+  }
+
   function rootChange(note, prev=undefined) {
     if (prev !== undefined) {
       setNotes(state => state.transpose(prev.intervalTo(note)))
@@ -28,7 +36,7 @@ export default function App() {
 
   return (
     <div>
-      <Piano notes={notes}></Piano>
+      <Piano notes={notes} onClick={pianoChange}></Piano>
       <br /><br />
       <RootNote selected={root.toPitchClass()} onChange={rootChange}></RootNote>
       <br /><br />
