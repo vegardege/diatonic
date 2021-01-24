@@ -7,7 +7,7 @@ export default function OptionList(props) {
     props.onChange(s, props.name)
   }
 
-  const options = ['major', 'minor', 'dim']
+  const options = Object.keys(props.options)
 
   const buttons = options.map(option => {
     const text = `${props.root.toString()} ${option}`

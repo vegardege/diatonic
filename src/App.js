@@ -7,13 +7,14 @@ import RootNote from './RootNote.js'
 
 export default function App() {
 
-  const [notes, setNotes] = useState(new NoteList([new Note('C')]))
+  const [notes, setNotes] = useState(new NoteList([new Note('C', '', 4)]))
+  const root = notes.notes[0]
 
   function rootChange(note, prev=undefined) {
     if (prev !== undefined) {
       setNotes(state => state.transpose(prev.intervalTo(note)))
     } else {
-      setNotes(new NoteList([note]))
+      setNotes(new NoteList([note.toPitch(4)]))
     }
   }
   
@@ -27,13 +28,13 @@ export default function App() {
 
   return (
     <div>
-      <Piano notes={notes.notes}></Piano>
+      <Piano notes={notes}></Piano>
       <br /><br />
-      <RootNote selected={notes.notes[0]} onChange={rootChange}></RootNote>
+      <RootNote selected={root.toPitchClass()} onChange={rootChange}></RootNote>
       <br /><br />
-      <OptionList name="Scales" root={notes.notes[0]} onChange={scaleChange}></OptionList>
+      <OptionList name="Scales" root={root} options={Scale.scales} onChange={scaleChange}></OptionList>
       <br /><br />
-      <OptionList name="Chords" root={notes.notes[0]} onChange={chordChange}></OptionList>
+      <OptionList name="Chords" root={root} options={Chord.chords} onChange={chordChange}></OptionList>
     </div>
   );
 }
