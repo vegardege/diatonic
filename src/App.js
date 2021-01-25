@@ -7,7 +7,7 @@ import RootNote from './RootNote.js'
 
 export default function App() {
 
-  const [notes, setNotes] = useState(new NoteList([new Note('C', '', 4)]))
+  const [notes, setNotes] = useState(new NoteList([]))
 
   const rootNotes = NoteList.fromString('C4 C#4 D4 D#4 E4 F4 G4 G#4 A4 A#4 B4')
   const currentRoot = notes.notes[0]
