@@ -22,7 +22,7 @@ export default function App() {
     }
   }
 
-  function rootChange(note, prev=undefined) {
+  function rootChange(note) {
     if (currentRoot !== undefined) {
       setNotes(state => state.transpose(currentRoot.intervalTo(note)))
     } else {
@@ -31,11 +31,11 @@ export default function App() {
   }
 
   function scaleChange(name) {
-    setNotes(new Scale(currentRoot, name))
+    setNotes(new Scale(currentRoot || new Note('C', '', 4), name))
   }
 
   function chordChange(name) {
-    setNotes(new Chord(currentRoot, name))
+    setNotes(new Chord(currentRoot || new Note('C', '', 4), name))
   }
 
   return (
