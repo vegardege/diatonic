@@ -44,9 +44,9 @@ export default function App() {
       <br /><br />
       <RootNote notes={rootNotes} selected={currentRoot} onChange={rootChange}></RootNote>
       <br /><br />
-      <OptionList name="scale" root={currentRoot} options={Scale.scales} onChange={scaleChange} match={match}></OptionList>
+      <OptionList name="scale" root={currentRoot} options={Scale.scales} onChange={scaleChange} match={match['scale']}></OptionList>
       <br /><br />
-      <OptionList name="chord" root={currentRoot} options={Chord.chords} onChange={chordChange} match={match}></OptionList>
+      <OptionList name="chord" root={currentRoot} options={Chord.chords} onChange={chordChange} match={match['chord']}></OptionList>
     </div>
   );
 }
