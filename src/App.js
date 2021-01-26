@@ -16,9 +16,9 @@ export default function App() {
 
   function pianoChange(note, wasPressed) {
     if (wasPressed) {
-      setNotes(state => new NoteList(state.notes.filter(n => !n.isEnharmonic(note))).sort())
+      setNotes(state => state.remove(note, true))
     } else {
-      setNotes(state => new NoteList(state.notes.concat([Note.fromString(note)])).sort())
+      setNotes(state => state.add(note))
     }
   }
 
