@@ -6,7 +6,7 @@ export default function OptionList(props) {
     const match = Math.round(100 * props.match[option])
     const text = `${option} (${match}%)`
 
-    return <Button key={text} text={text}
+    return <Button key={text} text={text} selected={match === 100}
       model={option} onClick={props.onChange} />
   })
 
