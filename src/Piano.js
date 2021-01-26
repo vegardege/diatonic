@@ -32,13 +32,14 @@ export default function Piano(props) {
       const octave = centerOctave + Math.floor((ixStart + ix) / 7)
       const diatonicNote = diatonic[mod((ixStart + ix), 7)]
       const selected = props.notes.includes(diatonicNote + octave)
+      const highlighted = props.highlight.includes(diatonicNote + octave)
 
       // TODO Make separate componen
       return <rect x={ix * size.diatonicKey.width}
                    y={0}
                    width={size.diatonicKey.width}
                    height={size.diatonicKey.height}
-                   fill={selected ? 'red' : 'white'}
+                   fill={selected ? 'red' : highlighted ? 'pink' : 'white'}
                    stroke='black'
                    strokeWidth='1'
                    rx={size.diatonicKey.rx}
@@ -50,6 +51,7 @@ export default function Piano(props) {
     const diatonicNote = diatonic[mod(ixStart + ix, 7)]
     const hasChromatic = chromatic[mod(ixStart + ix, 7)]
     const selected = props.notes.includes(diatonicNote + '#' + octave)
+    const highlighted = props.highlight.includes(diatonicNote + '#' + octave)
 
     if (!hasChromatic) {
       return undefined
@@ -60,7 +62,7 @@ export default function Piano(props) {
                  y={0}
                  width={size.chromaticKey.width}
                  height={size.chromaticKey.height}
-                 fill={selected ? 'red' : 'black'}
+                 fill={highlighted ? 'pink' : selected ? 'red' : 'black'}
                  stroke='black'
                  strokeWidth='1'
                  rx={size.chromaticKey.rx}

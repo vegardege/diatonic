@@ -12,7 +12,10 @@ export default function RootNote(props) {
   const buttons = props.notes.notes.map(note => {
     const text = note.toPitchClass().toString()
     return <Button key={text} text={text} model={note}
-      onClick={props.onChange} selected={isSelected(note)} />
+      onClick={props.onChange}
+      onMouseEnter={() => props.onHover(note, true)}
+      onMouseLeave={() => props.onHover(note, false)}
+      selected={isSelected(note)} />
   })
 
   return (

@@ -8,6 +8,7 @@ import RootNote from './RootNote.js'
 export default function App() {
 
   const [notes, setNotes] = useState(new NoteList([]))
+  const [highlight, setHighlight] = useState(new NoteList([]))
 
   const rootNotes = NoteList.fromString('C4 C#4 D4 D#4 E4 F4 G4 G#4 A4 A#4 B4')
   const currentRoot = notes.notes[0]
@@ -16,9 +17,9 @@ export default function App() {
 
   function pianoChange(note, wasPressed) {
     if (wasPressed) {
-      setNotes(state => state.remove(note, true))
+      setNotes(state => state.remove(note, true).sort())
     } else {
-      setNotes(state => state.add(note))
+      setNotes(state => state.add(note).sort())
     }
   }
 
@@ -30,23 +31,54 @@ export default function App() {
     }
   }
 
+  function rootHover(note, active) {
+    if (active) {
+      if (currentRoot !== undefined) {
+        setHighlight(notes.transpose(currentRoot.intervalTo(note)))
+      } else {
+        setHighlight(new NoteList([note.toPitch(4)]))
+      }
+    } else {
+      setHighlight(new NoteList([]))
+    }
+  }
+
   function scaleChange(name) {
     setNotes(new Scale(currentRoot || new Note('C', '', 4), name))
+  }
+
+  function scaleHover(name, active) {
+    if (active) {
+      setHighlight(new Scale(currentRoot || new Note('C', '', 4), name))
+    } else {
+      setHighlight(new NoteList([]))
+    }
   }
 
   function chordChange(name) {
     setNotes(new Chord(currentRoot || new Note('C', '', 4), name))
   }
 
+  function chordHover(name, active) {
+    if (active) {
+      setHighlight(new Chord(currentRoot || new Note('C', '', 4), name))
+    } else {
+      setHighlight(new NoteList([]))
+    }
+  }
+
   return (
     <div>
-      <Piano keys={7*3} notes={notes.simplify().toStringArray()} onClick={pianoChange}></Piano>
+      <Piano keys={7*3} notes={notes.simplify().toStringArray()} highlight={highlight.simplify().toStringArray()} onClick={pianoChange}></Piano>
       <br /><br />
-      <RootNote notes={rootNotes} selected={currentRoot} onChange={rootChange}></RootNote>
+      <RootNote notes={rootNotes} selected={currentRoot}
+        onChange={rootChange} onHover={rootHover}></RootNote>
       <br /><br />
-      <OptionList name="scales" root={currentRoot} options={Scale.scales} onChange={scaleChange} match={match['scales']}></OptionList>
+      <OptionList name="scales" root={currentRoot} options={Scale.scales} match={match['scales']}
+        onChange={scaleChange} onHover={scaleHover}></OptionList>
       <br /><br />
-      <OptionList name="chords" root={currentRoot} options={Chord.chords} onChange={chordChange} match={match['chords']}></OptionList>
+      <OptionList name="chords" root={currentRoot} options={Chord.chords} match={match['chords']}
+        onChange={chordChange} onHover={chordHover}></OptionList>
     </div>
   );
 }

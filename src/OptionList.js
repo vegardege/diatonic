@@ -7,7 +7,9 @@ export default function OptionList(props) {
     const text = `${option} (${match}%)`
 
     return <Button key={text} text={text} selected={match === 100}
-      model={option} onClick={props.onChange} />
+      model={option} onClick={props.onChange}
+      onMouseEnter={() => props.onHover(option, true)}
+      onMouseLeave={() => props.onHover(option, false)} />
   })
 
   return (
