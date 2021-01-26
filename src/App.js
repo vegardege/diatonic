@@ -40,13 +40,13 @@ export default function App() {
 
   return (
     <div>
-      <Piano notes={notes} onClick={pianoChange}></Piano>
+      <Piano keys={7*3} notes={notes.simplify().toStringArray()} onClick={pianoChange}></Piano>
       <br /><br />
       <RootNote notes={rootNotes} selected={currentRoot} onChange={rootChange}></RootNote>
       <br /><br />
-      <OptionList name="scale" root={currentRoot} options={Scale.scales} onChange={scaleChange} match={match['scale']}></OptionList>
+      <OptionList name="scales" root={currentRoot} options={Scale.scales} onChange={scaleChange} match={match['scales']}></OptionList>
       <br /><br />
-      <OptionList name="chord" root={currentRoot} options={Chord.chords} onChange={chordChange} match={match['chord']}></OptionList>
+      <OptionList name="chords" root={currentRoot} options={Chord.chords} onChange={chordChange} match={match['chords']}></OptionList>
     </div>
   );
 }
