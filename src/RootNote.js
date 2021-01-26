@@ -10,9 +10,9 @@ export default function RootNote(props) {
   }
 
   const buttons = props.notes.notes.map(note => {
-    return <Button text={note.toPitchClass().toString()}
-      model={note} onClick={props.onChange}
-      selected={isSelected(note)} />
+    const text = note.toPitchClass().toString()
+    return <Button key={text} text={text} model={note}
+      onClick={props.onChange} selected={isSelected(note)} />
   })
 
   return (
