@@ -20,8 +20,9 @@ export default function RootNote(props) {
 
   return (
     <div>
-      <div>Root</div>
-      <div>{buttons}</div>
+      <div class="notes">
+        {buttons}
+      </div>
     </div>
   )
 }

@@ -12,8 +12,8 @@ export default function Piano(props) {
   // Keep a fixed ratio for display purposes
   const size = {
     piano: {
-      width: props.width || 680,
-      height: 4 * (props.width || 680) / keyCount,
+      width: props.width || 670,
+      height: 4 * (props.width || 670) / keyCount,
     },
   }
   size.diatonicKey = {
@@ -39,9 +39,9 @@ export default function Piano(props) {
                    y={0}
                    width={size.diatonicKey.width}
                    height={size.diatonicKey.height}
-                   fill={selected ? 'red' : highlighted ? 'pink' : 'white'}
+                   fill={selected ? '#E84855' : highlighted ? '#F9E9EC' : 'white'}
                    stroke='black'
-                   strokeWidth='1'
+                   strokeWidth='1.5'
                    rx={size.diatonicKey.rx}
                    onClick={() => handleClick(diatonicNote + octave, selected)} />
     })
@@ -62,9 +62,9 @@ export default function Piano(props) {
                  y={0}
                  width={size.chromaticKey.width}
                  height={size.chromaticKey.height}
-                 fill={highlighted ? 'pink' : selected ? 'red' : 'black'}
+                 fill={selected ? '#E84855' : highlighted ? '#F9E9EC' : 'black'}
                  stroke='black'
-                 strokeWidth='1'
+                 strokeWidth='1.5'
                  rx={size.chromaticKey.rx}
                  onClick={() => handleClick(diatonicNote + '#' + octave, selected)} />
   })

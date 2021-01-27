@@ -10,7 +10,7 @@ export default function App() {
   const [notes, setNotes] = useState(new NoteList([]))
   const [highlight, setHighlight] = useState(new NoteList([]))
 
-  const rootNotes = NoteList.fromString('C4 C#4 D4 D#4 E4 F4 G4 G#4 A4 A#4 B4')
+  const rootNotes = NoteList.fromString('C4 C#4 D4 D#4 E4 F4 F#4 G4 G#4 A4 A#4 B4')
   const currentRoot = notes.notes[0]
 
   const match = notes.supersets()
@@ -68,17 +68,22 @@ export default function App() {
   }
 
   return (
-    <div>
-      <Piano keys={7*3} notes={notes.simplify().toStringArray()} highlight={highlight.simplify().toStringArray()} onClick={pianoChange}></Piano>
-      <br /><br />
-      <RootNote notes={rootNotes} selected={currentRoot}
-        onChange={rootChange} onHover={rootHover}></RootNote>
-      <br /><br />
-      <OptionList name="scales" root={currentRoot} options={Scale.scales} match={match['scales']}
-        onChange={scaleChange} onHover={scaleHover}></OptionList>
-      <br /><br />
-      <OptionList name="chords" root={currentRoot} options={Chord.chords} match={match['chords']}
-        onChange={chordChange} onHover={chordHover}></OptionList>
+    <div class="wrapper">
+      <div class="piano">
+        <Piano keys={7*3} notes={notes.simplify().toStringArray()} highlight={highlight.simplify().toStringArray()} onClick={pianoChange}></Piano>
+      </div>
+      <div>
+        <RootNote notes={rootNotes} selected={currentRoot}
+          onChange={rootChange} onHover={rootHover}></RootNote>
+      </div>
+      <div class="notelists">
+        <OptionList name="Scales" class="scale" root={currentRoot} options={Scale.scales} match={match['scales']}
+          onChange={scaleChange} onHover={scaleHover}></OptionList>
+      </div>
+      <div class="notelists">
+        <OptionList name="Chords" class="chord" root={currentRoot} options={Chord.chords} match={match['chords']}
+          onChange={chordChange} onHover={chordHover}></OptionList>
+      </div>
     </div>
   );
 }
