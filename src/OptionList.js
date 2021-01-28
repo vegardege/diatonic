@@ -6,14 +6,14 @@ export default function OptionList(props) {
     const match = Math.round(100 * props.match[option])
     const text = `${option} (${match}%)`
 
-    return <Button key={text} text={text} selected={match === 100}
+    return <Button key={text} text={text} isSelected={match === 100}
       model={option} onClick={props.onChange} class={props.class}
       onMouseEnter={() => props.onHover(option, true)}
       onMouseLeave={() => props.onHover(option, false)} />
   })
 
   return (
-    <div>
+    <div class="notelists">
       <div><strong>{props.name}</strong></div>
       <div>{buttons}</div>
     </div>

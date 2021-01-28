@@ -10,8 +10,8 @@ export default function App() {
   const [notes, setNotes] = useState(new NoteList([]))
   const [highlight, setHighlight] = useState(new NoteList([]))
 
-  const rootNotes = NoteList.fromString('C4 C#4 D4 D#4 E4 F4 F#4 G4 G#4 A4 A#4 B4')
   const currentRoot = notes.notes[0]
+  const currentHighlighRoot = highlight.notes[0]
 
   const match = notes.supersets()
 
@@ -31,23 +31,37 @@ export default function App() {
     }
   }
 
-  function rootChange(note) {
-    if (currentRoot !== undefined) {
-      setNotes(state => state.transpose(currentRoot.intervalTo(note)))
+  /**
+   * Called when the user clicks a button in the root note component.
+   * 
+   * If keys are already pressed, we transpose them to get a new selection
+   * with the desired key as root (lowest pitch). Otherwise, we simply
+   * press the desired note.
+   * 
+   * @param {Note} newRoot The new root note
+   */
+  function handleRootChange(newRoot) {
+    if (currentRoot === undefined) {
+      setNotes(new NoteList([newRoot]))
     } else {
-      setNotes(new NoteList([note.toPitch(4)]))
+      setNotes(state => state.transpose(currentRoot.intervalTo(newRoot)))
     }
   }
 
-  function rootHover(note, active) {
-    if (active) {
-      if (currentRoot !== undefined) {
-        setHighlight(notes.transpose(currentRoot.intervalTo(note)))
-      } else {
-        setHighlight(new NoteList([note.toPitch(4)]))
-      }
+  /**
+   * Called when the user hovers a button the root note component.
+   * 
+   * If keys are already pressed, we transpose them to get a new selection
+   * with the desired key as root (lowest pitch). Otherwise, we simply
+   * highlight the desired note.
+   * 
+   * @param {Note} newRoot The new root note
+   */
+  function handleRootHover(newRoot) {
+    if (currentRoot === undefined) {
+      setHighlight(new NoteList([newRoot]))
     } else {
-      setHighlight(new NoteList([]))
+      setHighlight(notes.transpose(currentRoot.intervalTo(newRoot)))
     }
   }
 
@@ -76,24 +90,21 @@ export default function App() {
   }
 
   return (
-    <div id="page">
+    <div id="app">
       <div class="piano">
         <Piano keys={7*3} width={780} notes={notes.simplify().toStringArray()} highlight={highlight.simplify().toStringArray()}
           onClick={pianoChange} onHover={pianoHover}></Piano>
       </div>
       <div id="controls">
-        <div>
-          <RootNote notes={rootNotes} selected={currentRoot}
-            onChange={rootChange} onHover={rootHover}></RootNote>
-        </div>
-        <div class="notelists">
-          <OptionList name="Scales" class="scale" root={currentRoot} options={Scale.scales} match={match['scales']}
+        <RootNote selected={currentRoot}
+                  highlighted={currentHighlighRoot}
+                  onClick={(...note) => handleRootChange(new Note(...note))}
+                  onMouseEnter={(...note) => handleRootHover(new Note(...note))}
+                  onMouseLeave={() => setHighlight(new NoteList([]))} />
+        <OptionList name="Scales" class="scale" root={currentRoot} options={Scale.scales} match={match['scales']}
             onChange={scaleChange} onHover={scaleHover}></OptionList>
-        </div>
-        <div class="notelists">
-          <OptionList name="Chords" class="chord" root={currentRoot} options={Chord.chords} match={match['chords']}
+        <OptionList name="Chords" class="chord" root={currentRoot} options={Chord.chords} match={match['chords']}
             onChange={chordChange} onHover={chordHover}></OptionList>
-        </div>
       </div>
     </div>
   );

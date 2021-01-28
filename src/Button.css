@@ -9,10 +9,6 @@
     width: 125px;
 }
 
-.button:hover {
-    background: #CCD8AB;
-}
-
 .notes .button {
     border-right: 1px solid #ccc;
     border-top: 1px solid #ccc;

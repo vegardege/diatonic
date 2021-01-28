@@ -5,16 +5,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-#root {
-  max-width: 780px;
-  margin: auto;
-}
-
-#page {
+#app {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  max-width: 780px;
+  margin: auto;
 }
 
 #controls {
@@ -25,13 +22,16 @@ body {
   width: 680px;
 }
 
-.piano {
-  margin: 20px 0 20px 0;
+#rootNote {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-bottom: 20px;
   width: 100%;
 }
 
-.notes {
-  margin: 0 0 20px 0;
+.piano {
+  margin: 20px 0 20px 0;
   width: 100%;
 }
 
