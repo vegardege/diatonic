@@ -6,15 +6,23 @@ body {
 }
 
 #root {
-  max-width: 680px;
+  max-width: 780px;
   margin: auto;
 }
 
-.wrapper {
+#page {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
+}
+
+#controls {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: 680px;
 }
 
 .piano {

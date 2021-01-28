@@ -2,7 +2,7 @@
     background: #eee;
     cursor: pointer;
     display: inline-block;
-    height: 20px;
+    height: 40px;
     margin: 5px;
     padding: 10px;
     vertical-align: middle;
@@ -17,9 +17,11 @@
     border-right: 1px solid #ccc;
     border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
+    border-left: 0;
+    font-size: 1.0rem;
     margin: 0;
-    height: 20px;
-    width: 20px;
+    height: 40px;
+    width: 40px;
     text-align: center;
     vertical-align: middle;
 }
@@ -37,5 +39,7 @@
 .notelists .button {
     border: 1px solid #ccc;
     border-radius: 5px;
+    font-size: 0.9rem;
+    height: 40px;
     text-align: left;
 }

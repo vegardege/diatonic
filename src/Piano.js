@@ -18,32 +18,45 @@ export default function Piano(props) {
   }
   size.diatonicKey = {
       width: size.piano.width / keyCount,
-      height: size.piano.height,
+      height: size.piano.height - 1,
       rx: 5,
   }
   size.chromaticKey = {
-      width: size.diatonicKey.width / 2,
-      height: size.diatonicKey.height / 2,
-      offset: size.diatonicKey.width * (3/4),
+      width: size.diatonicKey.width * 0.50,
+      height: size.diatonicKey.height * 0.55,
+      offset: size.diatonicKey.width * 0.75,
       rx: 5,
+  }
+
+  function keyColor(note, defaultColor) {
+    const pressed = props.notes.includes(note)
+    const highlighted = props.highlight.includes(note)
+
+    if (pressed) {
+      return '#E84855'
+    } else if (highlighted) {
+      return '#F2929A'
+    }
+    return defaultColor
   }
 
   const diatonicKeys = [...Array(keyCount).keys()].map(ix => {
       const octave = centerOctave + Math.floor((ixStart + ix) / 7)
       const diatonicNote = diatonic[mod((ixStart + ix), 7)]
       const selected = props.notes.includes(diatonicNote + octave)
-      const highlighted = props.highlight.includes(diatonicNote + octave)
 
       // TODO Make separate componen
       return <rect x={ix * size.diatonicKey.width}
                    y={0}
                    width={size.diatonicKey.width}
                    height={size.diatonicKey.height}
-                   fill={selected ? '#E84855' : highlighted ? '#F9E9EC' : 'white'}
+                   fill={keyColor(diatonicNote + octave, '#ffffff')}
                    stroke='black'
-                   strokeWidth='1.5'
+                   strokeWidth='1'
                    rx={size.diatonicKey.rx}
-                   onClick={() => handleClick(diatonicNote + octave, selected)} />
+                   onClick={() => props.onClick(diatonicNote + octave, selected)}
+                   onMouseEnter={() => props.onHover(diatonicNote + octave, true)}
+                   onMouseLeave={() => props.onHover(diatonicNote + octave, false)} />
     })
 
   const chromaticKeys = [...Array(keyCount).keys()].map(ix => {
@@ -51,7 +64,6 @@ export default function Piano(props) {
     const diatonicNote = diatonic[mod(ixStart + ix, 7)]
     const hasChromatic = chromatic[mod(ixStart + ix, 7)]
     const selected = props.notes.includes(diatonicNote + '#' + octave)
-    const highlighted = props.highlight.includes(diatonicNote + '#' + octave)
 
     if (!hasChromatic) {
       return undefined
@@ -62,21 +74,22 @@ export default function Piano(props) {
                  y={0}
                  width={size.chromaticKey.width}
                  height={size.chromaticKey.height}
-                 fill={selected ? '#E84855' : highlighted ? '#F9E9EC' : 'black'}
+                 fill={keyColor(diatonicNote + '#' + octave, '#000000')}
                  stroke='black'
-                 strokeWidth='1.5'
+                 strokeWidth='1'
                  rx={size.chromaticKey.rx}
-                 onClick={() => handleClick(diatonicNote + '#' + octave, selected)} />
+                 onClick={() => props.onClick(diatonicNote + '#' + octave, selected)}
+                 onMouseEnter={() => props.onHover(diatonicNote + '#' + octave, true)}
+                 onMouseLeave={() => props.onHover(diatonicNote + '#' + octave, false)} />
   })
-
-  function handleClick(note, wasPressed) {
-    props.onClick(note, wasPressed)
-  }
 
   return (
     <svg width={size.piano.width} height={size.piano.height}>
-      {diatonicKeys}
-      {chromaticKeys}
+      <g>
+        {diatonicKeys}
+        {chromaticKeys}
+      </g>
+      <rect x="0" y="0" width={size.piano.width} height="5" fill="#000" />
     </svg>
   )
 }

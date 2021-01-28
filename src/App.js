@@ -23,6 +23,14 @@ export default function App() {
     }
   }
 
+  function pianoHover(note, active) {
+    if (active) {
+      setHighlight(state => state.add(Note.fromString(note)))
+    } else {
+      setHighlight(state => state.remove(Note.fromString(note), true))
+    }
+  }
+
   function rootChange(note) {
     if (currentRoot !== undefined) {
       setNotes(state => state.transpose(currentRoot.intervalTo(note)))
@@ -68,21 +76,24 @@ export default function App() {
   }
 
   return (
-    <div class="wrapper">
+    <div id="page">
       <div class="piano">
-        <Piano keys={7*3} notes={notes.simplify().toStringArray()} highlight={highlight.simplify().toStringArray()} onClick={pianoChange}></Piano>
+        <Piano keys={7*3} width={780} notes={notes.simplify().toStringArray()} highlight={highlight.simplify().toStringArray()}
+          onClick={pianoChange} onHover={pianoHover}></Piano>
       </div>
-      <div>
-        <RootNote notes={rootNotes} selected={currentRoot}
-          onChange={rootChange} onHover={rootHover}></RootNote>
-      </div>
-      <div class="notelists">
-        <OptionList name="Scales" class="scale" root={currentRoot} options={Scale.scales} match={match['scales']}
-          onChange={scaleChange} onHover={scaleHover}></OptionList>
-      </div>
-      <div class="notelists">
-        <OptionList name="Chords" class="chord" root={currentRoot} options={Chord.chords} match={match['chords']}
-          onChange={chordChange} onHover={chordHover}></OptionList>
+      <div id="controls">
+        <div>
+          <RootNote notes={rootNotes} selected={currentRoot}
+            onChange={rootChange} onHover={rootHover}></RootNote>
+        </div>
+        <div class="notelists">
+          <OptionList name="Scales" class="scale" root={currentRoot} options={Scale.scales} match={match['scales']}
+            onChange={scaleChange} onHover={scaleHover}></OptionList>
+        </div>
+        <div class="notelists">
+          <OptionList name="Chords" class="chord" root={currentRoot} options={Chord.chords} match={match['chords']}
+            onChange={chordChange} onHover={chordHover}></OptionList>
+        </div>
       </div>
     </div>
   );
