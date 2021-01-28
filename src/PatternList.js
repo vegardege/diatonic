@@ -1,12 +1,12 @@
-import './OptionList.css'
+import './PatternList.css'
 import Button from './Button.js'
 
 /**
- * A list of buttons containing a scale or a chord.
+ * A list of buttons containing a pattern (scale or chord).
  */
-export default function OptionList(props) {
+export default function PatternList(props) {
 
-  const buttons = Object.keys(props.options).map(option => {
+  const buttons = Object.keys(props.patterns).map(option => {
     const match = Math.round(100 * props.pressMatch[option])
     const hMatch = Math.round(100 * props.highlightMatch[option])
     const text = `${option} (${match}%)`

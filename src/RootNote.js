@@ -38,7 +38,7 @@ export default function RootNote(props) {
 
     return <Button key={text}
                    text={text}
-                   isSelected={isSelected(props.selected, ...inputNote)}
+                   isSelected={isSelected(props.pressed, ...inputNote)}
                    isHighlighted={isSelected(props.highlighted, ...inputNote)}
                    onClick={() => props.onClick(...expandedNote)}
                    onMouseEnter={() => props.onMouseEnter(...expandedNote)}
@@ -73,13 +73,13 @@ export default function RootNote(props) {
    */
   function expandNote(letter, accidental, octave) {
 
-    letter = letter || props.selected?.letter || letters[0]
-    if (accidental === props.selected?.accidentals) {
+    letter = letter || props.pressed?.letter || letters[0]
+    if (accidental === props.pressed?.accidentals) {
       accidental = '' // Toggle
     } else {
-      accidental = accidental || props.selected?.accidentals || ''
+      accidental = accidental || props.pressed?.accidentals || ''
     }
-    octave = octave || props.selected?.octave || 4
+    octave = octave || props.pressed?.octave || 4
 
     return [letter, accidental, octave]
   }

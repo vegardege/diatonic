@@ -5,9 +5,8 @@ export default function Piano(props) {
 
   // We need at least seven diatonic keys, and always start with one of them.
   // The fourth octave is automatically centered.
-  const keyCount = Math.min(77, Math.max(7, props.keys || 7 * 3))
-  const ixStart = -Math.floor((keyCount - 7) / 2)
-  const centerOctave = 4
+  const keyCount = Math.min(77, Math.max(7, 7 * props.octaves || 1))
+  const firstOctave = 4 - Math.floor((props.octaves - 1) / 2)
 
   // Keep a fixed ratio for display purposes
   const size = {
@@ -29,8 +28,8 @@ export default function Piano(props) {
   }
 
   function keyColor(note, defaultColor) {
-    const pressed = props.notes.includes(note)
-    const highlighted = props.highlight.includes(note)
+    const pressed = props.pressed.includes(note)
+    const highlighted = props.highlighted.includes(note)
 
     if (pressed) {
       return '#E84855'
@@ -41,9 +40,9 @@ export default function Piano(props) {
   }
 
   const diatonicKeys = [...Array(keyCount).keys()].map(ix => {
-      const octave = centerOctave + Math.floor((ixStart + ix) / 7)
-      const diatonicNote = diatonic[mod((ixStart + ix), 7)]
-      const selected = props.notes.includes(diatonicNote + octave)
+      const octave = firstOctave + Math.floor(ix / 7)
+      const diatonicNote = diatonic[mod(ix, 7)]
+      const selected = props.pressed.includes(diatonicNote + octave)
 
       // TODO Make separate componen
       return <rect x={ix * size.diatonicKey.width}
@@ -54,16 +53,16 @@ export default function Piano(props) {
                    stroke='black'
                    strokeWidth='1'
                    rx={size.diatonicKey.rx}
-                   onClick={() => props.onClick(diatonicNote + octave, selected)}
-                   onMouseEnter={() => props.onHover(diatonicNote + octave, true)}
-                   onMouseLeave={() => props.onHover(diatonicNote + octave, false)} />
+                   onClick={() => props.onClick(diatonicNote + octave, !selected)}
+                   onMouseEnter={() => props.onMouseEnter(diatonicNote + octave)}
+                   onMouseLeave={props.onMouseLeave} />
     })
 
   const chromaticKeys = [...Array(keyCount).keys()].map(ix => {
-    const octave = centerOctave + Math.floor((ixStart + ix) / 7)
-    const diatonicNote = diatonic[mod(ixStart + ix, 7)]
-    const hasChromatic = chromatic[mod(ixStart + ix, 7)]
-    const selected = props.notes.includes(diatonicNote + '#' + octave)
+    const octave = firstOctave + Math.floor(ix / 7)
+    const diatonicNote = diatonic[mod(ix, 7)]
+    const hasChromatic = chromatic[mod(ix, 7)]
+    const selected = props.pressed.includes(diatonicNote + '#' + octave)
 
     if (!hasChromatic) {
       return undefined
@@ -79,8 +78,8 @@ export default function Piano(props) {
                  strokeWidth='1'
                  rx={size.chromaticKey.rx}
                  onClick={() => props.onClick(diatonicNote + '#' + octave, selected)}
-                 onMouseEnter={() => props.onHover(diatonicNote + '#' + octave, true)}
-                 onMouseLeave={() => props.onHover(diatonicNote + '#' + octave, false)} />
+                 onMouseEnter={() => props.onMouseEnter(diatonicNote + '#' + octave)}
+                 onMouseLeave={() => props.onMouseLeave()} />
   })
 
   return (
