@@ -18,8 +18,8 @@ export default function App() {
 
   // A key can be pressed or highlighted. The two sets are kept
   // as separate state objects, as they change independently.
-  const [pressed, setPressed] = useState(new NoteList([]))
-  const [highlighted, setHighlighted] = useState(new NoteList([]))
+  const [pressed, setPressed] = useState(new NoteList())
+  const [highlighted, setHighlighted] = useState(new NoteList())
 
   const currentRoot = pressed.notes[0]
   const currentHighlighRoot = highlighted.notes[0]
@@ -95,8 +95,12 @@ export default function App() {
    * @param {class} cls NoteList class name of pattern
    * @param {string} name Name of pattern
    */
-  function handlePatternChange(cls, name) {
-    setPressed(new cls(currentRoot || new Note('C', '', 4), name))
+  function handlePatternChange(cls, name, pressed) {
+    if (!pressed) {
+      setPressed(new cls(currentRoot || new Note('C', '', 4), name))
+    } else {
+      clearPressed()
+    }
   }
 
   /**
@@ -110,6 +114,20 @@ export default function App() {
     setHighlighted(new cls(currentRoot || new Note('C', '', 4), name))
   }
 
+  /**
+   * Remove all pressed notes from the piano.
+   */
+  function clearPressed() {
+    setPressed(new NoteList())
+  }
+
+  /**
+   * Remove all highlights from the piano.
+   */
+  function clearHighlight() {
+    setHighlighted(new NoteList())
+  }
+
   return (
     <div id="app">
       <div class="piano">
@@ -119,30 +137,30 @@ export default function App() {
                highlighted={highlighted.simplify().toStringArray()}
                onClick={handlePianoChange}
                onMouseEnter={handlePianoHover}
-               onMouseLeave={() => setHighlighted(new NoteList([]))} />
+               onMouseLeave={clearHighlight} />
       </div>
       <div id="controls">
         <RootNote pressed={currentRoot}
                   highlighted={currentHighlighRoot}
                   onClick={(...note) => handleRootChange(new Note(...note))}
                   onMouseEnter={(...note) => handleRootHover(new Note(...note))}
-                  onMouseLeave={() => setHighlighted(new NoteList([]))} />
+                  onMouseLeave={clearHighlight} />
 
         <PatternList name="Scales"
                      patterns={Scale.scales}
                      pressMatch={pressMatch['scales']}
                      highlightMatch={highlightMatch['scales']}
-                     onClick={(name) => handlePatternChange(Scale, name)}
+                     onClick={(name, pressed) => handlePatternChange(Scale, name, pressed)}
                      onMouseEnter={(name) => handlePatternHover(Scale, name)}
-                     onMouseLeave={() => setHighlighted(new NoteList([]))} />
+                     onMouseLeave={clearHighlight} />
 
         <PatternList name="Chords"
                      patterns={Chord.chords}
                      pressMatch={pressMatch['chords']}
                      highlightMatch={highlightMatch['chords']}
-                     onClick={(name) => handlePatternChange(Chord, name)}
+                     onClick={(name, pressed) => handlePatternChange(Chord, name, pressed)}
                      onMouseEnter={(name) => handlePatternHover(Chord, name)}
-                     onMouseLeave={() => setHighlighted(new NoteList([]))} />
+                     onMouseLeave={clearHighlight} />
       </div>
     </div>
   );

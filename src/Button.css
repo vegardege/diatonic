@@ -5,3 +5,7 @@ button {
     height: 40px;
     padding: 10px;
 }
+
+button svg {
+    float: right;
+}

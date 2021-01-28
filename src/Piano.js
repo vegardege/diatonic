@@ -77,7 +77,7 @@ export default function Piano(props) {
                  stroke='black'
                  strokeWidth='1'
                  rx={size.chromaticKey.rx}
-                 onClick={() => props.onClick(diatonicNote + '#' + octave, selected)}
+                 onClick={() => props.onClick(diatonicNote + '#' + octave, !selected)}
                  onMouseEnter={() => props.onMouseEnter(diatonicNote + '#' + octave)}
                  onMouseLeave={() => props.onMouseLeave()} />
   })

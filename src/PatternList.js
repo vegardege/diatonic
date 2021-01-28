@@ -7,15 +7,20 @@ import Button from './Button.js'
 export default function PatternList(props) {
 
   const buttons = Object.keys(props.patterns).map(option => {
-    const match = Math.round(100 * props.pressMatch[option])
-    const hMatch = Math.round(100 * props.highlightMatch[option])
-    const text = `${option} (${match}%)`
+    const match = props.pressMatch[option],
+          hightlightMatch = props.highlightMatch[option],
+          isSelected = match >= 1,
+          isHightlighted = hightlightMatch >= 1
+
+    if (props.pressMatch[option] === undefined) return null;
 
     return <Button key={option}
-                   text={text}
-                   isSelected={match === 100}
-                   isHighlighted={hMatch === 100}
-                   onClick={() => props.onClick(option)}
+                   text={option}
+                   isSelected={isSelected}
+                   isHighlighted={isHightlighted}
+                   showProgress={true}
+                   progress={props.pressMatch[option]}
+                   onClick={() => props.onClick(option, isSelected)}
                    onMouseEnter={() => props.onMouseEnter(option)}
                    onMouseLeave={props.onMouseLeave} />
   })
