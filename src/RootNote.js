@@ -1,3 +1,4 @@
+import './RootNote.css'
 import Button from './Button.js'
 
 /**
@@ -89,13 +90,13 @@ export default function RootNote(props) {
 
   return (
     <div id="rootNote">
-      <div class="notes">
+      <div className="buttonGroup">
         {letterButtons}
       </div>
-      <div class="notes">
+      <div className="buttonGroup">
         {accidentalButtons}
       </div>
-      <div class="notes">
+      <div className="buttonGroup">
         {octaveButtons}
       </div>
     </div>

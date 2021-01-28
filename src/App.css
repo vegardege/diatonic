@@ -1,0 +1,31 @@
+#app {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    max-width: 780px;
+    margin: auto;
+  }
+  
+  #controls {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 580px;
+  }
+  
+  h2 {
+    border-bottom: 1px solid #000;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    font-weight: 600;
+    text-align: center;
+    width: 100%;
+  }
+  
+  .piano {
+    margin: 20px 0 20px 0;
+    width: 100%;
+  }
+  

@@ -1,3 +1,4 @@
+import './OptionList.css'
 import Button from './Button.js'
 
 export default function OptionList(props) {
@@ -14,7 +15,7 @@ export default function OptionList(props) {
 
   return (
     <div class="notelists">
-      <div><strong>{props.name}</strong></div>
+      <h2>{props.name}</h2>
       <div>{buttons}</div>
     </div>
   )

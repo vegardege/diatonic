@@ -3,39 +3,5 @@
     cursor: pointer;
     display: inline-block;
     height: 40px;
-    margin: 5px;
     padding: 10px;
-    vertical-align: middle;
-    width: 125px;
-}
-
-.notes .button {
-    border-right: 1px solid #ccc;
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
-    border-left: 0;
-    font-size: 1.0rem;
-    margin: 0;
-    height: 40px;
-    width: 40px;
-    text-align: center;
-    vertical-align: middle;
-}
-
-.notes .button:first-child {
-    border-radius: 10px 0 0 10px;
-    border-left: 1px solid #ccc;
-}
-
-.notes .button:last-child {
-    border-right: 1px solid #ccc;
-    border-radius: 0 10px 10px 0;
-}
-
-.notelists .button {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 0.9rem;
-    height: 40px;
-    text-align: left;
 }

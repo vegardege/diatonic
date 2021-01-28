@@ -1,0 +1,33 @@
+#rootNote {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+.buttonGroup {
+    margin: 0 5px 20px 5px;
+}
+
+.buttonGroup button {
+    border-right: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    border-left: 0;
+    font-size: 1.0rem;
+    margin: 0;
+    height: 45px;
+    width: 45px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.buttonGroup button:first-child {
+    border-radius: 10px 0 0 10px;
+    border-left: 1px solid #ccc;
+}
+
+.buttonGroup button:last-child {
+    border-right: 1px solid #ccc;
+    border-radius: 0 10px 10px 0;
+}
