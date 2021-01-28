@@ -13,7 +13,11 @@ export default function App() {
   const currentRoot = notes.notes[0]
   const currentHighlighRoot = highlight.notes[0]
 
-  const match = notes.supersets()
+  // Find scales and chords matching current state of the piano.
+  // For pressed we want the superset with all possible extensions,
+  // for highlight we only need to know if therer is an exact match.
+  const pressMatch = notes.supersets()
+  const highlightMatch = highlight.search()
 
   function pianoChange(note, wasPressed) {
     if (wasPressed) {
@@ -25,9 +29,9 @@ export default function App() {
 
   function pianoHover(note, active) {
     if (active) {
-      setHighlight(state => state.add(Note.fromString(note)))
+      setHighlight(notes.add(Note.fromString(note)).sort())
     } else {
-      setHighlight(state => state.remove(Note.fromString(note), true))
+      setHighlight(notes.remove(Note.fromString(note), true).sort())
     }
   }
 
@@ -37,7 +41,7 @@ export default function App() {
    * If keys are already pressed, we transpose them to get a new selection
    * with the desired key as root (lowest pitch). Otherwise, we simply
    * press the desired note.
-   * 
+   *
    * @param {Note} newRoot The new root note
    */
   function handleRootChange(newRoot) {
@@ -54,7 +58,7 @@ export default function App() {
    * If keys are already pressed, we transpose them to get a new selection
    * with the desired key as root (lowest pitch). Otherwise, we simply
    * highlight the desired note.
-   * 
+   *
    * @param {Note} newRoot The new root note
    */
   function handleRootHover(newRoot) {
@@ -65,28 +69,26 @@ export default function App() {
     }
   }
 
-  function scaleChange(name) {
-    setNotes(new Scale(currentRoot || new Note('C', '', 4), name))
+  /**
+   * Called when the user clicks a pattern button.
+   * Sets all keys in pattern as pressed.
+   *
+   * @param {class} cls NoteList class name of pattern
+   * @param {string} name Name of pattern
+   */
+  function handlePatternChange(cls, name) {
+    setNotes(new cls(currentRoot || new Note('C', '', 4), name))
   }
 
-  function scaleHover(name, active) {
-    if (active) {
-      setHighlight(new Scale(currentRoot || new Note('C', '', 4), name))
-    } else {
-      setHighlight(new NoteList([]))
-    }
-  }
-
-  function chordChange(name) {
-    setNotes(new Chord(currentRoot || new Note('C', '', 4), name))
-  }
-
-  function chordHover(name, active) {
-    if (active) {
-      setHighlight(new Chord(currentRoot || new Note('C', '', 4), name))
-    } else {
-      setHighlight(new NoteList([]))
-    }
+  /**
+   * Called when the user hovers a pattern button.
+   * Sets all keys in pattern as highlighted.
+   *
+   * @param {class} cls NoteList class name of pattern
+   * @param {string} name Name of pattern
+   */
+  function handlePatternHover(cls, name) {
+    setHighlight(new cls(currentRoot || new Note('C', '', 4), name))
   }
 
   return (
@@ -101,10 +103,22 @@ export default function App() {
                   onClick={(...note) => handleRootChange(new Note(...note))}
                   onMouseEnter={(...note) => handleRootHover(new Note(...note))}
                   onMouseLeave={() => setHighlight(new NoteList([]))} />
-        <OptionList name="Scales" class="scale" root={currentRoot} options={Scale.scales} match={match['scales']}
-            onChange={scaleChange} onHover={scaleHover}></OptionList>
-        <OptionList name="Chords" class="chord" root={currentRoot} options={Chord.chords} match={match['chords']}
-            onChange={chordChange} onHover={chordHover}></OptionList>
+
+        <OptionList name="Scales"
+                    options={Scale.scales}
+                    pressMatch={pressMatch['scales']}
+                    highlightMatch={highlightMatch['scales']}
+                    onClick={(name) => handlePatternChange(Scale, name)}
+                    onMouseEnter={(name) => handlePatternHover(Scale, name)}
+                    onMouseLeave={() => setHighlight(new NoteList([]))} />
+
+        <OptionList name="Chords"
+                    options={Chord.chords}
+                    pressMatch={pressMatch['chords']}
+                    highlightMatch={highlightMatch['chords']}
+                    onClick={(name) => handlePatternChange(Chord, name)}
+                    onMouseEnter={(name) => handlePatternHover(Chord, name)}
+                    onMouseLeave={() => setHighlight(new NoteList([]))} />
       </div>
     </div>
   );

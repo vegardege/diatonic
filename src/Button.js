@@ -11,12 +11,12 @@ export default function Button(props) {
   }
 
   return (
-    <button class={"button " + props.class}
+    <button
       style={props.isSelected ? selectedStyle : props.isHighlighted ? highlightedStyle : {}}
-      onClick={() => props.onClick(props.model)}
+      onClick={props.onClick}
       onMouseEnter={props.onMouseEnter}
       onMouseLeave={props.onMouseLeave}>
-      {props.selected ? <b>{props.text}</b> : props.text}
+        {props.text}
     </button>
   )
 }
