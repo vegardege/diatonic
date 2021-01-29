@@ -4,6 +4,7 @@ import { Note, NoteList, Chord, Scale } from 'kamasi'
 import PatternList from './PatternList.js'
 import Piano from './Piano.js'
 import RootNote from './RootNote.js'
+import Search from  './Search.js'
 
 /**
  * The app consists of three different components:
@@ -29,6 +30,8 @@ export default function App() {
   // for highlight we only need to know if therer is an exact match.
   const pressMatch = pressed.supersets()
   const highlightMatch = highlighted.search()
+
+  const [search, setSearch] = useState('')
 
   /**
    * Called when the user clicks a piano key, either to press or
@@ -130,10 +133,14 @@ export default function App() {
 
   const scales = Object.keys(Scale.scales).filter(
     scale => pressMatch['scales'][scale] >= 0
+  ).filter(
+    scale => search.length === 0 || scale.includes(search)
   ).slice(0, 10)
 
   const chords = Object.keys(Chord.chords).filter(
     chord => pressMatch['chords'][chord] >= 0
+  ).filter(
+    chord => search.length === 0 || chord.includes(search)
   ).slice(0, 10)
 
   return (
@@ -169,6 +176,8 @@ export default function App() {
                      onClick={(name, pressed) => handlePatternChange(Chord, name, pressed)}
                      onMouseEnter={(name) => handlePatternHover(Chord, name)}
                      onMouseLeave={clearHighlight} />
+
+        <Search onChange={e => setSearch(e.target.value)} />
       </div>
     </div>
   );
