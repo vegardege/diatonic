@@ -1,5 +1,4 @@
 import './Button.css'
-import ProgressBar from './ProgressBar.js'
 
 export default function Button(props) {
 
@@ -11,8 +10,13 @@ export default function Button(props) {
     background: "#CCD8AB",
   }
 
-  const progressBar = props.showProgress ? <ProgressBar progress={props.progress} />
-                                         : null
+  const text = props.subText === undefined ? props.text :
+    <div className="text">
+      {props.text}<br />
+      <span className="name">
+        {props.subText}
+      </span>
+    </div>
 
   return (
     <button
@@ -20,8 +24,7 @@ export default function Button(props) {
       onClick={props.onClick}
       onMouseEnter={props.onMouseEnter}
       onMouseLeave={props.onMouseLeave}>
-        {props.text}
-        {progressBar}
+        {text}
     </button>
   )
 }

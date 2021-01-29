@@ -14,8 +14,11 @@ export default function PatternList(props) {
 
     if (props.pressMatch[option] === undefined) return null;
 
+    const [, mainText, subText] = option.split(/^([^\s]+)\s?(.*)$/)
+
     return <Button key={option}
-                   text={option}
+                   text={mainText}
+                   subText={subText}
                    isSelected={isSelected}
                    isHighlighted={isHightlighted}
                    showProgress={true}
@@ -26,9 +29,9 @@ export default function PatternList(props) {
   })
 
   return (
-    <div class="notelists">
+    <div class='patternlist'>
       <h2>{props.name}</h2>
-      <div>{buttons}</div>
+      <div className='options'>{buttons}</div>
     </div>
   )
 }

@@ -9,3 +9,13 @@ button {
 button svg {
     float: right;
 }
+
+button .text {
+    float: left;
+    max-width: 100%;
+}
+
+button .name {
+    color: #333;
+    font-size: 0.7rem;
+}

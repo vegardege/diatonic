@@ -1,14 +1,24 @@
-.notelists {
+.patternlist {
     margin-bottom: 20px;
-    width: 280px;
+    width: 310px;
 }
   
-.notelists button {
+.patternlist button {
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 0.9rem;
     margin: 5px;
-    height: 40px;
+    height: 50px;
+    padding: 5px 10px 5px 10px;
     text-align: left;
-    width: 130px;
+    width: 145px;
+}
+
+.options {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 3px;
+    width: 100%;
 }
