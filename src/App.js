@@ -128,6 +128,14 @@ export default function App() {
     setHighlighted(new NoteList())
   }
 
+  const scales = Object.keys(Scale.scales).filter(
+    scale => pressMatch['scales'][scale] >= 0
+  ).slice(0, 10)
+
+  const chords = Object.keys(Chord.chords).filter(
+    chord => pressMatch['chords'][chord] >= 0
+  ).slice(0, 10)
+
   return (
     <div id="app">
       <div class="piano">
@@ -147,7 +155,7 @@ export default function App() {
                   onMouseLeave={clearHighlight} />
 
         <PatternList name="Scales"
-                     patterns={Scale.scales}
+                     patterns={scales}
                      pressMatch={pressMatch['scales']}
                      highlightMatch={highlightMatch['scales']}
                      onClick={(name, pressed) => handlePatternChange(Scale, name, pressed)}
@@ -155,7 +163,7 @@ export default function App() {
                      onMouseLeave={clearHighlight} />
 
         <PatternList name="Chords"
-                     patterns={Chord.chords}
+                     patterns={chords}
                      pressMatch={pressMatch['chords']}
                      highlightMatch={highlightMatch['chords']}
                      onClick={(name, pressed) => handlePatternChange(Chord, name, pressed)}

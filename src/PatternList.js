@@ -6,24 +6,20 @@ import Button from './Button.js'
  */
 export default function PatternList(props) {
 
-  const buttons = Object.keys(props.patterns).map(option => {
-    const match = props.pressMatch[option],
-          hightlightMatch = props.highlightMatch[option],
-          isSelected = match >= 1,
-          isHightlighted = hightlightMatch >= 1
-
-    if (props.pressMatch[option] === undefined) return null;
+  const buttons = props.patterns.map(option => {
+    const isPressed = props.pressMatch[option] >= 1,
+          isHightlighted = props.highlightMatch[option] >= 1
 
     const [, mainText, subText] = option.split(/^([^\s]+)\s?(.*)$/)
 
     return <Button key={option}
                    text={mainText}
                    subText={subText}
-                   isSelected={isSelected}
+                   isSelected={isPressed}
                    isHighlighted={isHightlighted}
                    showProgress={true}
                    progress={props.pressMatch[option]}
-                   onClick={() => props.onClick(option, isSelected)}
+                   onClick={() => props.onClick(option, isPressed)}
                    onMouseEnter={() => props.onMouseEnter(option)}
                    onMouseLeave={props.onMouseLeave} />
   })
