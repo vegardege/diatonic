@@ -32,6 +32,8 @@ export default function App() {
   const highlightMatch = highlighted.search()
 
   const [search, setSearch] = useState('')
+  const [width, setWidth] = useState(window.innerWidth)
+  window.addEventListener('resize', () => setWidth(window.innerWidth));
 
   /**
    * Called when the user clicks a piano key, either to press or
@@ -146,8 +148,8 @@ export default function App() {
   return (
     <div id="app">
       <div class="piano">
-        <Piano octaves='3'
-               width='780'
+        <Piano octaves={width >= 750 ? 3 : 2}
+               width={Math.min(width, 780)}
                pressed={pressed.simplify().toStringArray()}
                highlighted={highlighted.simplify().toStringArray()}
                onClick={handlePianoChange}
@@ -157,6 +159,7 @@ export default function App() {
       <div id="controls">
         <RootNote pressed={currentRoot}
                   highlighted={currentHighlighRoot}
+                  octaves={width >= 750 ? [3, 4, 5] : [4, 5]}
                   onClick={(...note) => handleRootChange(new Note(...note))}
                   onMouseEnter={(...note) => handleRootHover(new Note(...note))}
                   onMouseLeave={clearHighlight} />

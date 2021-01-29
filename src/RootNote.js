@@ -20,7 +20,7 @@ export default function RootNote(props) {
 
   const letters = ['C', 'D', 'E', 'F', 'G', 'A', 'B']
   const accidentals = ['#', 'b']
-  const octaves = [3, 4, 5]
+  const octaves = props.octaves || [3, 4, 5]
 
   /**
    * Create a button for one of the three button groups.

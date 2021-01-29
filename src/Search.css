@@ -1,6 +1,13 @@
 #search {
     text-align: center;
-    width: 100%;
+    max-width: 650px;
+    width: 650px;
+}
+
+@media only screen and (max-width: 650px) {
+    #search {
+        width: 310px;
+    }
 }
 
 #search input {
@@ -9,5 +16,6 @@
     font-size: 1.3rem;
     height: 40px;
     padding: 5px;
+    margin: 0 5px 0 5px;
     width: 95%;
 }

@@ -1,10 +1,17 @@
 #rootNote {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-between;
     width: 100%;
-  }
+}
 
+@media only screen and (max-width: 650px) {
+    #rootNote {
+        justify-content: center;
+    }
+}
+  
 .buttonGroup {
     margin: 0 5px 20px 5px;
 }
