@@ -124,6 +124,7 @@ export default function App() {
    */
   function clearPressed() {
     setPressed(new NoteList())
+    setSearch('')
   }
 
   /**
@@ -180,7 +181,8 @@ export default function App() {
                      onMouseEnter={(name) => handlePatternHover(Chord, name)}
                      onMouseLeave={clearHighlight} />
 
-        <Search onChange={e => setSearch(e.target.value)} />
+        <Search text={search}
+                onChange={e => setSearch(e.target.value)} />
       </div>
     </div>
   );
