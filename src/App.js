@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Note, NoteList, Chord, Scale } from 'kamasi'
 import PatternList from './PatternList.js'
 import Piano from './Piano.js'
@@ -22,8 +22,8 @@ export default function App() {
   const [pressed, setPressed] = useState(new NoteList())
   const [highlighted, setHighlighted] = useState(new NoteList())
 
-  const currentRoot = pressed.notes[0]
-  const currentHighlighRoot = highlighted.notes[0]
+  const currentRoot = pressed.root()
+  const currentHighlighRoot = highlighted.root()
 
   // Find scales and chords matching current state of the piano.
   // For pressed we want the superset with all possible extensions,
@@ -33,7 +33,11 @@ export default function App() {
 
   const [search, setSearch] = useState('')
   const [width, setWidth] = useState(window.innerWidth)
-  window.addEventListener('resize', () => setWidth(window.innerWidth));
+  const narrowMode = width <= 780
+
+  useEffect(() =>
+    window.addEventListener('resize', () => setWidth(window.innerWidth))
+  )
 
   /**
    * Called when the user clicks a piano key, either to press or
@@ -56,7 +60,7 @@ export default function App() {
    * @param {string} note The note of the key that is hovered
    */
   function handlePianoHover(note) {
-    setHighlighted(pressed.add(Note.fromString(note)).sort())
+    setHighlighted(new NoteList([note]))
   }
 
   /**
@@ -72,7 +76,7 @@ export default function App() {
     if (currentRoot === undefined) {
       setPressed(new NoteList([newRoot]))
     } else {
-      setPressed(state => state.transpose(currentRoot.intervalTo(newRoot)))
+      setPressed(state => new NoteList(newRoot, state.intervals))
     }
   }
 
@@ -89,7 +93,7 @@ export default function App() {
     if (currentRoot === undefined) {
       setHighlighted(new NoteList([newRoot]))
     } else {
-      setHighlighted(pressed.transpose(currentRoot.intervalTo(newRoot)))
+      setHighlighted(new NoteList(newRoot, pressed.intervals))
     }
   }
 
@@ -149,7 +153,7 @@ export default function App() {
   return (
     <div id="app">
       <div class="piano">
-        <Piano octaves={width >= 750 ? 3 : 2}
+        <Piano octaves={narrowMode ? 2 : 3}
                width={Math.min(width, 780)}
                pressed={pressed.simplify().toStringArray()}
                highlighted={highlighted.simplify().toStringArray()}
@@ -160,7 +164,7 @@ export default function App() {
       <div id="controls">
         <RootNote pressed={currentRoot}
                   highlighted={currentHighlighRoot}
-                  octaves={width >= 750 ? [3, 4, 5] : [4, 5]}
+                  octaves={narrowMode ? [4, 5] : [3, 4, 5]}
                   onClick={(...note) => handleRootChange(new Note(...note))}
                   onMouseEnter={(...note) => handleRootHover(new Note(...note))}
                   onMouseLeave={clearHighlight} />
