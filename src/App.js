@@ -44,14 +44,9 @@ export default function App() {
    * unpress the key.
    * 
    * @param {string} note The note of the key that was clicked
-   * @param {boolean} pressed True if pressed, false if unpressed
    */
-  function handlePianoChange(note, pressed) {
-    if (pressed) {
-      setPressed(state => state.add(note).sort())
-    } else {
-      setPressed(state => state.remove(note, true).sort())
-    }
+  function handlePianoChange(note) {
+    setPressed(state => state.toggle(note, true).sort())
   }
 
   /**
