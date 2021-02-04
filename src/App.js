@@ -1,8 +1,8 @@
 import './App.css';
 import { useEffect, useState } from 'react'
 import { Note, NoteList, Chord, Scale } from 'kamasi'
+import { Piano } from 'diatonic-piano'
 import PatternList from './PatternList.js'
-import Piano from './Piano.js'
 import RootNote from './RootNote.js'
 import Search from  './Search.js'
 
@@ -149,9 +149,9 @@ export default function App() {
     <div id="app">
       <div class="piano">
         <Piano octaves={narrowMode ? 2 : 3}
-               width={Math.min(width, 780)}
-               pressed={pressed.simplify().toStringArray()}
-               highlighted={highlighted.simplify().toStringArray()}
+               width={Math.min(width, 780) + 'px'}
+               pressed={pressed}
+               highlighted={highlighted}
                onClick={handlePianoChange}
                onMouseEnter={handlePianoHover}
                onMouseLeave={clearHighlight} />

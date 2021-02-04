@@ -6,7 +6,7 @@
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.2",
-    "kamasi": "file:../kamasi/kamasi-0.1.0.tgz",
+    "diatonic-piano": "file:../diatonic-piano/diatonic-piano-0.1.0.tgz",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.1",
