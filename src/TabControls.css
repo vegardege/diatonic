@@ -9,11 +9,17 @@
 }
 
 #tabList button {
-  border: 1px solid #ccc;
+  border-top: 1px solid #ccc;
+  border-right: 1px solid #ccc;
   border-bottom: 0;
+  border-left: 0;
   border-radius: 5px 5px 0 0;
   font-size: 0.8rem;
   width: 100px;
+}
+
+#tabList button:first-child {
+  border-left: 1px solid #ccc;
 }
 
 #tabList button.selected {

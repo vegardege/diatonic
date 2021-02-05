@@ -37,7 +37,7 @@ export default function App() {
 
   const [search, setSearch] = useState('')
   const [width, setWidth] = useState(window.innerWidth)
-  const narrowMode = width <= 700
+  const narrowMode = width <= 680
 
   useEffect(() =>
     window.addEventListener('resize', () => setWidth(window.innerWidth))
@@ -147,14 +147,14 @@ export default function App() {
     scale => pressMatch['scales'][scale] >= 0
   ).filter(
     scale => search.length === 0 || scale.includes(search)
-  ).slice(0, 10)
+  ).slice(0, 12)
 
   const chords = Object.keys(Chord.chords)
   const filteredChords = chords.filter(
     chord => pressMatch['chords'][chord] >= 0
   ).filter(
     chord => search.length === 0 || chord.includes(search)
-  ).slice(0, 10)
+  ).slice(0, 12)
 
   /**
    * Control panel components
@@ -211,7 +211,6 @@ export default function App() {
     <div id="app">
       <div class="piano">
         <Piano octaves={narrowMode ? 2 : 3}
-               width={Math.min(width, 780) + 'px'}
                pressed={pressed}
                highlighted={highlighted}
                onClick={handlePianoChange}
