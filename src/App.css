@@ -37,6 +37,8 @@
   }
   
   .piano {
+    border-top: 5px solid #000;
     margin: 20px 0 20px 0;
+    max-width: 780px;
     width: 100%;
   }
