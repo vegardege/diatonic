@@ -55,7 +55,7 @@ export default function App() {
    * @param {string} note The note of the key that is hovered
    */
   function handlePianoHover(note) {
-    setHighlighted(new NoteList([note]))
+    setHighlighted(pressed.add(note).sort())
   }
 
   /**
