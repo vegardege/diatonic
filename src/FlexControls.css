@@ -1,0 +1,33 @@
+#controls {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 650px;
+}
+
+@media only screen and (max-width: 650px) {
+  #controls {
+    justify-content: center;
+  }
+}
+
+h2 {
+  border-bottom: 1px solid #000;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  font-weight: 600;
+  text-align: center;
+  width: 100%;
+}
+
+@media only screen and (max-width: 650px) {
+  h2 {
+    max-width: 350px;
+  }
+}
+
+.patternColumn {
+    margin-bottom: 20px;
+    width: 310px;
+}  

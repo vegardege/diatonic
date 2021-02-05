@@ -1,10 +1,14 @@
 import './App.css';
+
 import { useEffect, useState } from 'react'
 import { Note, NoteList, Chord, Scale } from 'kamasi'
 import { Piano } from 'diatonic-piano'
+
+import FlexControls from './FlexControls.js'
 import PatternList from './PatternList.js'
 import RootNote from './RootNote.js'
 import Search from  './Search.js'
+import TabControls from './TabControls.js'
 
 /**
  * The app consists of three different components:
@@ -33,7 +37,7 @@ export default function App() {
 
   const [search, setSearch] = useState('')
   const [width, setWidth] = useState(window.innerWidth)
-  const narrowMode = width <= 780
+  const narrowMode = width <= 700
 
   useEffect(() =>
     window.addEventListener('resize', () => setWidth(window.innerWidth))
@@ -133,17 +137,75 @@ export default function App() {
     setHighlighted(new NoteList())
   }
 
-  const scales = Object.keys(Scale.scales).filter(
+  /**
+   * Prepare data for selection lists. We filter in full mode to reduce the
+   * amount of information visible. In narrow mode, we don't filter, as this
+   * would require too much clicking back and forth.
+   */
+  const scales = Object.keys(Scale.scales)
+  const filteredScales = scales.filter(
     scale => pressMatch['scales'][scale] >= 0
   ).filter(
     scale => search.length === 0 || scale.includes(search)
   ).slice(0, 10)
 
-  const chords = Object.keys(Chord.chords).filter(
+  const chords = Object.keys(Chord.chords)
+  const filteredChords = chords.filter(
     chord => pressMatch['chords'][chord] >= 0
   ).filter(
     chord => search.length === 0 || chord.includes(search)
   ).slice(0, 10)
+
+  /**
+   * Control panel components
+   */
+  const rootNotePanel = <RootNote
+    pressed={currentRoot}
+    highlighted={currentHighlighRoot}
+    octaves={narrowMode ? [4, 5] : [3, 4, 5]}
+    onClick={(...note) => handleRootChange(new Note(...note))}
+    onMouseEnter={(...note) => handleRootHover(new Note(...note))}
+    onMouseLeave={clearHighlight}
+  />
+
+  const scalesPanel = <PatternList
+    patterns={narrowMode ? scales : filteredScales}
+    pressMatch={pressMatch['scales']}
+    highlightMatch={highlightMatch['scales']}
+    onClick={(name, pressed) => handlePatternChange(Scale, name, pressed)}
+    onMouseEnter={(name) => handlePatternHover(Scale, name)}
+    onMouseLeave={clearHighlight}
+  />
+
+  const chordsPanel = <PatternList
+    patterns={narrowMode ? chords : filteredChords}
+    pressMatch={pressMatch['chords']}
+    highlightMatch={highlightMatch['chords']}
+    onClick={(name, pressed) => handlePatternChange(Chord, name, pressed)}
+    onMouseEnter={(name) => handlePatternHover(Chord, name)}
+    onMouseLeave={clearHighlight}
+  />
+
+  const searchPanel = <Search
+    text={search}
+    onChange={e => setSearch(e.target.value)}
+  />
+  
+  /**
+   * Define control panels in mobile (narrow) and desktop mode
+   */
+  const fullControlPanel = <FlexControls
+    rootPanel={rootNotePanel}
+    scalesPanel={scalesPanel}
+    chordsPanel={chordsPanel}
+    searchPanel={searchPanel}
+  />
+
+  const narrowControlPanel = <TabControls tabs={[
+    {id: 'rootTab', text: 'Root Note', panel: rootNotePanel},
+    {id: 'scaleTab', text: 'Scales', panel: scalesPanel},
+    {id: 'chordTab', text: 'Chords', panel: chordsPanel},
+  ]} />
 
   return (
     <div id="app">
@@ -156,33 +218,7 @@ export default function App() {
                onMouseEnter={handlePianoHover}
                onMouseLeave={clearHighlight} />
       </div>
-      <div id="controls">
-        <RootNote pressed={currentRoot}
-                  highlighted={currentHighlighRoot}
-                  octaves={narrowMode ? [4, 5] : [3, 4, 5]}
-                  onClick={(...note) => handleRootChange(new Note(...note))}
-                  onMouseEnter={(...note) => handleRootHover(new Note(...note))}
-                  onMouseLeave={clearHighlight} />
-
-        <PatternList name="Scales"
-                     patterns={scales}
-                     pressMatch={pressMatch['scales']}
-                     highlightMatch={highlightMatch['scales']}
-                     onClick={(name, pressed) => handlePatternChange(Scale, name, pressed)}
-                     onMouseEnter={(name) => handlePatternHover(Scale, name)}
-                     onMouseLeave={clearHighlight} />
-
-        <PatternList name="Chords"
-                     patterns={chords}
-                     pressMatch={pressMatch['chords']}
-                     highlightMatch={highlightMatch['chords']}
-                     onClick={(name, pressed) => handlePatternChange(Chord, name, pressed)}
-                     onMouseEnter={(name) => handlePatternHover(Chord, name)}
-                     onMouseLeave={clearHighlight} />
-
-        <Search text={search}
-                onChange={e => setSearch(e.target.value)} />
-      </div>
-    </div>
+      {narrowMode ? narrowControlPanel : fullControlPanel}
+    </div>    
   );
 }

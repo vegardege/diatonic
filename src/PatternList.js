@@ -24,10 +24,5 @@ export default function PatternList(props) {
                    onMouseLeave={props.onMouseLeave} />
   })
 
-  return (
-    <div class='patternlist'>
-      <h2>{props.name}</h2>
-      <div className='options'>{buttons}</div>
-    </div>
-  )
+  return <div className='options'>{buttons}</div>
 }

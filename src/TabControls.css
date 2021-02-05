@@ -1,0 +1,22 @@
+#tabs {
+  width: 100%;
+}
+
+#tabList {
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+#tabList button {
+  border: 1px solid #ccc;
+  border-bottom: 0;
+  border-radius: 5px 5px 0 0;
+  font-size: 0.8rem;
+  width: 100px;
+}
+
+#tabList button.selected {
+  background-color: #abbf73;
+  border-color: #abbf73;
+}
