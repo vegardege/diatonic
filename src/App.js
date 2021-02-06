@@ -44,6 +44,29 @@ export default function App() {
   )
 
   /**
+   * Keyboard shortcuts
+   */
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  })
+
+  function handleKeyDown(e) {
+    // eslint-disable-next-line default-case
+    switch (e.keyCode) {
+      case 37: setPressed(state => state.transpose('-m2').simplify())
+               break
+      case 39: setPressed(state => state.transpose('m2').simplify())
+               break
+      case 32: setPressed(new NoteList())
+               e.preventDefault()
+               break
+    }
+  }
+
+  /**
    * Called when the user clicks a piano key, either to press or
    * unpress the key.
    * 
@@ -213,6 +236,7 @@ export default function App() {
         <Piano octaves={narrowMode ? 2 : 3}
                pressed={pressed}
                highlighted={highlighted}
+               keyboardShortcuts={true}
                onClick={handlePianoChange}
                onMouseEnter={handlePianoHover}
                onMouseLeave={clearHighlight} />
