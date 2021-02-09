@@ -10,6 +10,9 @@ export default function Search(props) {
              placeholder="Search for scale or chord"
              value={props.text}
              onChange={props.onChange}
+             onKeyPress={e => e.stopPropagation()}
+             onKeyDown={e => e.stopPropagation()}
+             onKeyUp={e => e.stopPropagation()}
       />
     </div>
   )
