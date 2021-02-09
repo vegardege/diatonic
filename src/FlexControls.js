@@ -8,11 +8,11 @@ export default function FlexControls(props) {
 
   return <div id="controls">
     {props.rootPanel}
-    <div class='patternColumn'>
+    <div className="patternColumn">
       <h2>Scales</h2>
       {props.scalesPanel}
     </div>
-    <div class='patternColumn'>
+    <div className="patternColumn">
       <h2>Chords</h2>
       {props.chordsPanel}
     </div>

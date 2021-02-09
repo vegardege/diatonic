@@ -232,7 +232,7 @@ export default function App() {
 
   return (
     <div id="app">
-      <div class="piano">
+      <div className="piano">
         <Piano octaves={narrowMode ? 2 : 3}
                pressed={pressed}
                highlighted={highlighted}
