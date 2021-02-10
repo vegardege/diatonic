@@ -43,7 +43,10 @@ export default function RootNote(props) {
               isHighlighted={isSelected(props.highlighted, ...inputNote)}
               onClick={() => props.onClick(...expandedNote)}
               onMouseEnter={() => props.onMouseEnter(...expandedNote)}
-              onMouseLeave={props.onMouseLeave} />
+              onMouseLeave={props.onMouseLeave}
+              onFocus={() => props.onFocus(...expandedNote)}
+              onBlur={props.onBlur}
+       />
       </li>
   }
 

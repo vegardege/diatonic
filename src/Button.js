@@ -24,7 +24,9 @@ export default function Button(props) {
       style={props.isSelected ? selectedStyle : props.isHighlighted ? highlightedStyle : {}}
       onClick={props.onClick}
       onMouseEnter={props.onMouseEnter}
-      onMouseLeave={props.onMouseLeave}>
+      onMouseLeave={props.onMouseLeave}
+      onFocus={props.onFocus}
+      onBlur={props.onBlur}>
         {text}
     </button>
   )

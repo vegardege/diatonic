@@ -22,7 +22,10 @@ export default function PatternList(props) {
               progress={props.pressMatch[option]}
               onClick={() => props.onClick(option, isPressed)}
               onMouseEnter={() => props.onMouseEnter(option)}
-              onMouseLeave={props.onMouseLeave} />
+              onMouseLeave={props.onMouseLeave}
+              onFocus={() => props.onFocus(option)}
+              onBlur={props.onBlur}
+       />
       </li>
   })
 

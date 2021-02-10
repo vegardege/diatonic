@@ -192,6 +192,8 @@ export default function App() {
     onClick={(...note) => handleRootChange(new Note(...note))}
     onMouseEnter={(...note) => handleRootHover(new Note(...note))}
     onMouseLeave={clearHighlight}
+    onFocus={(...note) => handleRootHover(new Note(...note))}
+    onBlur={clearHighlight}
   />
 
   const scalesPanel = <PatternList
@@ -201,6 +203,8 @@ export default function App() {
     onClick={(name, pressed) => handlePatternChange(Scale, name, pressed)}
     onMouseEnter={(name) => handlePatternHover(Scale, name)}
     onMouseLeave={clearHighlight}
+    onFocus={(name) => handlePatternHover(Scale, name)}
+    onBlur={clearHighlight}
   />
 
   const chordsPanel = <PatternList
@@ -210,6 +214,8 @@ export default function App() {
     onClick={(name, pressed) => handlePatternChange(Chord, name, pressed)}
     onMouseEnter={(name) => handlePatternHover(Chord, name)}
     onMouseLeave={clearHighlight}
+    onFocus={(name) => handlePatternHover(Chord, name)}
+    onBlur={clearHighlight}
   />
 
   const searchPanel = <Search
