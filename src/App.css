@@ -13,3 +13,12 @@
   max-width: 780px;
   width: 100%;
 }
+
+.diatonic-key:focus {
+  outline: none;
+}
+
+.diatonic-key:focus-visible {
+  fill: #F2929A;
+  outline: none;
+}

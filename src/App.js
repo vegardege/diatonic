@@ -237,6 +237,7 @@ export default function App() {
                pressed={pressed}
                highlighted={highlighted}
                keyboardShortcuts={true}
+               focusable={true}
                onClick={handlePianoChange}
                onMouseEnter={handlePianoHover}
                onMouseLeave={clearHighlight} />
