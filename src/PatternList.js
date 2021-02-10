@@ -12,17 +12,19 @@ export default function PatternList(props) {
 
     const [, mainText, subText] = option.split(/^([^\s]+)\s?(.*)$/)
 
-    return <Button key={option}
-                   text={mainText}
-                   subText={subText}
-                   isSelected={isPressed}
-                   isHighlighted={isHightlighted}
-                   showProgress={true}
-                   progress={props.pressMatch[option]}
-                   onClick={() => props.onClick(option, isPressed)}
-                   onMouseEnter={() => props.onMouseEnter(option)}
-                   onMouseLeave={props.onMouseLeave} />
+    return <li>
+      <Button key={option}
+              text={mainText}
+              subText={subText}
+              isSelected={isPressed}
+              isHighlighted={isHightlighted}
+              showProgress={true}
+              progress={props.pressMatch[option]}
+              onClick={() => props.onClick(option, isPressed)}
+              onMouseEnter={() => props.onMouseEnter(option)}
+              onMouseLeave={props.onMouseLeave} />
+      </li>
   })
 
-  return <div className='options'>{buttons}</div>
+  return <ul className='options'>{buttons}</ul>
 }

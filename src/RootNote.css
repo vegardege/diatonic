@@ -16,6 +16,10 @@
     margin: 0 5px 20px 5px;
 }
 
+.buttonGroup li {
+    display: inline-block;
+}
+
 .buttonGroup button {
     border-right: 1px solid #ccc;
     border-top: 1px solid #ccc;
@@ -29,12 +33,12 @@
     vertical-align: middle;
 }
 
-.buttonGroup button:first-child {
+.buttonGroup li:first-child button {
     border-radius: 10px 0 0 10px;
     border-left: 1px solid #ccc;
 }
 
-.buttonGroup button:last-child {
+.buttonGroup li:last-child button {
     border-right: 1px solid #ccc;
     border-radius: 0 10px 10px 0;
 }

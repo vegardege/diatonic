@@ -6,16 +6,16 @@ import './FlexControls.css'
  */
 export default function FlexControls(props) {
 
-  return <div id="controls">
+  return <section id="controls">
     {props.rootPanel}
-    <div className="patternColumn">
+    <section className="patternColumn">
       <h2>Scales</h2>
       {props.scalesPanel}
-    </div>
-    <div className="patternColumn">
+    </section>
+    <section className="patternColumn">
       <h2>Chords</h2>
       {props.chordsPanel}
-    </div>
+    </section>
     {props.searchPanel}
-  </div>
+  </section>
 }

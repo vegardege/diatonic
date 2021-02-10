@@ -36,13 +36,15 @@ export default function RootNote(props) {
           inputNote = [letter, accidental, octave],
           expandedNote = expandNote(...inputNote)
 
-    return <Button key={text}
-                   text={text}
-                   isSelected={isSelected(props.pressed, ...inputNote)}
-                   isHighlighted={isSelected(props.highlighted, ...inputNote)}
-                   onClick={() => props.onClick(...expandedNote)}
-                   onMouseEnter={() => props.onMouseEnter(...expandedNote)}
-                   onMouseLeave={props.onMouseLeave} />
+    return <li>
+      <Button key={text}
+              text={text}
+              isSelected={isSelected(props.pressed, ...inputNote)}
+              isHighlighted={isSelected(props.highlighted, ...inputNote)}
+              onClick={() => props.onClick(...expandedNote)}
+              onMouseEnter={() => props.onMouseEnter(...expandedNote)}
+              onMouseLeave={props.onMouseLeave} />
+      </li>
   }
 
   /**
@@ -90,15 +92,15 @@ export default function RootNote(props) {
 
   return (
     <div id="rootNote">
-      <div className="buttonGroup">
+      <ul className="buttonGroup">
         {letterButtons}
-      </div>
-      <div className="buttonGroup">
+      </ul>
+      <ul className="buttonGroup">
         {accidentalButtons}
-      </div>
-      <div className="buttonGroup">
+      </ul>
+      <ul className="buttonGroup">
         {octaveButtons}
-      </div>
+      </ul>
     </div>
   )
 }
