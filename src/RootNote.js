@@ -36,9 +36,8 @@ export default function RootNote(props) {
           inputNote = [letter, accidental, octave],
           expandedNote = expandNote(...inputNote)
 
-    return <li>
-      <Button key={text}
-              text={text}
+    return <li key={text}>
+      <Button text={text}
               isSelected={isSelected(props.pressed, ...inputNote)}
               isHighlighted={isSelected(props.highlighted, ...inputNote)}
               onClick={() => props.onClick(...expandedNote)}

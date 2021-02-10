@@ -12,9 +12,8 @@ export default function PatternList(props) {
 
     const [, mainText, subText] = option.split(/^([^\s]+)\s?(.*)$/)
 
-    return <li>
-      <Button key={option}
-              text={mainText}
+    return <li key={option}>
+      <Button text={mainText}
               subText={subText}
               isSelected={isPressed}
               isHighlighted={isHightlighted}
