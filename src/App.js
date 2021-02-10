@@ -56,11 +56,14 @@ export default function App() {
   function handleKeyDown(e) {
     // eslint-disable-next-line default-case
     switch (e.keyCode) {
-      case 37: setPressed(state => state.transpose('-m2').simplify())
+      case 37: clearHighlight()
+               setPressed(state => state.transpose('-m2').simplify())
                break
-      case 39: setPressed(state => state.transpose('m2').simplify())
+      case 39: clearHighlight()
+               setPressed(state => state.transpose('m2').simplify())
                break
-      case 32: setPressed(new NoteList())
+      case 32: clearPressed()
+               clearHighlight()
                e.preventDefault()
                break
     }
@@ -81,7 +84,7 @@ export default function App() {
    * 
    * @param {string} note The note of the key that is hovered
    */
-  function handlePianoHover(note) {
+  function handlePianoFocus(note) {
     setHighlighted(pressed.add(note).sort())
   }
 
@@ -239,8 +242,11 @@ export default function App() {
                keyboardShortcuts={true}
                focusable={true}
                onClick={handlePianoChange}
-               onMouseEnter={handlePianoHover}
-               onMouseLeave={clearHighlight} />
+               onMouseEnter={handlePianoFocus}
+               onMouseLeave={clearHighlight}
+               onFocus={handlePianoFocus}
+               onBlur={clearHighlight}
+        />
       </div>
       {narrowMode ? narrowControlPanel : fullControlPanel}
     </div>    
