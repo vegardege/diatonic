@@ -32,6 +32,16 @@
     margin-bottom: 1.6rem;
 }
 
+.modal p {
+    line-height: 1.4rem;
+    margin-bottom: 1.4rem;
+    margin-top: 0.5rem;
+}
+
+.modal strong {
+    font-weight: 600;
+}
+
 .shortcut {
     background-color: #000;
     border-radius: 5px;
