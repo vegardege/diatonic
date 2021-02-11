@@ -20,9 +20,31 @@
     padding: 30px;
     max-height: 80%;
     width: 70%;
-    max-width: 680px;
+    max-width: 500px;
 }
 
 .modal .close {
     float: right;
+}
+
+.modal h1 {
+    font-size: 1.6rem;
+    margin-bottom: 1.6rem;
+}
+
+.shortcut {
+    background-color: #000;
+    border-radius: 5px;
+    color: #fff;
+    display: inline-block;
+    fill: #fff;
+    font-size: 0.9rem;
+    min-height: 15px;
+    min-width: 15px;
+    padding: 5px;
+    text-align: center;
+}
+
+.modal td {
+    padding: 5px;
 }
