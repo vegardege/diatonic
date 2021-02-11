@@ -5,6 +5,8 @@ import { Note, NoteList, Chord, Scale } from 'kamasi'
 import { Piano } from 'diatonic-piano'
 
 import FlexControls from './FlexControls.js'
+import HelpModal from './HelpModal.js'
+import KeyboardModal from './KeyboardModal.js'
 import PatternList from './PatternList.js'
 import RootNote from './RootNote.js'
 import Search from  './Search.js'
@@ -36,6 +38,9 @@ export default function App() {
   const highlightMatch = highlighted.search()
 
   const [search, setSearch] = useState('')
+
+  const [modal, setModal] = useState('')
+
   const [width, setWidth] = useState(window.innerWidth)
   const narrowMode = width <= 680
 
@@ -56,6 +61,8 @@ export default function App() {
   function handleKeyDown(e) {
     // eslint-disable-next-line default-case
     switch (e.keyCode) {
+      case 27: setModal('');
+               break;
       case 37: clearHighlight()
                setPressed(state => state.transpose('-m2').simplify())
                break
@@ -67,6 +74,17 @@ export default function App() {
                e.preventDefault()
                break
     }
+  }
+
+  /**
+   * Called when the user activates a modal popup.
+   * 
+   * @param {string} name Name of modal popup to show
+   * @param {string} focusElement ID of element to focus on (close button)
+   */
+  function showModal(name, focusElement) {
+    setModal(name)
+    document.getElementById(focusElement).focus()
   }
 
   /**
@@ -241,6 +259,16 @@ export default function App() {
 
   return (
     <div id="app">
+      <KeyboardModal onClose={() => setModal('')}
+                     display={modal === 'keyboard'} />
+      <HelpModal onClose={() => setModal('')}
+                 display={modal === 'help'} />
+      <nav>
+        <button onClick={() => showModal('keyboard', 'keyboardClose')}>
+          Keyboard
+        </button>
+        <button onClick={() => showModal('help', 'helpClose')}>Help</button>
+      </nav>
       <div className="piano">
         <Piano octaves={narrowMode ? 2 : 3}
                pressed={pressed}

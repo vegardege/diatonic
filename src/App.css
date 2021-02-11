@@ -7,9 +7,18 @@
     margin: auto;
   }
 
+nav {
+  display: flex;
+  justify-content: flex-end;
+  margin: 20px 10px 0 10px;
+  max-width: 780px;
+  padding-bottom: 5px;
+  width: 100%;
+}
+
 .piano {
   border-top: 5px solid #000;
-  margin: 20px 10px 20px 10px;
+  margin: 0 10px 20px 10px;
   max-width: 780px;
   width: 100%;
 }
