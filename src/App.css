@@ -9,11 +9,42 @@
 
 nav {
   display: flex;
-  justify-content: flex-end;
-  margin: 20px 10px 0 10px;
+  justify-content: space-between;
+  margin: 10px 10px 0 10px;
   max-width: 780px;
-  padding-bottom: 5px;
   width: 100%;
+}
+
+#navInstruments {
+  display: flex;
+  justify-content: flex-start;
+}
+
+#navButtons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+nav button {
+  background-color: #fff;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  color: #000;
+  fill: #000;
+  font-size: 0.9rem;
+  margin-left: 5px;
+  padding: 5px 0 5px 5px;
+  vertical-align: middle;
+}
+
+nav button:hover {
+  text-decoration: underline;
+}
+
+nav svg {
+  margin-right: 5px;
 }
 
 .piano {

@@ -20,7 +20,7 @@ export default function Button(props) {
 
   return (
     <button
-      className={props.className}
+      className={`${props.className} choice`}
       style={props.isSelected ? selectedStyle : props.isHighlighted ? highlightedStyle : {}}
       onClick={props.onClick}
       onMouseEnter={props.onMouseEnter}
