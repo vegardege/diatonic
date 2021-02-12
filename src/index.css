@@ -7,9 +7,9 @@ body {
 
 footer {
   font-size: 0.9rem;
-  line-heighT: 2.5rem;
+  line-height: 2.5rem;
   margin: auto;
-  margin-top: 40px;
+  margin-top: 10px;
   max-width: 350px;
   text-align: center;
 }
