@@ -25,6 +25,9 @@
 
 .modal .close {
     float: right;
+    border: 0;
+    margin: 0;
+    padding: 0;
 }
 
 .modal h1 {
