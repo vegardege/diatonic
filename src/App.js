@@ -1,7 +1,7 @@
 import './App.css';
 
 import { useEffect, useState } from 'react'
-import { Note, NoteList, Chord, Scale } from 'kamasi'
+import { Note, NoteList, SCALES, CHORDS } from 'kamasi'
 import { Piano } from 'diatonic-piano'
 
 import FlexControls from './FlexControls.js'
@@ -144,12 +144,12 @@ export default function App() {
    * Called when the user clicks a pattern button.
    * Sets all keys in pattern as pressed.
    *
-   * @param {class} cls NoteList class name of pattern
+   * @param {function} func NoteList constructor function
    * @param {string} name Name of pattern
    */
-  function handlePatternChange(cls, name, pressed) {
+  function handlePatternChange(func, name, pressed) {
     if (!pressed) {
-      setPressed(new cls(currentRoot || new Note('C', '', 4), name))
+      setPressed(func(currentRoot || new Note('C', '', 4), name))
     } else {
       clearPressed()
     }
@@ -159,11 +159,11 @@ export default function App() {
    * Called when the user hovers a pattern button.
    * Sets all keys in pattern as highlighted.
    *
-   * @param {class} cls NoteList class name of pattern
+   * @param {function} func NoteList constructor function
    * @param {string} name Name of pattern
    */
-  function handlePatternHover(cls, name) {
-    setHighlighted(new cls(currentRoot || new Note('C', '', 4), name))
+  function handlePatternHover(func, name) {
+    setHighlighted(func(currentRoot || new Note('C', '', 4), name))
   }
 
   /**
@@ -186,14 +186,14 @@ export default function App() {
    * amount of information visible. In narrow mode, we don't filter, as this
    * would require too much clicking back and forth.
    */
-  const scales = Object.keys(Scale.scales)
+  const scales = Object.keys(SCALES)
   const filteredScales = scales.filter(
     scale => pressMatch['scales'][scale] >= 0
   ).filter(
     scale => search.length === 0 || scale.includes(search)
   ).slice(0, 12)
 
-  const chords = Object.keys(Chord.chords)
+  const chords = Object.keys(CHORDS)
   const filteredChords = chords.filter(
     chord => pressMatch['chords'][chord] >= 0
   ).filter(
@@ -218,10 +218,10 @@ export default function App() {
     patterns={narrowMode ? scales : filteredScales}
     pressMatch={pressMatch['scales']}
     highlightMatch={highlightMatch['scales']}
-    onClick={(name, pressed) => handlePatternChange(Scale, name, pressed)}
-    onMouseEnter={(name) => handlePatternHover(Scale, name)}
+    onClick={(name, pressed) => handlePatternChange(NoteList.fromScale, name, pressed)}
+    onMouseEnter={(name) => handlePatternHover(NoteList.fromScale, name)}
     onMouseLeave={clearHighlight}
-    onFocus={(name) => handlePatternHover(Scale, name)}
+    onFocus={(name) => handlePatternHover(NoteList.fromScale, name)}
     onBlur={clearHighlight}
   />
 
@@ -229,10 +229,10 @@ export default function App() {
     patterns={narrowMode ? chords : filteredChords}
     pressMatch={pressMatch['chords']}
     highlightMatch={highlightMatch['chords']}
-    onClick={(name, pressed) => handlePatternChange(Chord, name, pressed)}
-    onMouseEnter={(name) => handlePatternHover(Chord, name)}
+    onClick={(name, pressed) => handlePatternChange(NoteList.fromChord, name, pressed)}
+    onMouseEnter={(name) => handlePatternHover(NoteList.fromChord, name)}
     onMouseLeave={clearHighlight}
-    onFocus={(name) => handlePatternHover(Chord, name)}
+    onFocus={(name) => handlePatternHover(NoteList.fromChord, name)}
     onBlur={clearHighlight}
   />
 
