@@ -27,7 +27,7 @@ export default function HelpModal(props) {
       <p>A <strong>chord</strong> is a set of notes, which is normally played harmonically (at the same time).
       Click a chord button to see it highlighted for the selected tonic.</p>
       <h2>Reverse Lookup</h2>
-      <Piano octaves="3" pressed={['C4', 'E4', 'G4']} />
+      <Piano octaves="3" pressed={chord('C4 major')} />
       <p>As you press keys on the piano, the selectable scales and chords will be filtered according to the
         tonic and proceeding intervals. Once you have a perfect match, the button will be selected.
       </p>
