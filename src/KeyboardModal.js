@@ -11,7 +11,7 @@ export default function KeyboardModal(props) {
       <section onClick={(e) => e.stopPropagation()}>
         <button
           id="keyboardClose"
-          class="close"
+          className="close"
           aria-label="Close"
           onClick={props.onClose}
         >
@@ -24,34 +24,34 @@ export default function KeyboardModal(props) {
           <tbody>
             <tr>
               <td align="center">
-                <span class="shortcut">Esc</span>
+                <span className="shortcut">Esc</span>
               </td>
               <td>Close modal popup</td>
             </tr>
             <tr>
               <td align="center">
-                <span class="shortcut">Q</span> –{" "}
-                <span class="shortcut">U</span>
+                <span className="shortcut">Q</span> –{" "}
+                <span className="shortcut">U</span>
               </td>
               <td>Press/unpress key in octave 3</td>
             </tr>
             <tr>
               <td align="center">
-                <span class="shortcut">A</span> –{" "}
-                <span class="shortcut">J</span>
+                <span className="shortcut">A</span> –{" "}
+                <span className="shortcut">J</span>
               </td>
               <td>Press/unpress key in octave 4</td>
             </tr>
             <tr>
               <td align="center">
-                <span class="shortcut">Z</span> –{" "}
-                <span class="shortcut">M</span>
+                <span className="shortcut">Z</span> –{" "}
+                <span className="shortcut">M</span>
               </td>
               <td>Press/unpress key in octave 5</td>
             </tr>
             <tr>
               <td align="center">
-                <span class="shortcut">
+                <span className="shortcut">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="10"
@@ -64,13 +64,13 @@ export default function KeyboardModal(props) {
                 </span>
               </td>
               <td align="center">
-                Increase pressed note (<span class="shortcut">Q</span>{" "}–{" "}
-                <span class="shortcut">M</span>) by a semitone
+                Increase pressed note (<span className="shortcut">Q</span>{" "}–{" "}
+                <span className="shortcut">M</span>) by a semitone
               </td>
             </tr>
             <tr>
               <td align="center">
-                <span class="shortcut">
+                <span className="shortcut">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="12"
@@ -80,7 +80,7 @@ export default function KeyboardModal(props) {
                     <path d="M3.86 8.753l5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
                   </svg>
                 </span>{" "}
-                <span class="shortcut">
+                <span className="shortcut">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="12"
@@ -95,19 +95,19 @@ export default function KeyboardModal(props) {
             </tr>
             <tr>
               <td align="center">
-                <span class="shortcut">Tab</span>
+                <span className="shortcut">Tab</span>
               </td>
               <td>Navigate between focusable elements</td>
             </tr>
             <tr>
               <td align="center">
-                <span class="shortcut">Enter</span>
+                <span className="shortcut">Enter</span>
               </td>
               <td>Click focused element</td>
             </tr>
             <tr>
               <td align="center">
-                <span class="shortcut">Space</span>
+                <span className="shortcut">Space</span>
               </td>
               <td>Reset piano</td>
             </tr>
