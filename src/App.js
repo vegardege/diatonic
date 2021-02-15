@@ -188,14 +188,14 @@ export default function App() {
    */
   const scales = Object.keys(SCALES)
   const filteredScales = scales.filter(
-    scale => pressMatch['scales'][scale] >= 0
+    scale => pressMatch.scales.includes(scale)
   ).filter(
     scale => search.length === 0 || scale.includes(search)
   ).slice(0, 12)
 
   const chords = Object.keys(CHORDS)
   const filteredChords = chords.filter(
-    chord => pressMatch['chords'][chord] >= 0
+    chord => pressMatch.chords.includes(chord)
   ).filter(
     chord => search.length === 0 || chord.includes(search)
   ).slice(0, 12)
@@ -216,8 +216,8 @@ export default function App() {
 
   const scalesPanel = <PatternList
     patterns={narrowMode ? scales : filteredScales}
-    pressMatch={pressMatch['scales']}
-    highlightMatch={highlightMatch['scales']}
+    pressMatch={pressMatch.scales}
+    highlightMatch={highlightMatch.scales}
     onClick={(name, pressed) => handlePatternChange(NoteList.fromScale, name, pressed)}
     onMouseEnter={(name) => handlePatternHover(NoteList.fromScale, name)}
     onMouseLeave={clearHighlight}
@@ -227,8 +227,8 @@ export default function App() {
 
   const chordsPanel = <PatternList
     patterns={narrowMode ? chords : filteredChords}
-    pressMatch={pressMatch['chords']}
-    highlightMatch={highlightMatch['chords']}
+    pressMatch={pressMatch.chords}
+    highlightMatch={highlightMatch.chords}
     onClick={(name, pressed) => handlePatternChange(NoteList.fromChord, name, pressed)}
     onMouseEnter={(name) => handlePatternHover(NoteList.fromChord, name)}
     onMouseLeave={clearHighlight}
