@@ -28,15 +28,6 @@ export default function App() {
   const [pressed, setPressed] = useState(new NoteList())
   const [highlighted, setHighlighted] = useState(new NoteList())
 
-  const currentRoot = pressed.root()
-  const currentHighlighRoot = highlighted.root()
-
-  // Find scales and chords matching current state of the piano.
-  // For pressed we want the superset with all possible extensions,
-  // for highlight we only need to know if therer is an exact match.
-  const pressMatch = pressed.supersets()
-  const highlightMatch = highlighted.search()
-
   const [search, setSearch] = useState('')
 
   const [modal, setModal] = useState('')
@@ -116,7 +107,7 @@ export default function App() {
    * @param {Note} newRoot The new root note
    */
   function handleRootChange(newRoot) {
-    if (currentRoot === undefined) {
+    if (pressed.root() === undefined) {
       setPressed(new NoteList([newRoot]))
     } else {
       setPressed(state => new NoteList(newRoot, state.intervals))
@@ -133,7 +124,7 @@ export default function App() {
    * @param {Note} newRoot The new root note
    */
   function handleRootHover(newRoot) {
-    if (currentRoot === undefined) {
+    if (pressed.root() === undefined) {
       setHighlighted(new NoteList([newRoot]))
     } else {
       setHighlighted(new NoteList(newRoot, pressed.intervals))
@@ -149,7 +140,7 @@ export default function App() {
    */
   function handlePatternChange(func, name, pressed) {
     if (!pressed) {
-      setPressed(func(currentRoot || new Note('C', '', 4), name))
+      setPressed(func(pressed.root() || new Note('C', '', 4), name))
     } else {
       clearPressed()
     }
@@ -163,7 +154,7 @@ export default function App() {
    * @param {string} name Name of pattern
    */
   function handlePatternHover(func, name) {
-    setHighlighted(func(currentRoot || new Note('C', '', 4), name))
+    setHighlighted(func(pressed.root() || new Note('C', '', 4), name))
   }
 
   /**
@@ -188,14 +179,14 @@ export default function App() {
    */
   const scales = Object.keys(SCALES)
   const filteredScales = scales.filter(
-    scale => pressMatch.scales.includes(scale)
+    scale => pressed.scales().supersets().includes(scale)
   ).filter(
     scale => search.length === 0 || scale.includes(search)
   ).slice(0, 12)
 
   const chords = Object.keys(CHORDS)
   const filteredChords = chords.filter(
-    chord => pressMatch.chords.includes(chord)
+    chord => pressed.chords().supersets().includes(chord)
   ).filter(
     chord => search.length === 0 || chord.includes(search)
   ).slice(0, 12)
@@ -204,8 +195,8 @@ export default function App() {
    * Control panel components
    */
   const rootNotePanel = <RootNote
-    pressed={currentRoot}
-    highlighted={currentHighlighRoot}
+    pressed={pressed.root()}
+    highlighted={highlighted.root()}
     octaves={narrowMode ? [4, 5] : [3, 4, 5]}
     onClick={(...note) => handleRootChange(new Note(...note))}
     onMouseEnter={(...note) => handleRootHover(new Note(...note))}
@@ -216,8 +207,8 @@ export default function App() {
 
   const scalesPanel = <PatternList
     patterns={narrowMode ? scales : filteredScales}
-    pressMatch={pressMatch.scales}
-    highlightMatch={highlightMatch.scales}
+    pressed={pressed.scales().exact()}
+    highlighted={highlighted.scales().exact()}
     onClick={(name, pressed) => handlePatternChange(NoteList.fromScale, name, pressed)}
     onMouseEnter={(name) => handlePatternHover(NoteList.fromScale, name)}
     onMouseLeave={clearHighlight}
@@ -227,8 +218,8 @@ export default function App() {
 
   const chordsPanel = <PatternList
     patterns={narrowMode ? chords : filteredChords}
-    pressMatch={pressMatch.chords}
-    highlightMatch={highlightMatch.chords}
+    pressed={pressed.chords().exact()}
+    highlighted={highlighted.chords().exact()}
     onClick={(name, pressed) => handlePatternChange(NoteList.fromChord, name, pressed)}
     onMouseEnter={(name) => handlePatternHover(NoteList.fromChord, name)}
     onMouseLeave={clearHighlight}

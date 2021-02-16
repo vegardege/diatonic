@@ -7,8 +7,8 @@ import Button from './Button.js'
 export default function PatternList(props) {
 
   const buttons = props.patterns.map(option => {
-    const isPressed = props.pressMatch.exact() === option,
-          isHightlighted = props.highlightMatch.exact() === option
+    const isPressed = props.pressed.includes(option),
+          isHightlighted = props.highlighted.includes(option)
 
     const [, mainText, subText] = option.split(/^([^\s]+)\s?(.*)$/)
 
