@@ -138,8 +138,8 @@ export default function App() {
    * @param {function} func NoteList constructor function
    * @param {string} name Name of pattern
    */
-  function handlePatternChange(func, name, pressed) {
-    if (!pressed) {
+  function handlePatternChange(func, name, isPressed) {
+    if (!isPressed) {
       setPressed(func(pressed.root() || new Note('C', '', 4), name))
     } else {
       clearPressed()
