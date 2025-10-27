@@ -1,5 +1,7 @@
 # Diatonic
 
+[![Lint, Test, Type Check, Build](https://github.com/vegardege/diatonic/actions/workflows/ci.yml/badge.svg)](https://github.com/vegardege/diatonic/actions/workflows/ci.yml)
+
 Diatonic is a web site providing lookup and reverse lookup of scales and chords
 using an interactive piano component.
 
