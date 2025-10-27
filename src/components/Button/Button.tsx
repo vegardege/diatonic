@@ -1,4 +1,4 @@
-import "./Button.css";
+import styles from "./Button.module.css";
 
 interface ButtonProps {
   text: string;
@@ -26,17 +26,17 @@ export default function Button(props: ButtonProps) {
     props.subText === undefined ? (
       props.text
     ) : (
-      <div className="text">
+      <div className={styles.text}>
         {props.text}
         <br />
-        <span className="name">{props.subText}</span>
+        <span className={styles.name}>{props.subText}</span>
       </div>
     );
 
   return (
     <button
       type="button"
-      className={`${props.className} choice`}
+      className={`${props.className} ${styles.choice}`}
       style={
         props.isSelected
           ? selectedStyle

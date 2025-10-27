@@ -1,6 +1,5 @@
-import "./App.css";
-
 import { Piano } from "@diatonic/piano";
+import styles from "./App.module.css";
 
 // NoteListConstructor type for pattern handlers
 type NoteListConstructor = (root: Note, name: string) => NoteList;
@@ -8,13 +7,13 @@ type NoteListConstructor = (root: Note, name: string) => NoteList;
 import { CHORDS, Note, NoteList, SCALES } from "kamasi";
 import { useEffect, useState } from "react";
 
-import FlexControls from "./FlexControls.tsx";
-import HelpModal from "./HelpModal.tsx";
-import KeyboardModal from "./KeyboardModal.tsx";
-import PatternList from "./PatternList.tsx";
-import RootNote from "./RootNote.tsx";
-import Search from "./Search.tsx";
-import TabControls from "./TabControls.tsx";
+import FlexControls from "./components/FlexControls/FlexControls.tsx";
+import HelpModal from "./components/HelpModal/HelpModal.tsx";
+import KeyboardModal from "./components/KeyboardModal/KeyboardModal.tsx";
+import PatternList from "./components/PatternList/PatternList.tsx";
+import RootNote from "./components/RootNote/RootNote.tsx";
+import Search from "./components/Search/Search.tsx";
+import TabControls from "./components/TabControls/TabControls.tsx";
 
 /**
  * The app consists of three different components:
@@ -274,16 +273,21 @@ export default function App() {
   );
 
   return (
-    <div id="app">
+    <div className={styles.app}>
       <KeyboardModal
         onClose={() => setModal("")}
         display={modal === "keyboard"}
       />
       <HelpModal onClose={() => setModal("")} display={modal === "help"} />
-      <nav>
-        <div id="navInstruments"></div>
-        <div id="navButtons">
-          <button type="button" title="Reset" onClick={() => clearPressed()}>
+      <nav className={styles.nav}>
+        <div className={styles.navInstruments}></div>
+        <div className={styles.navButtons}>
+          <button
+            className={styles.navButton}
+            type="button"
+            title="Reset"
+            onClick={() => clearPressed()}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -296,6 +300,7 @@ export default function App() {
             Reset
           </button>
           <button
+            className={styles.navButton}
             type="button"
             title="Keyboard shortcuts"
             onClick={() => showModal("keyboard", "keyboardClose")}
@@ -312,6 +317,7 @@ export default function App() {
             Keys
           </button>
           <button
+            className={styles.navButton}
             type="button"
             title="Help"
             onClick={() => showModal("help", "helpClose")}
@@ -329,7 +335,7 @@ export default function App() {
           </button>
         </div>
       </nav>
-      <div className="piano">
+      <div className={styles.piano}>
         <Piano
           octaves={narrowMode ? 2 : 3}
           pressed={pressed}

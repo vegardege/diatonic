@@ -1,5 +1,5 @@
-import "./Search.css";
 import type { ChangeEvent, KeyboardEvent } from "react";
+import styles from "./Search.module.css";
 
 interface SearchProps {
   text: string;
@@ -11,9 +11,9 @@ export default function Search(props: SearchProps) {
     e.stopPropagation();
 
   return (
-    <div id="search">
+    <div className={styles.search}>
       <label htmlFor="searchField">
-        <h2>Search</h2>
+        <h2 className={styles.heading}>Search</h2>
       </label>
       <input
         id="searchField"

@@ -1,5 +1,5 @@
-import "./FlexControls.css";
 import type { ReactNode } from "react";
+import styles from "./FlexControls.module.css";
 
 interface FlexControlsProps {
   rootPanel: ReactNode;
@@ -14,14 +14,14 @@ interface FlexControlsProps {
  */
 export default function FlexControls(props: FlexControlsProps) {
   return (
-    <section id="controls">
+    <section className={styles.controls}>
       {props.rootPanel}
-      <section className="patternColumn">
-        <h2>Scales</h2>
+      <section className={styles.patternColumn}>
+        <h2 className={styles.heading}>Scales</h2>
         {props.scalesPanel}
       </section>
-      <section className="patternColumn">
-        <h2>Chords</h2>
+      <section className={styles.patternColumn}>
+        <h2 className={styles.heading}>Chords</h2>
         {props.chordsPanel}
       </section>
       {props.searchPanel}
