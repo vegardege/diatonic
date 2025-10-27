@@ -14,14 +14,6 @@ interface ButtonProps {
 }
 
 export default function Button(props: ButtonProps) {
-  const selectedStyle = {
-    background: "#ABBF73",
-  };
-
-  const highlightedStyle = {
-    background: "#CCD8AB",
-  };
-
   const text =
     props.subText === undefined ? (
       props.text
@@ -33,17 +25,19 @@ export default function Button(props: ButtonProps) {
       </div>
     );
 
+  const classNames = [
+    props.className,
+    styles.choice,
+    props.isSelected && styles.selected,
+    props.isHighlighted && styles.highlighted,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
     <button
       type="button"
-      className={`${props.className} ${styles.choice}`}
-      style={
-        props.isSelected
-          ? selectedStyle
-          : props.isHighlighted
-            ? highlightedStyle
-            : {}
-      }
+      className={classNames}
       onClick={props.onClick}
       onMouseEnter={props.onMouseEnter}
       onMouseLeave={props.onMouseLeave}

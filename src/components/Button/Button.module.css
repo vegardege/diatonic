@@ -7,6 +7,14 @@
   position: relative;
 }
 
+.choice.selected {
+  background: #abbf73;
+}
+
+.choice.highlighted {
+  background: #ccd8ab;
+}
+
 .choice:focus {
   outline: none;
 }
