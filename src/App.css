@@ -1,11 +1,11 @@
 #app {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    max-width: 780px;
-    margin: auto;
-  }
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  max-width: 780px;
+  margin: auto;
+}
 
 nav {
   display: flex;

@@ -1,29 +1,29 @@
 .choice {
-    background: #eee;
-    cursor: pointer;
-    display: inline-block;
-    height: 40px;
-    padding: 10px;
-    position: relative;
+  background: #eee;
+  cursor: pointer;
+  display: inline-block;
+  height: 40px;
+  padding: 10px;
+  position: relative;
 }
 
 .choice:focus {
-    outline: none;
+  outline: none;
 }
 
 .choice:focus-visible {
-    background: #CCD8AB;
-    box-shadow: 0 0 1px 1px #000;
-    outline: none;
-    z-index: 1;
+  background: #ccd8ab;
+  box-shadow: 0 0 1px 1px #000;
+  outline: none;
+  z-index: 1;
 }
 
 .choice .text {
-    float: left;
-    max-width: 100%;
+  float: left;
+  max-width: 100%;
 }
 
 .choice .name {
-    color: #333;
-    font-size: 0.7rem;
+  color: #333;
+  font-size: 0.7rem;
 }

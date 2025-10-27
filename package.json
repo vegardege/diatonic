@@ -1,23 +1,31 @@
 {
-	"name": "@diatonic/web",
-	"version": "0.1.0",
-	"private": true,
-	"dependencies": {
-		"@diatonic/piano": "^0.2.0",
-		"@vitejs/plugin-react": "^5.1.0",
-		"kamasi": "^0.3.0",
-		"react": "^19.2.0",
-		"react-dom": "^19.2.0",
-		"vite": "^7.1.12"
-	},
-	"scripts": {
-		"dev": "vite",
-		"build": "vite build",
-		"preview": "vite preview"
-	},
-	"devDependencies": {
-		"@types/react": "^19.2.2",
-		"@types/react-dom": "^19.2.2",
-		"typescript": "^5.9.3"
-	}
+  "name": "@diatonic/web",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@diatonic/piano": "^0.2.0",
+    "@vitejs/plugin-react": "^5.1.0",
+    "kamasi": "^0.3.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "vite": "^7.1.12"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "check": "biome check .",
+    "check:fix": "biome check . --write",
+    "lint": "biome lint .",
+    "lint:fix": "biome lint . --write",
+    "format": "biome format .",
+    "format:fix": "biome format . --write",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.3.1",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "typescript": "^5.9.3"
+  }
 }

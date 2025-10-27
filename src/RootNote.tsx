@@ -1,16 +1,16 @@
-import './RootNote.css'
-import Button from './Button.tsx'
-import type { Note } from 'kamasi'
+import "./RootNote.css";
+import type { Note } from "kamasi";
+import Button from "./Button.tsx";
 
 interface RootNoteProps {
-  pressed?: Note
-  highlighted?: Note
-  octaves?: number[]
-  onClick: (letter: string, accidental: string, octave: number) => void
-  onMouseEnter: (letter: string, accidental: string, octave: number) => void
-  onMouseLeave: () => void
-  onFocus: (letter: string, accidental: string, octave: number) => void
-  onBlur: () => void
+  pressed?: Note;
+  highlighted?: Note;
+  octaves?: number[];
+  onClick: (letter: string, accidental: string, octave: number) => void;
+  onMouseEnter: (letter: string, accidental: string, octave: number) => void;
+  onMouseLeave: () => void;
+  onFocus: (letter: string, accidental: string, octave: number) => void;
+  onBlur: () => void;
 }
 
 /**
@@ -29,9 +29,9 @@ interface RootNoteProps {
  * - onMouseLeave(): No notes are hovered
  */
 export default function RootNote(props: RootNoteProps) {
-  const letters = ['C', 'D', 'E', 'F', 'G', 'A', 'B']
-  const accidentals = ['#', 'b']
-  const octaves = props.octaves || [3, 4, 5]
+  const letters = ["C", "D", "E", "F", "G", "A", "B"];
+  const accidentals = ["#", "b"];
+  const octaves = props.octaves || [3, 4, 5];
 
   /**
    * Create a button for one of the three button groups.
@@ -42,22 +42,33 @@ export default function RootNote(props: RootNoteProps) {
    * @param {string} accidental Accidental or ''
    * @param {number | string} octave Octave or ''
    */
-  function createButton(letter: string, accidental: string, octave: number | string) {
-    const text = letter || accidental || octave.toString()
-    const inputNote: [string, string, number | string] = [letter, accidental, octave]
-    const expandedNote = expandNote(...inputNote)
+  function createButton(
+    letter: string,
+    accidental: string,
+    octave: number | string,
+  ) {
+    const text = letter || accidental || octave.toString();
+    const inputNote: [string, string, number | string] = [
+      letter,
+      accidental,
+      octave,
+    ];
+    const expandedNote = expandNote(...inputNote);
 
-    return <li key={text}>
-      <Button text={text}
-              isSelected={isSelected(props.pressed, ...inputNote)}
-              isHighlighted={isSelected(props.highlighted, ...inputNote)}
-              onClick={() => props.onClick(...expandedNote)}
-              onMouseEnter={() => props.onMouseEnter(...expandedNote)}
-              onMouseLeave={props.onMouseLeave}
-              onFocus={() => props.onFocus(...expandedNote)}
-              onBlur={props.onBlur}
-       />
+    return (
+      <li key={text}>
+        <Button
+          text={text}
+          isSelected={isSelected(props.pressed, ...inputNote)}
+          isHighlighted={isSelected(props.highlighted, ...inputNote)}
+          onClick={() => props.onClick(...expandedNote)}
+          onMouseEnter={() => props.onMouseEnter(...expandedNote)}
+          onMouseLeave={props.onMouseLeave}
+          onFocus={() => props.onFocus(...expandedNote)}
+          onBlur={props.onBlur}
+        />
       </li>
+    );
   }
 
   /**
@@ -68,12 +79,21 @@ export default function RootNote(props: RootNoteProps) {
    * @param {string} accidental Accidental or ''
    * @param {number | string} octave Octave or ''
    */
-  function isSelected(base: Note | undefined, letter: string, accidental: string, octave: number | string): boolean {
-    return base === undefined ? false
-      : letter ? base.letter === letter
-      : accidental ? base.accidentals === accidental
-      : octave ? base.octave === octave
-      : false
+  function isSelected(
+    base: Note | undefined,
+    letter: string,
+    accidental: string,
+    octave: number | string,
+  ): boolean {
+    return base === undefined
+      ? false
+      : letter
+        ? base.letter === letter
+        : accidental
+          ? base.accidentals === accidental
+          : octave
+            ? base.octave === octave
+            : false;
   }
 
   /**
@@ -86,36 +106,37 @@ export default function RootNote(props: RootNoteProps) {
    *
    * The precedence is current button value, pressed value, or default (C4).
    */
-  function expandNote(letter: string, accidental: string, octave: number | string): [string, string, number] {
-    let finalLetter = letter || props.pressed?.letter || letters[0]!
-    let finalAccidental: string
+  function expandNote(
+    letter: string,
+    accidental: string,
+    octave: number | string,
+  ): [string, string, number] {
+    const finalLetter = letter || props.pressed?.letter || letters[0]!;
+    let finalAccidental: string;
 
     if (accidental === props.pressed?.accidentals) {
-      finalAccidental = '' // Toggle
+      finalAccidental = ""; // Toggle
     } else {
-      finalAccidental = accidental || props.pressed?.accidentals || ''
+      finalAccidental = accidental || props.pressed?.accidentals || "";
     }
 
-    const finalOctave = (typeof octave === 'number' ? octave : undefined) || props.pressed?.octave || 4
+    const finalOctave =
+      (typeof octave === "number" ? octave : undefined) ||
+      props.pressed?.octave ||
+      4;
 
-    return [finalLetter, finalAccidental, finalOctave]
+    return [finalLetter, finalAccidental, finalOctave];
   }
 
-  const letterButtons = letters.map(letter => createButton(letter, '', ''))
-  const accidentalButtons = accidentals.map(acc => createButton('', acc, ''))
-  const octaveButtons = octaves.map(octave => createButton('', '', octave))
+  const letterButtons = letters.map((letter) => createButton(letter, "", ""));
+  const accidentalButtons = accidentals.map((acc) => createButton("", acc, ""));
+  const octaveButtons = octaves.map((octave) => createButton("", "", octave));
 
   return (
     <div id="rootNote">
-      <ul className="buttonGroup">
-        {letterButtons}
-      </ul>
-      <ul className="buttonGroup">
-        {accidentalButtons}
-      </ul>
-      <ul className="buttonGroup">
-        {octaveButtons}
-      </ul>
+      <ul className="buttonGroup">{letterButtons}</ul>
+      <ul className="buttonGroup">{accidentalButtons}</ul>
+      <ul className="buttonGroup">{octaveButtons}</ul>
     </div>
-  )
+  );
 }
