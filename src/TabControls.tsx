@@ -1,14 +1,24 @@
 import './TabControls.css'
 import { useState } from 'react'
+import type { ReactNode } from 'react'
+
+interface Tab {
+  id: string
+  text: string
+  panel: ReactNode
+}
+
+interface TabControlsProps {
+  tabs: Tab[]
+}
 
 /**
  * A row of tabs controlling a series of panels
  */
-export default function TabControls(props) {
+export default function TabControls(props: TabControlsProps) {
+  const [selectedTab, setSelectedTab] = useState(props.tabs[0]?.id ?? '')
 
-  const [selectedTab, setSelectedTab] = useState(props.tabs[0]['id'])
-
-  const tabs = props.tabs.map((tab, ix) => 
+  const tabs = props.tabs.map((tab, ix) =>
     <button key={tab.text}
             className={tab.id === selectedTab ? 'selected' : ''}
             role="tab"
@@ -19,8 +29,10 @@ export default function TabControls(props) {
       {tab.text}
     </button>
   )
+
   const panels = props.tabs.map(tab =>
-    <div style={{display: tab.id === selectedTab ? 'block' : 'none'}}
+    <div key={tab.id}
+         style={{display: tab.id === selectedTab ? 'block' : 'none'}}
          role="tabpanel"
          aria-hidden={tab.id === selectedTab ? 'false' : 'true'}>
       {tab.panel}

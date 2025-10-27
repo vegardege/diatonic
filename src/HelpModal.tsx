@@ -1,14 +1,21 @@
 import './Modal.css'
 import { Piano } from '@diatonic/piano'
-import { chord, scale } from 'kamasi'
+import { chord, scale } from 'kamasi'
+import type { MouseEvent } from 'react'
 
+interface HelpModalProps {
+  display: boolean
+  onClose: () => void
+}
 
-export default function HelpModal(props) {
+export default function HelpModal(props: HelpModalProps) {
+  const stopPropagation = (e: MouseEvent) => e.stopPropagation()
+
   return <div className={`modal ${props.display ? '' : 'hidden'}`}
               role="dialog"
               aria-modal="true"
               onClick={props.onClose}>
-    <section onClick={e => e.stopPropagation()}>
+    <section onClick={stopPropagation}>
       <button id="helpClose"
               className="close"
               aria-label="Close"

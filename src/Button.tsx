@@ -1,11 +1,23 @@
 import './Button.css'
 
-export default function Button(props) {
+interface ButtonProps {
+  text: string
+  subText?: string
+  className?: string
+  isSelected?: boolean
+  isHighlighted?: boolean
+  onClick?: () => void
+  onMouseEnter?: () => void
+  onMouseLeave?: () => void
+  onFocus?: () => void
+  onBlur?: () => void
+}
 
+export default function Button(props: ButtonProps) {
   const selectedStyle = {
     background: "#ABBF73",
   }
-  
+
   const highlightedStyle = {
     background: "#CCD8AB",
   }

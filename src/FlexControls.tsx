@@ -1,11 +1,18 @@
 import './FlexControls.css'
+import type { ReactNode } from 'react'
+
+interface FlexControlsProps {
+  rootPanel: ReactNode
+  scalesPanel: ReactNode
+  chordsPanel: ReactNode
+  searchPanel: ReactNode
+}
 
 /**
  * Not a reusable component at all, but hides the implementation of the
- * flex controls from the main App.js file.
+ * flex controls from the main App.tsx file.
  */
-export default function FlexControls(props) {
-
+export default function FlexControls(props: FlexControlsProps) {
   return <section id="controls">
     {props.rootPanel}
     <section className="patternColumn">
