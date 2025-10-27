@@ -1,11 +1,11 @@
-import './FlexControls.css'
-import type { ReactNode } from 'react'
+import "./FlexControls.css";
+import type { ReactNode } from "react";
 
 interface FlexControlsProps {
-  rootPanel: ReactNode
-  scalesPanel: ReactNode
-  chordsPanel: ReactNode
-  searchPanel: ReactNode
+  rootPanel: ReactNode;
+  scalesPanel: ReactNode;
+  chordsPanel: ReactNode;
+  searchPanel: ReactNode;
 }
 
 /**
@@ -13,16 +13,18 @@ interface FlexControlsProps {
  * flex controls from the main App.tsx file.
  */
 export default function FlexControls(props: FlexControlsProps) {
-  return <section id="controls">
-    {props.rootPanel}
-    <section className="patternColumn">
-      <h2>Scales</h2>
-      {props.scalesPanel}
+  return (
+    <section id="controls">
+      {props.rootPanel}
+      <section className="patternColumn">
+        <h2>Scales</h2>
+        {props.scalesPanel}
+      </section>
+      <section className="patternColumn">
+        <h2>Chords</h2>
+        {props.chordsPanel}
+      </section>
+      {props.searchPanel}
     </section>
-    <section className="patternColumn">
-      <h2>Chords</h2>
-      {props.chordsPanel}
-    </section>
-    {props.searchPanel}
-  </section>
+  );
 }
