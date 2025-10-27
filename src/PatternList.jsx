@@ -1,5 +1,5 @@
 import './PatternList.css'
-import Button from './Button.js'
+import Button from './Button.jsx'
 
 /**
  * A list of buttons containing a pattern (scale or chord).
