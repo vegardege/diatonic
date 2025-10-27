@@ -1,5 +1,5 @@
 import './Modal.css'
-import { Piano } from 'diatonic-piano'
+import { Piano } from '@diatonic/piano'
 import { chord, scale } from 'kamasi'
 
 

@@ -1,39 +1,18 @@
 {
-  "name": "diatonic",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.11.9",
-    "@testing-library/react": "^11.2.3",
-    "@testing-library/user-event": "^12.6.2",
-    "diatonic-piano": "file:../diatonic-piano/diatonic-piano-0.1.0.tgz",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-scripts": "4.0.1",
-    "web-vitals": "^0.2.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+	"name": "@diatonic/web",
+	"version": "0.1.0",
+	"private": true,
+	"dependencies": {
+		"@diatonic/piano": "^0.2.0",
+		"@vitejs/plugin-react": "^5.1.0",
+		"kamasi": "^0.3.0",
+		"react": "^19.2.0",
+		"react-dom": "^19.2.0",
+		"vite": "^7.1.12"
+	},
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build",
+		"preview": "vite preview"
+	}
 }

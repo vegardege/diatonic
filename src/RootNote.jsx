@@ -1,5 +1,5 @@
 import './RootNote.css'
-import Button from './Button.js'
+import Button from './Button.jsx'
 
 /**
  * The root note component lets the user modify the lowest pitch of their

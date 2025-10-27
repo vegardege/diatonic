@@ -2,15 +2,15 @@ import './App.css';
 
 import { useEffect, useState } from 'react'
 import { Note, NoteList, SCALES, CHORDS } from 'kamasi'
-import { Piano } from 'diatonic-piano'
+import { Piano } from '@diatonic/piano'
 
-import FlexControls from './FlexControls.js'
-import HelpModal from './HelpModal.js'
-import KeyboardModal from './KeyboardModal.js'
-import PatternList from './PatternList.js'
-import RootNote from './RootNote.js'
-import Search from  './Search.js'
-import TabControls from './TabControls.js'
+import FlexControls from './FlexControls.jsx'
+import HelpModal from './HelpModal.jsx'
+import KeyboardModal from './KeyboardModal.jsx'
+import PatternList from './PatternList.jsx'
+import RootNote from './RootNote.jsx'
+import Search from  './Search.jsx'
+import TabControls from './TabControls.jsx'
 
 /**
  * The app consists of three different components:
@@ -110,7 +110,7 @@ export default function App() {
     if (pressed.root() === undefined) {
       setPressed(new NoteList([newRoot]))
     } else {
-      setPressed(state => new NoteList(newRoot, state.intervals))
+      setPressed(state => NoteList.fromIntervals(newRoot, state.intervals))
     }
   }
 
@@ -127,7 +127,7 @@ export default function App() {
     if (pressed.root() === undefined) {
       setHighlighted(new NoteList([newRoot]))
     } else {
-      setHighlighted(new NoteList(newRoot, pressed.intervals))
+      setHighlighted(NoteList.fromIntervals(newRoot, pressed.intervals))
     }
   }
 
