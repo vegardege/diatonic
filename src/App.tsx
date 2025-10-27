@@ -1,28 +1,28 @@
 import './App.css';
 
 import { useEffect, useState } from 'react'
-import { Note, NoteList, SCALES, CHORDS } from 'kamasi'
+import { Note, NoteList, SCALES, CHORDS } from 'kamasi'
+import type { NoteListConstructor } from 'kamasi'
 import { Piano } from '@diatonic/piano'
 
-import FlexControls from './FlexControls.jsx'
-import HelpModal from './HelpModal.jsx'
-import KeyboardModal from './KeyboardModal.jsx'
-import PatternList from './PatternList.jsx'
-import RootNote from './RootNote.jsx'
-import Search from  './Search.jsx'
-import TabControls from './TabControls.jsx'
+import FlexControls from './FlexControls.tsx'
+import HelpModal from './HelpModal.tsx'
+import KeyboardModal from './KeyboardModal.tsx'
+import PatternList from './PatternList.tsx'
+import RootNote from './RootNote.tsx'
+import Search from  './Search.tsx'
+import TabControls from './TabControls.tsx'
 
 /**
  * The app consists of three different components:
  * - `Piano` is an SVG piano allowing the user to press or hover keys
  * - `RootKey` is a list of buttons allowing the lowest pitch to be set
  * - `PatternList` is a list of note patterns the user can select
- * 
+ *
  * The components are connected, ensuring that their state is consistent.
  * If you click or hover one component, the others will update in real time.
  */
 export default function App() {
-
   // A key can be pressed or highlighted. The two sets are kept
   // as separate state objects, as they change independently.
   const [pressed, setPressed] = useState(new NoteList())
@@ -49,8 +49,7 @@ export default function App() {
     }
   })
 
-  function handleKeyDown(e) {
-    // eslint-disable-next-line default-case
+  function handleKeyDown(e: KeyboardEvent) {
     switch (e.keyCode) {
       case 27: setModal('');
                break;
@@ -69,44 +68,44 @@ export default function App() {
 
   /**
    * Called when the user activates a modal popup.
-   * 
+   *
    * @param {string} name Name of modal popup to show
    * @param {string} focusElement ID of element to focus on (close button)
    */
-  function showModal(name, focusElement) {
+  function showModal(name: string, focusElement: string) {
     setModal(name)
-    document.getElementById(focusElement).focus()
+    document.getElementById(focusElement)?.focus()
   }
 
   /**
    * Called when the user clicks a piano key, either to press or
    * unpress the key.
-   * 
+   *
    * @param {string} note The note of the key that was clicked
    */
-  function handlePianoChange(note) {
+  function handlePianoChange(note: string) {
     setPressed(state => state.toggle(note, true).sort())
   }
 
   /**
    * Called when the user hovers a piano key.
-   * 
+   *
    * @param {string} note The note of the key that is hovered
    */
-  function handlePianoFocus(note) {
+  function handlePianoFocus(note: string) {
     setHighlighted(pressed.add(note).sort())
   }
 
   /**
    * Called when the user clicks a button in the root note component.
-   * 
+   *
    * If keys are already pressed, we transpose them to get a new selection
    * with the desired key as root (lowest pitch). Otherwise, we simply
    * press the desired note.
    *
    * @param {Note} newRoot The new root note
    */
-  function handleRootChange(newRoot) {
+  function handleRootChange(newRoot: Note) {
     if (pressed.root() === undefined) {
       setPressed(new NoteList([newRoot]))
     } else {
@@ -116,14 +115,14 @@ export default function App() {
 
   /**
    * Called when the user hovers a button the root note component.
-   * 
+   *
    * If keys are already pressed, we transpose them to get a new selection
    * with the desired key as root (lowest pitch). Otherwise, we simply
    * highlight the desired note.
    *
    * @param {Note} newRoot The new root note
    */
-  function handleRootHover(newRoot) {
+  function handleRootHover(newRoot: Note) {
     if (pressed.root() === undefined) {
       setHighlighted(new NoteList([newRoot]))
     } else {
@@ -138,7 +137,7 @@ export default function App() {
    * @param {function} func NoteList constructor function
    * @param {string} name Name of pattern
    */
-  function handlePatternChange(func, name, isPressed) {
+  function handlePatternChange(func: NoteListConstructor, name: string, isPressed: boolean) {
     if (!isPressed) {
       setPressed(func(pressed.root() || new Note('C', '', 4), name))
     } else {
@@ -153,7 +152,7 @@ export default function App() {
    * @param {function} func NoteList constructor function
    * @param {string} name Name of pattern
    */
-  function handlePatternHover(func, name) {
+  function handlePatternHover(func: NoteListConstructor, name: string) {
     setHighlighted(func(pressed.root() || new Note('C', '', 4), name))
   }
 
@@ -231,7 +230,7 @@ export default function App() {
     text={search}
     onChange={e => setSearch(e.target.value)}
   />
-  
+
   /**
    * Define control panels in mobile (narrow) and desktop mode
    */
@@ -256,7 +255,7 @@ export default function App() {
                  display={modal === 'help'} />
       <nav>
         <div id="navInstruments">
-          
+
         </div>
         <div id="navButtons">
           <button title="Reset"
@@ -296,6 +295,6 @@ export default function App() {
         />
       </div>
       {narrowMode ? narrowControlPanel : fullControlPanel}
-    </div>    
+    </div>
   );
 }

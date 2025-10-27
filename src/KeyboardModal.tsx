@@ -1,6 +1,14 @@
 import "./Modal.css";
+import type { MouseEvent } from 'react'
 
-export default function KeyboardModal(props) {
+interface KeyboardModalProps {
+  display: boolean
+  onClose: () => void
+}
+
+export default function KeyboardModal(props: KeyboardModalProps) {
+  const stopPropagation = (e: MouseEvent) => e.stopPropagation()
+
   return (
     <div
       className={`modal ${props.display ? "" : "hidden"}`}
@@ -8,7 +16,7 @@ export default function KeyboardModal(props) {
       aria-modal="true"
       onClick={props.onClose}
     >
-      <section onClick={(e) => e.stopPropagation()}>
+      <section onClick={stopPropagation}>
         <button
           id="keyboardClose"
           className="close"
