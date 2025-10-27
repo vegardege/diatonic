@@ -1,4 +1,4 @@
-#app {
+.app {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -7,7 +7,7 @@
   margin: auto;
 }
 
-nav {
+.nav {
   display: flex;
   justify-content: space-between;
   margin: 10px 10px 0 10px;
@@ -15,17 +15,17 @@ nav {
   width: 100%;
 }
 
-#navInstruments {
+.navInstruments {
   display: flex;
   justify-content: flex-start;
 }
 
-#navButtons {
+.navButtons {
   display: flex;
   justify-content: flex-end;
 }
 
-nav button {
+.navButton {
   background-color: #fff;
   border: 1px solid #fff;
   border-radius: 5px;
@@ -39,11 +39,11 @@ nav button {
   vertical-align: middle;
 }
 
-nav button:hover {
+.navButton:hover {
   text-decoration: underline;
 }
 
-nav svg {
+.navButton svg {
   margin-right: 5px;
 }
 
@@ -52,8 +52,4 @@ nav svg {
   margin: 0 10px 20px 10px;
   max-width: 780px;
   width: 100%;
-}
-
-.diatonic-key:focus {
-  outline: none;
 }

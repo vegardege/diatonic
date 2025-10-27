@@ -1,6 +1,6 @@
-import "./RootNote.css";
 import type { Note } from "kamasi";
-import Button from "./Button.tsx";
+import Button from "../Button/Button.tsx";
+import styles from "./RootNote.module.css";
 
 interface RootNoteProps {
   pressed?: Note;
@@ -133,10 +133,10 @@ export default function RootNote(props: RootNoteProps) {
   const octaveButtons = octaves.map((octave) => createButton("", "", octave));
 
   return (
-    <div id="rootNote">
-      <ul className="buttonGroup">{letterButtons}</ul>
-      <ul className="buttonGroup">{accidentalButtons}</ul>
-      <ul className="buttonGroup">{octaveButtons}</ul>
+    <div className={styles.rootNote}>
+      <ul className={styles.buttonGroup}>{letterButtons}</ul>
+      <ul className={styles.buttonGroup}>{accidentalButtons}</ul>
+      <ul className={styles.buttonGroup}>{octaveButtons}</ul>
     </div>
   );
 }

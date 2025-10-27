@@ -1,5 +1,5 @@
-import "./PatternList.css";
-import Button from "./Button.tsx";
+import Button from "../Button/Button.tsx";
+import styles from "./PatternList.module.css";
 
 interface PatternListProps {
   patterns: string[];
@@ -39,5 +39,5 @@ export default function PatternList(props: PatternListProps) {
     );
   });
 
-  return <ul className="options">{buttons}</ul>;
+  return <ul className={styles.options}>{buttons}</ul>;
 }

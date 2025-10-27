@@ -1,4 +1,4 @@
-#rootNote {
+.rootNote {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -7,7 +7,7 @@
 }
 
 @media only screen and (max-width: 650px) {
-  #rootNote {
+  .rootNote {
     justify-content: center;
   }
 }

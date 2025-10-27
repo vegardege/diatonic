@@ -1,6 +1,6 @@
-import "./TabControls.css";
 import type { ReactNode } from "react";
 import { useState } from "react";
+import styles from "./TabControls.module.css";
 
 interface Tab {
   id: string;
@@ -22,7 +22,7 @@ export default function TabControls(props: TabControlsProps) {
     <button
       type="button"
       key={tab.text}
-      className={tab.id === selectedTab ? "selected" : ""}
+      className={tab.id === selectedTab ? styles.selected : ""}
       role="tab"
       aria-selected={tab.id === selectedTab ? "true" : "false"}
       aria-posinset={ix}
@@ -45,8 +45,8 @@ export default function TabControls(props: TabControlsProps) {
   ));
 
   return (
-    <div id="tabs">
-      <div id="tabList" role="tablist" style={{ width: "100%" }}>
+    <div className={styles.tabs}>
+      <div className={styles.tabList} role="tablist" style={{ width: "100%" }}>
         {tabs}
       </div>
       {panels}

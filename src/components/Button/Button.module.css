@@ -18,12 +18,12 @@
   z-index: 1;
 }
 
-.choice .text {
+.text {
   float: left;
   max-width: 100%;
 }
 
-.choice .name {
+.name {
   color: #333;
   font-size: 0.7rem;
 }

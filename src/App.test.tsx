@@ -9,9 +9,9 @@ describe("App", () => {
   });
 
   it("renders the piano component", () => {
-    render(<App />);
-    // Check for the piano container
-    const pianoElement = document.querySelector(".piano");
+    const { container } = render(<App />);
+    // Check for piano component by looking for diatonic-piano class
+    const pianoElement = container.querySelector(".diatonic-piano");
     expect(pianoElement).toBeInTheDocument();
   });
 
