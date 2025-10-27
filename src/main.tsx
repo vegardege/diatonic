@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import "modern-normalize/modern-normalize.css";
 import "./index.css";
 import App from "./App";
+import { ThemeProvider } from "./contexts/ThemeContext";
 
 const rootElement = document.getElementById("root");
 if (!rootElement) {
@@ -12,6 +13,8 @@ if (!rootElement) {
 const root = createRoot(rootElement);
 root.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
   </React.StrictMode>,
 );
