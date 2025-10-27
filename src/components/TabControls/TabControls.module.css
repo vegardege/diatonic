@@ -1,30 +1,32 @@
 .tabs {
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 10px;
+  width: 310px;
 }
 
 .tabList {
-  border-bottom: 1px solid #ccc;
-  margin-bottom: 15px;
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
 }
 
 .tabList button {
-  border-top: 1px solid #ccc;
-  border-right: 1px solid #ccc;
-  border-bottom: 0;
-  border-left: 0;
-  border-radius: 5px 5px 0 0;
+  background-color: transparent;
+  border: 0;
+  border-bottom: 2px solid transparent;
   cursor: pointer;
-  height: 40px;
-  font-size: 0.8rem;
-  width: 100px;
+  font-size: 1rem;
+  padding: 2px 2px 4px 2px;
+  width: 100%;
 }
 
-.tabList button:first-child {
-  border-left: 1px solid #ccc;
+.tabList button:hover {
+  text-decoration: underline;
 }
 
 .selected {
-  background-color: #abbf73;
-  border-color: #abbf73;
+  background-color: var(--color-button-selected);
+  border-color: var(--color-button-selected);
+  font-weight: 600;
 }

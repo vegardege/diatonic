@@ -1,12 +1,8 @@
 import { Piano } from "@diatonic/piano";
-import styles from "./App.module.css";
-
-// NoteListConstructor type for pattern handlers
-type NoteListConstructor = (root: Note, name: string) => NoteList;
-
 import { CHORDS, Note, NoteList, SCALES } from "kamasi";
 import { useEffect, useState } from "react";
 
+import styles from "./App.module.css";
 import FlexControls from "./components/FlexControls/FlexControls.tsx";
 import HelpModal from "./components/HelpModal/HelpModal.tsx";
 import KeyboardModal from "./components/KeyboardModal/KeyboardModal.tsx";
@@ -14,6 +10,11 @@ import PatternList from "./components/PatternList/PatternList.tsx";
 import RootNote from "./components/RootNote/RootNote.tsx";
 import Search from "./components/Search/Search.tsx";
 import TabControls from "./components/TabControls/TabControls.tsx";
+import ThemeToggle from "./components/ThemeToggle/ThemeToggle.tsx";
+import { useTheme } from "./contexts/ThemeContext";
+
+// NoteListConstructor type for pattern handlers
+type NoteListConstructor = (root: Note, name: string) => NoteList;
 
 /**
  * The app consists of three different components:
@@ -25,6 +26,37 @@ import TabControls from "./components/TabControls/TabControls.tsx";
  * If you click or hover one component, the others will update in real time.
  */
 export default function App() {
+  const { theme } = useTheme();
+
+  // Piano colors are hardcoded here rather than using CSS variables
+  // to ensure the Piano component re-renders when theme changes
+  const pianoStyle =
+    theme === "light"
+      ? {
+          diatonic: {
+            fill: "#ffffff",
+            stroke: "#000000",
+            pressedFill: "#abbf73",
+          },
+          chromatic: {
+            fill: "#000000",
+            stroke: "#000000",
+            pressedFill: "#7a9943",
+          },
+        }
+      : {
+          diatonic: {
+            fill: "#2a2a2a",
+            stroke: "#666666",
+            pressedFill: "#7a9943",
+          },
+          chromatic: {
+            fill: "#1a1a1a",
+            stroke: "#666666",
+            pressedFill: "#5a7333",
+          },
+        };
+
   // A key can be pressed or highlighted. The two sets are kept
   // as separate state objects, as they change independently.
   const [pressed, setPressed] = useState(new NoteList());
@@ -299,6 +331,7 @@ export default function App() {
             </svg>
             Reset
           </button>
+          <ThemeToggle />
           <button
             className={styles.navButton}
             type="button"
@@ -347,6 +380,7 @@ export default function App() {
           onMouseLeave={clearHighlight}
           onFocus={handlePianoFocus}
           onBlur={clearHighlight}
+          style={pianoStyle}
         />
       </div>
       {narrowMode ? narrowControlPanel : fullControlPanel}
