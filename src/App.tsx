@@ -34,26 +34,30 @@ export default function App() {
     theme === "light"
       ? {
           diatonic: {
-            fill: "#ffffff",
-            stroke: "#000000",
-            pressedFill: "#abbf73",
+            fill: "#f7f5f0",
+            stroke: "#d8d0c5",
+            highlighted: "#e8e0d5",
+            pressed: "#b89a7e",
           },
           chromatic: {
-            fill: "#000000",
-            stroke: "#000000",
-            pressedFill: "#7a9943",
+            fill: "#4a423c",
+            stroke: "#6b5d52",
+            highlighted: "#8b7a68",
+            pressed: "#9d8a78",
           },
         }
       : {
           diatonic: {
-            fill: "#2a2a2a",
-            stroke: "#666666",
-            pressedFill: "#7a9943",
+            fill: "#c5bdb5",
+            stroke: "#5a544e",
+            highlighted: "#a59a8f",
+            pressed: "#a08d7e",
           },
           chromatic: {
-            fill: "#1a1a1a",
-            stroke: "#666666",
-            pressedFill: "#5a7333",
+            fill: "#1f1d1b",
+            stroke: "#38342f",
+            highlighted: "#6b635a",
+            pressed: "#75675d",
           },
         };
 
@@ -310,7 +314,11 @@ export default function App() {
         onClose={() => setModal("")}
         display={modal === "keyboard"}
       />
-      <HelpModal onClose={() => setModal("")} display={modal === "help"} />
+      <HelpModal
+        onClose={() => setModal("")}
+        display={modal === "help"}
+        pianoStyle={pianoStyle}
+      />
       <nav className={styles.nav}>
         <div className={styles.navInstruments}></div>
         <div className={styles.navButtons}>

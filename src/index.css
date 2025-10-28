@@ -1,39 +1,54 @@
 :root {
-  /* UI Colors - Light Theme (default) */
-  --color-background: #ffffff;
-  --color-text: #000000;
-  --color-text-secondary: #333333;
-  --color-button-base: #eeeeee;
-  --color-button-selected: #abbf73;
-  --color-button-highlighted: #ccd8ab;
-  --color-border: #000000;
-  --color-border-light: #ccc;
-  --color-modal-overlay: rgba(0, 0, 0, 0.8);
-  --color-modal-bg: #ffffff;
-  --color-shortcut-bg: #000000;
-  --color-shortcut-text: #ffffff;
-  --color-nav-button-bg: #ffffff;
-  --color-nav-button-text: #000000;
-  --color-nav-button-border: #ffffff;
+  /* Base */
+  --color-background: #ebe7dd; /* warm darker beige */
+  --color-surface: #e3ded3; /* warmer surface tone */
+  --color-border: #3d3530; /* warm dark brown */
+  --color-border-light: #d8d0c5; /* warm light border */
+  --color-focus: #8b7a68; /* warm brown focus indicator */
+
+  /* Text */
+  --color-text: #2d2520; /* warm dark brown instead of grey */
+  --color-text-secondary: #6b5d52; /* warm brown secondary */
+
+  /* Buttons & UI elements */
+  --color-button-base: #f7f5f0; /* warm light button base (matches piano keys) */
+  --color-button-selected: #b89a7e; /* darker warm tan - strong contrast like reference image */
+  --color-button-highlighted: #cfc5b8; /* warm highlighted state */
+
+  /* Modal & overlay */
+  --color-modal-overlay: rgba(45, 37, 32, 0.5);
+  --color-modal-bg: #f7f5f0;
+
+  /* Shortcuts / special UI */
+  --color-shortcut-bg: #3d3530;
+  --color-shortcut-text: #f7f5f0;
 }
 
 [data-theme="dark"] {
-  /* UI Colors - Dark Theme */
-  --color-background: #1a1a1a;
-  --color-text: #e0e0e0;
-  --color-text-secondary: #b0b0b0;
-  --color-button-base: #2a2a2a;
-  --color-button-selected: #7a9943;
-  --color-button-highlighted: #5a7333;
-  --color-border: #666666;
-  --color-border-light: #444444;
-  --color-modal-overlay: rgba(0, 0, 0, 0.9);
-  --color-modal-bg: #2a2a2a;
-  --color-shortcut-bg: #333333;
-  --color-shortcut-text: #e0e0e0;
-  --color-nav-button-bg: #2a2a2a;
-  --color-nav-button-text: #e0e0e0;
-  --color-nav-button-border: #2a2a2a;
+  /* Background & Surfaces */
+  --color-background: #2d2a28; /* warm charcoal, lighter than before */
+  --color-surface: #38342f; /* slightly lighter panels */
+  --color-surface-hover: #3f3a35; /* mild hover lift */
+  --color-modal-bg: #38342f;
+  --color-modal-overlay: rgba(0, 0, 0, 0.75);
+
+  /* Borders */
+  --color-border: #5a544e; /* warm gray border */
+  --color-border-light: #4a4540;
+  --color-focus: #b89a7e; /* warm tan focus indicator */
+
+  /* Text */
+  --color-text: #e8e6e3; /* soft warm white */
+  --color-text-secondary: #2d2520; /* very dark warm brown for strong contrast on light buttons */
+
+  /* Buttons */
+  --color-button-base: #c5bdb5; /* lighter warm beige - more contrast */
+  --color-button-selected: #a89383; /* warm tan-gray - matches pressed piano keys */
+  --color-button-highlighted: #a59a8f;
+
+  /* Shortcuts */
+  --color-shortcut-bg: #4c4844;
+  --color-shortcut-text: #ebeae9;
 }
 
 body {

@@ -21,7 +21,7 @@
 
 .choice:focus-visible {
   background: var(--color-button-highlighted);
-  box-shadow: 0 0 1px 1px var(--color-border);
+  box-shadow: 0 0 0 2px var(--color-focus);
   outline: none;
   z-index: 1;
 }
