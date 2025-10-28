@@ -11,7 +11,6 @@ import RootNote from "./components/RootNote/RootNote.tsx";
 import Search from "./components/Search/Search.tsx";
 import TabControls from "./components/TabControls/TabControls.tsx";
 import ThemeToggle from "./components/ThemeToggle/ThemeToggle.tsx";
-import { useTheme } from "./contexts/ThemeContext";
 
 // NoteListConstructor type for pattern handlers
 type NoteListConstructor = (root: Note, name: string) => NoteList;
@@ -26,41 +25,6 @@ type NoteListConstructor = (root: Note, name: string) => NoteList;
  * If you click or hover one component, the others will update in real time.
  */
 export default function App() {
-  const { theme } = useTheme();
-
-  // Piano colors are hardcoded here rather than using CSS variables
-  // to ensure the Piano component re-renders when theme changes
-  const pianoStyle =
-    theme === "light"
-      ? {
-          diatonic: {
-            fill: "#f7f5f0",
-            stroke: "#d8d0c5",
-            highlighted: "#e8e0d5",
-            pressed: "#b89a7e",
-          },
-          chromatic: {
-            fill: "#4a423c",
-            stroke: "#6b5d52",
-            highlighted: "#8b7a68",
-            pressed: "#9d8a78",
-          },
-        }
-      : {
-          diatonic: {
-            fill: "#c5bdb5",
-            stroke: "#5a544e",
-            highlighted: "#a59a8f",
-            pressed: "#a08d7e",
-          },
-          chromatic: {
-            fill: "#1f1d1b",
-            stroke: "#38342f",
-            highlighted: "#6b635a",
-            pressed: "#75675d",
-          },
-        };
-
   // A key can be pressed or highlighted. The two sets are kept
   // as separate state objects, as they change independently.
   const [pressed, setPressed] = useState(new NoteList());
@@ -135,7 +99,7 @@ export default function App() {
    * @param {string} note The note of the key that is hovered
    */
   function handlePianoFocus(note: string) {
-    setHighlighted(pressed.add(note).sort());
+    setHighlighted(new NoteList([note]));
   }
 
   /**
@@ -314,11 +278,7 @@ export default function App() {
         onClose={() => setModal("")}
         display={modal === "keyboard"}
       />
-      <HelpModal
-        onClose={() => setModal("")}
-        display={modal === "help"}
-        pianoStyle={pianoStyle}
-      />
+      <HelpModal onClose={() => setModal("")} display={modal === "help"} />
       <nav className={styles.nav}>
         <div className={styles.navInstruments}></div>
         <div className={styles.navButtons}>
@@ -388,7 +348,6 @@ export default function App() {
           onMouseLeave={clearHighlight}
           onFocus={handlePianoFocus}
           onBlur={clearHighlight}
-          style={pianoStyle}
         />
       </div>
       {narrowMode ? narrowControlPanel : fullControlPanel}

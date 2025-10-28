@@ -22,6 +22,25 @@
   /* Shortcuts / special UI */
   --color-shortcut-bg: #3d3530;
   --color-shortcut-text: #f7f5f0;
+
+  /* Piano keys - diatonic (white keys) */
+  --piano-key-diatonic-fill: #f7f5f0;
+  --piano-key-diatonic-stroke: #d8d0c5;
+  --piano-key-diatonic-highlighted-fill: #e8e0d5;
+  --piano-key-diatonic-highlighted-stroke: #c8c0b5;
+  --piano-key-diatonic-pressed-fill: #b89a7e;
+  --piano-key-diatonic-pressed-stroke: #a88a6e;
+
+  /* Piano keys - chromatic (black keys) */
+  --piano-key-chromatic-fill: #4a423c;
+  --piano-key-chromatic-stroke: #6b5d52;
+  --piano-key-chromatic-highlighted-fill: #8b7a68;
+  --piano-key-chromatic-highlighted-stroke: #7b6a58;
+  --piano-key-chromatic-pressed-fill: #9d8a78;
+  --piano-key-chromatic-pressed-stroke: #8d7a68;
+
+  /* Piano stroke width */
+  --piano-key-stroke-width: 2;
 }
 
 [data-theme="dark"] {
@@ -49,6 +68,22 @@
   /* Shortcuts */
   --color-shortcut-bg: #4c4844;
   --color-shortcut-text: #ebeae9;
+
+  /* Piano keys - diatonic (white keys) */
+  --piano-key-diatonic-fill: #c5bdb5;
+  --piano-key-diatonic-stroke: #5a544e;
+  --piano-key-diatonic-highlighted-fill: #a59a8f;
+  --piano-key-diatonic-highlighted-stroke: #857a6f;
+  --piano-key-diatonic-pressed-fill: #a08d7e;
+  --piano-key-diatonic-pressed-stroke: #907d6e;
+
+  /* Piano keys - chromatic (black keys) */
+  --piano-key-chromatic-fill: #1f1d1b;
+  --piano-key-chromatic-stroke: #38342f;
+  --piano-key-chromatic-highlighted-fill: #6b635a;
+  --piano-key-chromatic-highlighted-stroke: #5b534a;
+  --piano-key-chromatic-pressed-fill: #75675d;
+  --piano-key-chromatic-pressed-stroke: #65574d;
 }
 
 body {
