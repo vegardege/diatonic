@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@diatonic/piano": "^0.2.0",
+    "@diatonic/piano": "^0.3.0",
     "@vitejs/plugin-react": "^5.1.0",
     "kamasi": "^0.3.0",
     "modern-normalize": "^3.0.1",
