@@ -1,3 +1,4 @@
+import type { StyleOverride } from "@diatonic/piano";
 import { Piano } from "@diatonic/piano";
 import { chord, scale } from "kamasi";
 import Modal from "../Modal/Modal";
@@ -6,13 +7,18 @@ import styles from "../Modal/Modal.module.css";
 interface HelpModalProps {
   display: boolean;
   onClose: () => void;
+  pianoStyle: StyleOverride;
 }
 
 export default function HelpModal(props: HelpModalProps) {
   return (
     <Modal title="Help" display={props.display} onClose={props.onClose}>
       <h2 className={styles.subheading}>Lookup</h2>
-      <Piano octaves={3} pressed={scale("B3 pentatonic minor")} />
+      <Piano
+        octaves={3}
+        pressed={scale("B3 pentatonic minor")}
+        style={props.pianoStyle}
+      />
       <p className={styles.paragraph}>
         The <strong className={styles.strong}>tonic</strong> is the leftmost key
         pressed, and the start of an ascending musical pattern. The default
@@ -29,7 +35,7 @@ export default function HelpModal(props: HelpModalProps) {
         button to see it highlighted for the selected tonic.
       </p>
       <h2 className={styles.subheading}>Reverse Lookup</h2>
-      <Piano octaves={3} pressed={chord("C4 major")} />
+      <Piano octaves={3} pressed={chord("C4 major")} style={props.pianoStyle} />
       <p className={styles.paragraph}>
         As you press keys on the piano, the selectable scales and chords will be
         filtered according to the tonic and proceeding intervals. Once you have

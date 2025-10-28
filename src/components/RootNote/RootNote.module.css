@@ -6,12 +6,6 @@
   width: 100%;
 }
 
-@media only screen and (max-width: 650px) {
-  .rootNote {
-    justify-content: center;
-  }
-}
-
 .buttonGroup {
   margin: 0 5px 20px 5px;
 }
@@ -21,12 +15,14 @@
 }
 
 .buttonGroup button {
-  border-right: 1px solid #ccc;
-  border-top: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
+  border-right: 1px solid var(--color-border-light);
+  border-top: 1px solid var(--color-border-light);
+  border-bottom: 1px solid var(--color-border-light);
   border-left: 0;
+  box-sizing: border-box;
   font-size: 1rem;
   margin: 0;
+  padding: 0;
   height: 50px;
   width: 50px;
   text-align: center;
@@ -35,14 +31,25 @@
 
 .buttonGroup li:first-child button {
   border-radius: 10px 0 0 10px;
-  border-left: 1px solid #ccc;
+  border-left: 1px solid var(--color-border-light);
 }
 
 .buttonGroup li:last-child button {
-  border-right: 1px solid #ccc;
+  border-right: 1px solid var(--color-border-light);
   border-radius: 0 10px 10px 0;
 }
 
 .buttonGroup button:focus {
   z-index: 1;
+}
+
+@media only screen and (max-width: 650px) {
+  .buttonGroup {
+    margin: 0 0 20px 0;
+  }
+
+  .buttonGroup button {
+    width: 44px;
+    height: 44px;
+  }
 }
