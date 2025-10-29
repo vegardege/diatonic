@@ -119,17 +119,15 @@ export default function KeyboardModal(props: KeyboardModalProps) {
           </tr>
           <tr>
             <td align="center" className={styles.tableCell}>
-              <span className={styles.shortcut}>3</span>
+              <span className={styles.shortcut}>2</span>
             </td>
-            <td className={styles.tableCell}>Play pressed notes an arpeggio</td>
+            <td className={styles.tableCell}>Play pressed notes in arpeggio</td>
           </tr>
           <tr>
             <td align="center" className={styles.tableCell}>
               <span className={styles.shortcut}>3</span>
             </td>
-            <td className={styles.tableCell}>
-              Play pressed notes as a harmony
-            </td>
+            <td className={styles.tableCell}>Play pressed notes in harmony</td>
           </tr>
         </tbody>
       </table>
