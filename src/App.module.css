@@ -15,11 +15,6 @@
   width: 100%;
 }
 
-.navInstruments {
-  display: flex;
-  justify-content: flex-start;
-}
-
 .navButtons {
   display: flex;
   justify-content: flex-end;
