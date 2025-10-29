@@ -3,6 +3,7 @@ import { CHORDS, Note, NoteList, SCALES } from "kamasi";
 import { useEffect, useState } from "react";
 
 import styles from "./App.module.css";
+import AudioControls from "./components/AudioControls/AudioControls.tsx";
 import FlexControls from "./components/FlexControls/FlexControls.tsx";
 import HelpModal from "./components/HelpModal/HelpModal.tsx";
 import KeyboardModal from "./components/KeyboardModal/KeyboardModal.tsx";
@@ -11,6 +12,7 @@ import RootNote from "./components/RootNote/RootNote.tsx";
 import Search from "./components/Search/Search.tsx";
 import TabControls from "./components/TabControls/TabControls.tsx";
 import ThemeToggle from "./components/ThemeToggle/ThemeToggle.tsx";
+import { useAudioEngine } from "./hooks/useAudioEngine.ts";
 
 // NoteListConstructor type for pattern handlers
 type NoteListConstructor = (root: Note, name: string) => NoteList;
@@ -30,9 +32,13 @@ export default function App() {
   const [pressed, setPressed] = useState(new NoteList());
   const [highlighted, setHighlighted] = useState(new NoteList());
 
+  // Internally kept state for searching and visible modals
   const [search, setSearch] = useState("");
-
   const [modal, setModal] = useState("");
+
+  // Use audio engine hook for reactive mute state
+  const audio = useAudioEngine();
+
 
   const [width, setWidth] = useState(window.innerWidth);
   const narrowMode = width <= 680;
@@ -56,14 +62,32 @@ export default function App() {
       case 27:
         setModal("");
         break;
-      case 37:
+      case 37: {
+        // Left arrow - transpose down
         clearHighlight();
-        setPressed((state) => state.transpose("-m2").simplify());
+        const transposed = pressed.transpose("-m2").simplify();
+        const newRoot = transposed.root();
+
+        // Only transpose if root stays within visible piano range (C3-B5)
+        if (newRoot && newRoot.octave >= 3 && newRoot.octave <= 5) {
+          setPressed(transposed);
+          playCurrentPattern();
+        }
         break;
-      case 39:
+      }
+      case 39: {
+        // Right arrow - transpose up
         clearHighlight();
-        setPressed((state) => state.transpose("m2").simplify());
+        const transposed = pressed.transpose("m2").simplify();
+        const newRoot = transposed.root();
+
+        // Only transpose if root stays within visible piano range (C3-B5)
+        if (newRoot && newRoot.octave >= 3 && newRoot.octave <= 5) {
+          setPressed(transposed);
+          playCurrentPattern();
+        }
         break;
+      }
       case 32:
         clearPressed();
         clearHighlight();
@@ -90,7 +114,15 @@ export default function App() {
    * @param {string} note The note of the key that was clicked
    */
   function handlePianoChange(note: string) {
+    // Check if the note is currently pressed before toggling
+    const wasPressed = pressed.notes.some((n) => n.toString() === note);
+
     setPressed((state) => state.toggle(note, true).sort());
+
+    // Only play the note if we're ADDING it (not removing it)
+    if (!wasPressed) {
+      audio.playNote(note);
+    }
   }
 
   /**
@@ -109,6 +141,8 @@ export default function App() {
    * with the desired key as root (lowest pitch). Otherwise, we simply
    * press the desired note.
    *
+   * Also plays the appropriate sound based on current pattern selection.
+   *
    * @param {Note} newRoot The new root note
    */
   function handleRootChange(newRoot: Note) {
@@ -119,6 +153,7 @@ export default function App() {
         NoteList.fromIntervals(newRoot, state.intervals || []),
       );
     }
+    playCurrentPattern();
   }
 
   /**
@@ -151,7 +186,18 @@ export default function App() {
     isPressed: boolean,
   ) {
     if (!isPressed) {
-      setPressed(func(pressed.root() || new Note("C", "", 4), name));
+      const newPressed = func(pressed.root() || new Note("C", "", 4), name);
+      setPressed(newPressed);
+
+      // Auto-play based on pattern type
+      const notes = newPressed.notes.map((note) => note.toString());
+      if (func === NoteList.fromChord) {
+        // Play chords simultaneously
+        audio.playChord(notes);
+      } else if (func === NoteList.fromScale) {
+        // Play scales sequentially
+        audio.playScale(notes);
+      }
     } else {
       clearPressed();
     }
@@ -169,6 +215,34 @@ export default function App() {
   }
 
   /**
+   * Play the currently pressed keys using the appropriate playback mode.
+   * Automatically detects if pressed keys match a scale or chord pattern.
+   */
+  function playCurrentPattern() {
+    const notes = pressed.notes.map((note) => note.toString());
+
+    if (notes.length === 0) {
+      // No notes pressed, nothing to play
+      return;
+    }
+
+    // Check if current pressed keys match any scale or chord patterns
+    const matchedScales = pressed.exact().scales();
+    const matchedChords = pressed.exact().chords();
+
+    if (matchedScales.length > 0) {
+      // Pressed keys match a scale pattern - play sequentially
+      audio.playScale(notes);
+    } else if (matchedChords.length > 0) {
+      // Pressed keys match a chord pattern - play simultaneously
+      audio.playChord(notes);
+    } else {
+      // No pattern match, just play the first note
+      audio.playNote(notes[0]);
+    }
+  }
+
+  /**
    * Remove all pressed notes from the piano.
    */
   function clearPressed() {
@@ -181,6 +255,29 @@ export default function App() {
    */
   function clearHighlight() {
     setHighlighted(new NoteList());
+  }
+
+  /**
+   * Toggle mute state for audio playback.
+   */
+  function handleToggleMute() {
+    audio.setMuted(!audio.muted);
+  }
+
+  /**
+   * Play all currently pressed notes as a chord (simultaneously).
+   */
+  function handlePlayChord() {
+    const notes = pressed.notes.map((note) => note.toString());
+    audio.playChord(notes);
+  }
+
+  /**
+   * Play all currently pressed notes as a scale (sequentially).
+   */
+  function handlePlayScale() {
+    const notes = pressed.notes.map((note) => note.toString());
+    audio.playScale(notes);
   }
 
   /**
@@ -280,6 +377,12 @@ export default function App() {
       />
       <HelpModal onClose={() => setModal("")} display={modal === "help"} />
       <nav className={styles.nav}>
+        <AudioControls
+          muted={audio.muted}
+          onToggleMute={handleToggleMute}
+          onPlayChord={handlePlayChord}
+          onPlayScale={handlePlayScale}
+        />
         <div className={styles.navInstruments}></div>
         <div className={styles.navButtons}>
           <button
