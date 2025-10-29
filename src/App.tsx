@@ -73,7 +73,7 @@ export default function App() {
         // Only transpose if root stays within visible piano range (C3-B5)
         if (newRoot && newRoot.octave >= 3 && newRoot.octave <= 5) {
           setPressed(transposed);
-          playCurrentPattern();
+          playCurrentPattern(transposed);
         }
         break;
       }
@@ -86,7 +86,7 @@ export default function App() {
         // Only transpose if root stays within visible piano range (C3-B5)
         if (newRoot && newRoot.octave >= 3 && newRoot.octave <= 5) {
           setPressed(transposed);
-          playCurrentPattern();
+          playCurrentPattern(transposed);
         }
         break;
       }
@@ -157,14 +157,16 @@ export default function App() {
    * @param {Note} newRoot The new root note
    */
   function handleRootChange(newRoot: Note) {
+    let newPressed: NoteList;
+
     if (pressed.root() === undefined) {
-      setPressed(new NoteList([newRoot]));
+      newPressed = new NoteList([newRoot]);
     } else {
-      setPressed((state) =>
-        NoteList.fromIntervals(newRoot, state.intervals || []),
-      );
+      newPressed = NoteList.fromIntervals(newRoot, pressed.intervals || []);
     }
-    playCurrentPattern();
+
+    setPressed(newPressed);
+    playCurrentPattern(newPressed);
   }
 
   /**
@@ -224,23 +226,26 @@ export default function App() {
   /**
    * Play the currently pressed keys using the appropriate playback mode.
    * Automatically detects if pressed keys match a scale or chord pattern.
+   *
+   * @param noteList Optional NoteList to play. Uses current pressed state if not provided.
    */
-  function playCurrentPattern() {
-    const notes = pressed.notes.map((note) => note.toString());
+  function playCurrentPattern(noteList?: NoteList) {
+    const notesToPlay = noteList || pressed;
+    const notes = notesToPlay.notes.map((note) => note.toString());
 
     if (notes.length === 0) {
       return;
     }
 
-    // Check if current pressed keys match any scale or chord patterns
-    const matchedScales = pressed.exact().scales();
-    const matchedChords = pressed.exact().chords();
+    // Check if notes match any scale or chord patterns
+    const matchedScales = notesToPlay.exact().scales();
+    const matchedChords = notesToPlay.exact().chords();
 
     if (matchedScales.length > 0) {
-      // Pressed keys match a scale pattern - play sequentially
+      // Notes match a scale pattern - play sequentially
       audio.playArpeggio(notes);
     } else if (matchedChords.length > 0) {
-      // Pressed keys match a chord pattern - play simultaneously
+      // Notes match a chord pattern - play simultaneously
       audio.playHarmony(notes);
     } else {
       // No pattern match, just play the first note
