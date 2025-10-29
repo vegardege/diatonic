@@ -101,7 +101,7 @@ export default function App() {
       case 50:
         handlePlayArpeggio();
         break;
-        case 51:
+      case 51:
         handlePlayHarmony();
         break;
     }
@@ -244,7 +244,7 @@ export default function App() {
       audio.playHarmony(notes);
     } else {
       // No pattern match, just play the first note
-      audio.playNote(notes[0]);
+      audio.playNote(notes[0]!);
     }
   }
 

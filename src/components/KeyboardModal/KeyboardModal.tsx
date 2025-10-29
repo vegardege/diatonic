@@ -127,7 +127,9 @@ export default function KeyboardModal(props: KeyboardModalProps) {
             <td align="center" className={styles.tableCell}>
               <span className={styles.shortcut}>3</span>
             </td>
-            <td className={styles.tableCell}>Play pressed notes as a harmony</td>
+            <td className={styles.tableCell}>
+              Play pressed notes as a harmony
+            </td>
           </tr>
         </tbody>
       </table>
