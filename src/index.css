@@ -1,19 +1,21 @@
 :root {
   /* Base */
-  --color-background: #ebe7dd; /* warm darker beige */
-  --color-surface: #e3ded3; /* warmer surface tone */
-  --color-border: #3d3530; /* warm dark brown */
-  --color-border-light: #d8d0c5; /* warm light border */
-  --color-focus: #8b7a68; /* warm brown focus indicator */
+  --color-background: #ebe7dd;
+  --color-surface: #e3ded3;
+  --color-border: #3d3530;
+  --color-border-light: #d8d0c5;
+  --color-border-piano: #3d3530;
+  --color-focus: #3d3530;
 
   /* Text */
-  --color-text: #2d2520; /* warm dark brown instead of grey */
-  --color-text-secondary: #6b5d52; /* warm brown secondary */
+  --color-text: #2d2520;
+  --color-text-secondary: #6b5d52;
+  --color-text-secondary-selected: #2d2520;
 
-  /* Buttons & UI elements */
-  --color-button-base: #f7f5f0; /* warm light button base (matches piano keys) */
-  --color-button-selected: #b89a7e; /* darker warm tan - strong contrast like reference image */
-  --color-button-highlighted: #cfc5b8; /* warm highlighted state */
+  /* Buttons & UI elements - burgundy-red theme */
+  --color-button-base: #f7f5f0;
+  --color-button-selected: #e07858;
+  --color-button-highlighted: #eca088;
 
   /* Modal & overlay */
   --color-modal-overlay: rgba(45, 37, 32, 0.5);
@@ -23,21 +25,21 @@
   --color-shortcut-bg: #3d3530;
   --color-shortcut-text: #f7f5f0;
 
-  /* Piano keys - diatonic (white keys) */
+  /* Piano keys - diatonic (white keys) - burgundy-red */
   --piano-key-diatonic-fill: #f7f5f0;
-  --piano-key-diatonic-stroke: #d8d0c5;
-  --piano-key-diatonic-highlighted-fill: #e8e0d5;
-  --piano-key-diatonic-highlighted-stroke: #c8c0b5;
-  --piano-key-diatonic-pressed-fill: #b89a7e;
-  --piano-key-diatonic-pressed-stroke: #a88a6e;
+  --piano-key-diatonic-stroke: #c0b8b0;
+  --piano-key-diatonic-highlighted-fill: #eca088;
+  --piano-key-diatonic-highlighted-stroke: #b8624c;
+  --piano-key-diatonic-pressed-fill: #e07858;
+  --piano-key-diatonic-pressed-stroke: #3d3530;
 
-  /* Piano keys - chromatic (black keys) */
+  /* Piano keys - chromatic (black keys) - dark burgundy-red */
   --piano-key-chromatic-fill: #4a423c;
-  --piano-key-chromatic-stroke: #6b5d52;
-  --piano-key-chromatic-highlighted-fill: #8b7a68;
-  --piano-key-chromatic-highlighted-stroke: #7b6a58;
-  --piano-key-chromatic-pressed-fill: #9d8a78;
-  --piano-key-chromatic-pressed-stroke: #8d7a68;
+  --piano-key-chromatic-stroke: #4a423c;
+  --piano-key-chromatic-highlighted-fill: #b86850;
+  --piano-key-chromatic-highlighted-stroke: #503028;
+  --piano-key-chromatic-pressed-fill: #c04838;
+  --piano-key-chromatic-pressed-stroke: #2d2520;
 
   /* Piano stroke width */
   --piano-key-stroke-width: 2;
@@ -54,36 +56,38 @@
   /* Borders */
   --color-border: #5a544e; /* warm gray border */
   --color-border-light: #4a4540;
-  --color-focus: #b89a7e; /* warm tan focus indicator */
+  --color-border-piano: #1f1d1b; /* strong separation from background */
+  --color-focus: #a05848; /* matches pressed white keys */
 
   /* Text */
   --color-text: #e8e6e3; /* soft warm white */
   --color-text-secondary: #2d2520; /* very dark warm brown for strong contrast on light buttons */
+  --color-text-secondary-selected: #0a0908; /* very dark for selected buttons */
 
   /* Buttons */
   --color-button-base: #c5bdb5; /* lighter warm beige - more contrast */
-  --color-button-selected: #a89383; /* warm tan-gray - matches pressed piano keys */
-  --color-button-highlighted: #a59a8f;
+  --color-button-selected: #a05848; /* muted burgundy-red for dark mode */
+  --color-button-highlighted: #b88070; /* lighter burgundy preview */
 
   /* Shortcuts */
   --color-shortcut-bg: #4c4844;
   --color-shortcut-text: #ebeae9;
 
-  /* Piano keys - diatonic (white keys) */
+  /* Piano keys - diatonic (white keys) - burgundy-red for dark mode */
   --piano-key-diatonic-fill: #c5bdb5;
   --piano-key-diatonic-stroke: #5a544e;
-  --piano-key-diatonic-highlighted-fill: #a59a8f;
-  --piano-key-diatonic-highlighted-stroke: #857a6f;
-  --piano-key-diatonic-pressed-fill: #a08d7e;
-  --piano-key-diatonic-pressed-stroke: #907d6e;
+  --piano-key-diatonic-highlighted-fill: #b88070;
+  --piano-key-diatonic-highlighted-stroke: #906050;
+  --piano-key-diatonic-pressed-fill: #a05848;
+  --piano-key-diatonic-pressed-stroke: #0a0908;
 
-  /* Piano keys - chromatic (black keys) */
+  /* Piano keys - chromatic (black keys) - burgundy-red for dark mode */
   --piano-key-chromatic-fill: #1f1d1b;
   --piano-key-chromatic-stroke: #38342f;
-  --piano-key-chromatic-highlighted-fill: #6b635a;
-  --piano-key-chromatic-highlighted-stroke: #5b534a;
-  --piano-key-chromatic-pressed-fill: #75675d;
-  --piano-key-chromatic-pressed-stroke: #65574d;
+  --piano-key-chromatic-highlighted-fill: #704838;
+  --piano-key-chromatic-highlighted-stroke: #0f0e0d;
+  --piano-key-chromatic-pressed-fill: #883828;
+  --piano-key-chromatic-pressed-stroke: #0a0908;
 }
 
 body {

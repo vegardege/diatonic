@@ -28,7 +28,7 @@
   margin: 0 5px 0 5px;
   width: 95%;
   background: var(--color-button-base);
-  color: var(--color-text);
+  color: var(--color-text-secondary);
 }
 
 .search input:focus {

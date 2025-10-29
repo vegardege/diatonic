@@ -35,3 +35,7 @@
   color: var(--color-text-secondary);
   font-size: 0.7rem;
 }
+
+.selected .name {
+  color: var(--color-text-secondary-selected);
+}
