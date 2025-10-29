@@ -5,14 +5,14 @@ import * as Tone from "tone";
  *
  * Features:
  * - Realistic piano sound using actual piano recordings
- * - Play individual notes, chords, and scales
+ * - Play individual notes, arpeggios, and harmonies
  * - Mute/unmute control
  */
 class AudioEngine {
   private sampler: Tone.Sampler | null = null;
   private muted = false;
   private initialized = false;
-  private currentScaleTimeout: number | null = null;
+  private currentArpeggioTimeout: number | null = null;
   private muteListeners: Set<(muted: boolean) => void> = new Set();
 
   /**
@@ -100,12 +100,12 @@ class AudioEngine {
   }
 
   /**
-   * Play multiple notes simultaneously as a chord.
+   * Play multiple notes simultaneously as a harmony.
    *
    * @param notes Array of note strings in scientific pitch notation
    * @param duration Duration in seconds
    */
-  async playChord(notes: string[], duration = 2.0): Promise<void> {
+  async playHarmony(notes: string[], duration = 2.0): Promise<void> {
     if (notes.length === 0 || this.muted) {
       return;
     }
@@ -121,17 +121,17 @@ class AudioEngine {
     try {
       this.sampler.triggerAttackRelease(notes, duration);
     } catch (error) {
-      console.error("Failed to play chord:", error);
+      console.error("Failed to play harmony:", error);
     }
   }
 
   /**
-   * Play notes sequentially (as a scale or arpeggio).
+   * Play notes sequentially.
    *
    * @param notes Array of note strings in scientific pitch notation
    * @param interval Milliseconds between each note
    */
-  async playScale(notes: string[], interval = 400): Promise<void> {
+  async playArpeggio(notes: string[], interval = 400): Promise<void> {
     if (notes.length === 0 || this.muted) {
       return;
     }
@@ -149,13 +149,13 @@ class AudioEngine {
 
         this.sampler.triggerAttackRelease(note, noteDuration);
         await new Promise((resolve) => {
-          this.currentScaleTimeout = window.setTimeout(resolve, interval);
+          this.currentArpeggioTimeout = window.setTimeout(resolve, interval);
         });
       }
     } catch (error) {
-      console.error("Failed to play scale:", error);
+      console.error("Failed to play arpeggio:", error);
     } finally {
-      this.currentScaleTimeout = null;
+      this.currentArpeggioTimeout = null;
     }
   }
 
@@ -163,10 +163,10 @@ class AudioEngine {
    * Stop all currently playing sounds and sequences.
    */
   stopAll(): void {
-    // Cancel any ongoing scale playback
-    if (this.currentScaleTimeout !== null) {
-      clearTimeout(this.currentScaleTimeout);
-      this.currentScaleTimeout = null;
+    // Cancel any ongoing arpeggio playback
+    if (this.currentArpeggioTimeout !== null) {
+      clearTimeout(this.currentArpeggioTimeout);
+      this.currentArpeggioTimeout = null;
     }
 
     // Release all currently playing notes
