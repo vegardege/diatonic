@@ -2,6 +2,7 @@ import styles from "../../App.module.css";
 import ThemeToggle from "../ThemeToggle/ThemeToggle.tsx";
 
 interface AppControlsProps {
+  narrowMode: boolean;
   onReset: () => void;
   onShowKeyboardShortcuts: () => void;
   onShowHelp: () => void;
@@ -45,6 +46,7 @@ const HelpIcon = () => (
  * - Showing help modal
  */
 export default function AppControls({
+  narrowMode,
   onReset,
   onShowKeyboardShortcuts,
   onShowHelp,
@@ -61,15 +63,17 @@ export default function AppControls({
         Reset
       </button>
       <ThemeToggle />
-      <button
-        className={styles.navButton}
-        type="button"
-        title="Keyboard shortcuts"
-        onClick={onShowKeyboardShortcuts}
-      >
-        <KeyboardIcon />
-        Keys
-      </button>
+      {!narrowMode && (
+        <button
+          className={styles.navButton}
+          type="button"
+          title="Keyboard shortcuts"
+          onClick={onShowKeyboardShortcuts}
+        >
+          <KeyboardIcon />
+          Keys
+        </button>
+      )}
       <button
         className={styles.navButton}
         type="button"

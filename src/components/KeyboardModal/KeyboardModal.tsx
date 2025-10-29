@@ -111,6 +111,24 @@ export default function KeyboardModal(props: KeyboardModalProps) {
             </td>
             <td className={styles.tableCell}>Reset piano</td>
           </tr>
+          <tr>
+            <td align="center" className={styles.tableCell}>
+              <span className={styles.shortcut}>1</span>
+            </td>
+            <td className={styles.tableCell}>Mute/unmute audio</td>
+          </tr>
+          <tr>
+            <td align="center" className={styles.tableCell}>
+              <span className={styles.shortcut}>3</span>
+            </td>
+            <td className={styles.tableCell}>Play pressed notes an arpeggio</td>
+          </tr>
+          <tr>
+            <td align="center" className={styles.tableCell}>
+              <span className={styles.shortcut}>3</span>
+            </td>
+            <td className={styles.tableCell}>Play pressed notes as a harmony</td>
+          </tr>
         </tbody>
       </table>
     </Modal>

@@ -39,13 +39,15 @@ export default function App() {
   // Use audio engine hook for reactive mute state
   const audio = useAudioEngine();
 
-
+  // Keep track of width to toggle narrow mode
   const [width, setWidth] = useState(window.innerWidth);
   const narrowMode = width <= 680;
 
-  useEffect(() =>
-    window.addEventListener("resize", () => setWidth(window.innerWidth)),
-  );
+  useEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   /**
    * Keyboard shortcuts
@@ -92,6 +94,15 @@ export default function App() {
         clearPressed();
         clearHighlight();
         e.preventDefault();
+        break;
+      case 49:
+        handleToggleMute();
+        break;
+      case 50:
+        handlePlayArpeggio();
+        break;
+        case 51:
+        handlePlayHarmony();
         break;
     }
   }
@@ -189,15 +200,11 @@ export default function App() {
       const newPressed = func(pressed.root() || new Note("C", "", 4), name);
       setPressed(newPressed);
 
-      // Auto-play based on pattern type
+      // Auto-play: chords play simultaneously, scales play sequentially
       const notes = newPressed.notes.map((note) => note.toString());
-      if (func === NoteList.fromChord) {
-        // Play chords simultaneously
-        audio.playChord(notes);
-      } else if (func === NoteList.fromScale) {
-        // Play scales sequentially
-        audio.playScale(notes);
-      }
+      const isChord = func === NoteList.fromChord;
+
+      isChord ? audio.playHarmony(notes) : audio.playArpeggio(notes);
     } else {
       clearPressed();
     }
@@ -222,7 +229,6 @@ export default function App() {
     const notes = pressed.notes.map((note) => note.toString());
 
     if (notes.length === 0) {
-      // No notes pressed, nothing to play
       return;
     }
 
@@ -232,10 +238,10 @@ export default function App() {
 
     if (matchedScales.length > 0) {
       // Pressed keys match a scale pattern - play sequentially
-      audio.playScale(notes);
+      audio.playArpeggio(notes);
     } else if (matchedChords.length > 0) {
       // Pressed keys match a chord pattern - play simultaneously
-      audio.playChord(notes);
+      audio.playHarmony(notes);
     } else {
       // No pattern match, just play the first note
       audio.playNote(notes[0]);
@@ -265,19 +271,19 @@ export default function App() {
   }
 
   /**
-   * Play all currently pressed notes as a chord (simultaneously).
+   * Play all currently pressed notes as a scale (sequentially).
    */
-  function handlePlayChord() {
+  function handlePlayArpeggio() {
     const notes = pressed.notes.map((note) => note.toString());
-    audio.playChord(notes);
+    audio.playArpeggio(notes);
   }
 
   /**
-   * Play all currently pressed notes as a scale (sequentially).
+   * Play all currently pressed notes as a chord (simultaneously).
    */
-  function handlePlayScale() {
+  function handlePlayHarmony() {
     const notes = pressed.notes.map((note) => note.toString());
-    audio.playScale(notes);
+    audio.playHarmony(notes);
   }
 
   /**
@@ -380,10 +386,11 @@ export default function App() {
         <AudioControls
           muted={audio.muted}
           onToggleMute={handleToggleMute}
-          onPlayChord={handlePlayChord}
-          onPlayScale={handlePlayScale}
+          onPlayArpeggio={handlePlayArpeggio}
+          onPlayHarmony={handlePlayHarmony}
         />
         <AppControls
+          narrowMode={narrowMode}
           onReset={clearPressed}
           onShowKeyboardShortcuts={() => showModal("keyboard", "keyboardClose")}
           onShowHelp={() => showModal("help", "helpClose")}

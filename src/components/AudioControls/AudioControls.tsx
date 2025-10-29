@@ -3,8 +3,8 @@ import styles from "../../App.module.css";
 interface AudioControlsProps {
   muted: boolean;
   onToggleMute: () => void;
-  onPlayChord: () => void;
-  onPlayScale: () => void;
+  onPlayArpeggio: () => void;
+  onPlayHarmony: () => void;
 }
 
 // SVG Icons
@@ -49,14 +49,14 @@ const PlayIcon = () => (
  *
  * Provides buttons for:
  * - Muting/unmuting audio
- * - Playing pressed notes as a chord (all at once)
- * - Playing pressed notes as a scale (sequentially)
+ * - Playing pressed notes as an arpeggio (sequentially)
+ * - Playing pressed notes as a harmony (all at once)
  */
 export default function AudioControls({
   muted,
   onToggleMute,
-  onPlayChord,
-  onPlayScale,
+  onPlayArpeggio,
+  onPlayHarmony,
 }: AudioControlsProps) {
   return (
     <div className={styles.navButtons}>
@@ -74,20 +74,20 @@ export default function AudioControls({
           <button
             className={styles.navButton}
             type="button"
-            title="Play all pressed notes together"
-            onClick={onPlayChord}
+            title="Play all pressed notes sequentially"
+            onClick={onPlayArpeggio}
           >
             <PlayIcon />
-            Chord
+            Arpeggio
           </button>
           <button
             className={styles.navButton}
             type="button"
-            title="Play all pressed notes sequentially"
-            onClick={onPlayScale}
+            title="Play all pressed notes together"
+            onClick={onPlayHarmony}
           >
             <PlayIcon />
-            Scale
+            Harmony
           </button>
         </>
       )}

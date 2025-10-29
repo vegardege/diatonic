@@ -20,9 +20,9 @@ export function useAudioEngine() {
     setMuted: (value: boolean) => audioEngine.setMuted(value),
     playNote: (note: string, duration?: number) =>
       audioEngine.playNote(note, duration),
-    playChord: (notes: string[], duration?: number) =>
-      audioEngine.playChord(notes, duration),
-    playScale: (notes: string[], interval?: number) =>
-      audioEngine.playScale(notes, interval),
+    playArpeggio: (notes: string[], interval?: number) =>
+      audioEngine.playArpeggio(notes, interval),
+    playHarmony: (notes: string[], duration?: number) =>
+      audioEngine.playHarmony(notes, duration),
   };
 }
