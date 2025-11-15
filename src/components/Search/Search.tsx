@@ -22,7 +22,6 @@ export default function Search(props: SearchProps) {
         placeholder="Search for scale or chord"
         value={props.text}
         onChange={props.onChange}
-        onKeyPress={stopPropagation}
         onKeyDown={stopPropagation}
         onKeyUp={stopPropagation}
       />
