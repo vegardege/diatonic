@@ -22,7 +22,7 @@ class AudioEngine {
   async initialize(): Promise<void> {
     if (this.initialized) {
       // Already initialized, just resume audio context if needed
-      if (Tone.context.state === "suspended") {
+      if (Tone.getContext().state === "suspended") {
         await Tone.start();
       }
       return;
