@@ -189,12 +189,17 @@ class AudioEngine {
    *
    * @param muted True to mute, false to unmute
    */
-  setMuted(muted: boolean): void {
+  async setMuted(muted: boolean): Promise<void> {
     this.muted = muted;
 
     // Notify listeners
     for (const listener of this.muteListeners) {
       listener(muted);
+    }
+
+    // If unmuting, preload the audio samples so they're ready for the first key press
+    if (!muted && !this.initialized) {
+      await this.initialize();
     }
 
     // Also mute/unmute the Tone.js destination
