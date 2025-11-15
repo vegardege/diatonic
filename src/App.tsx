@@ -60,11 +60,11 @@ export default function App() {
   });
 
   function handleKeyDown(e: KeyboardEvent) {
-    switch (e.keyCode) {
-      case 27:
+    switch (e.key) {
+      case "Escape":
         setModal("");
         break;
-      case 37: {
+      case "ArrowLeft": {
         // Left arrow - transpose down
         clearHighlight();
         const transposed = pressed.transpose("-m2").simplify();
@@ -77,7 +77,7 @@ export default function App() {
         }
         break;
       }
-      case 39: {
+      case "ArrowRight": {
         // Right arrow - transpose up
         clearHighlight();
         const transposed = pressed.transpose("m2").simplify();
@@ -90,18 +90,18 @@ export default function App() {
         }
         break;
       }
-      case 32:
+      case " ":
         clearPressed();
         clearHighlight();
         e.preventDefault();
         break;
-      case 49:
+      case "1":
         handleToggleMute();
         break;
-      case 50:
+      case "2":
         handlePlayArpeggio();
         break;
-      case 51:
+      case "3":
         handlePlayHarmony();
         break;
     }
