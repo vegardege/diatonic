@@ -39,14 +39,20 @@ export default function App() {
   // Use audio engine hook for reactive mute state
   const audio = useAudioEngine();
 
-  // Keep track of width to toggle narrow mode
-  const [width, setWidth] = useState(window.innerWidth);
-  const narrowMode = width <= 680;
+  // Track narrow mode using matchMedia for better performance
+  const [narrowMode, setNarrowMode] = useState(
+    window.matchMedia("(max-width: 680px)").matches,
+  );
 
   useEffect(() => {
-    const handleResize = () => setWidth(window.innerWidth);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    const mediaQuery = window.matchMedia("(max-width: 680px)");
+
+    const handleChange = (e: MediaQueryListEvent) => {
+      setNarrowMode(e.matches);
+    };
+
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
 
   /**
