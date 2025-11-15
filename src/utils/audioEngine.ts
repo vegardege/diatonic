@@ -10,7 +10,7 @@ import * as Tone from "tone";
  */
 class AudioEngine {
   private sampler: Tone.Sampler | null = null;
-  private muted = false;
+  private muted = true;
   private initialized = false;
   private currentArpeggioTimeout: number | null = null;
   private muteListeners: Set<(muted: boolean) => void> = new Set();
