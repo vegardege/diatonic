@@ -1,40 +1,39 @@
-import * as Tone from "tone";
+import type { Sampler } from "tone";
 
 /**
  * Audio engine using Tone.js with Salamander Grand Piano samples.
- *
- * Features:
- * - Realistic piano sound using actual piano recordings
- * - Play individual notes, arpeggios, and harmonies
- * - Mute/unmute control
  */
 class AudioEngine {
-  private sampler: Tone.Sampler | null = null;
-  private muted = true;
+  private sampler: Sampler | null = null;
   private initialized = false;
+  private muted = true;
   private currentArpeggioTimeout: number | null = null;
   private muteListeners: Set<(muted: boolean) => void> = new Set();
 
   /**
    * Initialize Tone.js and load piano samples.
+   * Tone.js is lazy-loaded only when this is called, reducing initial bundle size.
    * Must be called after user interaction due to browser autoplay policies.
    */
   async initialize(): Promise<void> {
+    // Dynamically import Tone.js only when needed
+    const { Sampler, start, loaded, getContext } = await import("tone");
+
     if (this.initialized) {
       // Already initialized, just resume audio context if needed
-      if (Tone.getContext().state === "suspended") {
-        await Tone.start();
+      if (getContext().state === "suspended") {
+        await start();
       }
       return;
     }
 
     // Start Tone.js audio context
-    await Tone.start();
+    await start();
 
     // Create sampler with Salamander Grand Piano samples
     // These are public domain piano recordings self-hosted for reliability
     // We sample every 3 notes (C, D#, F#, A) across the range
-    this.sampler = new Tone.Sampler({
+    this.sampler = new Sampler({
       urls: {
         A0: "A0.mp3",
         C1: "C1.mp3",
@@ -72,7 +71,7 @@ class AudioEngine {
     }).toDestination();
 
     // Wait for samples to load
-    await Tone.loaded();
+    await loaded();
     this.initialized = true;
   }
 
