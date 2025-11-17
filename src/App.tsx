@@ -382,13 +382,14 @@ export default function App() {
 
   const narrowControlPanel = (
     <div className={styles.narrowControls}>
-      <div className={styles.alwaysVisible}>{rootNotePanel}</div>
+      {rootNotePanel}
       <TabControls
         tabs={[
           { id: "scaleTab", text: "Scales", panel: scalesPanel },
           { id: "chordTab", text: "Chords", panel: chordsPanel },
         ]}
       />
+      {searchPanel}
     </div>
   );
 
