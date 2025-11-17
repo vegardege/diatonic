@@ -11,7 +11,6 @@ import KeyboardModal from "./components/KeyboardModal/KeyboardModal.tsx";
 import PatternList from "./components/PatternList/PatternList.tsx";
 import RootNote from "./components/RootNote/RootNote.tsx";
 import Search from "./components/Search/Search.tsx";
-import TabControls from "./components/TabControls/TabControls.tsx";
 import { useAudioEngine } from "./hooks/useAudioEngine.ts";
 
 // NoteListConstructor type for pattern handlers
@@ -383,12 +382,16 @@ export default function App() {
   const narrowControlPanel = (
     <div className={styles.narrowControls}>
       {rootNotePanel}
-      <TabControls
-        tabs={[
-          { id: "scaleTab", text: "Scales", panel: scalesPanel },
-          { id: "chordTab", text: "Chords", panel: chordsPanel },
-        ]}
-      />
+      <div className={styles.twoColumn}>
+        <div className={styles.column}>
+          <h3 className={styles.columnHeader}>Scales</h3>
+          {scalesPanel}
+        </div>
+        <div className={styles.column}>
+          <h3 className={styles.columnHeader}>Chords</h3>
+          {chordsPanel}
+        </div>
+      </div>
       {searchPanel}
     </div>
   );
