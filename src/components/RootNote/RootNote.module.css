@@ -4,10 +4,17 @@
   flex-wrap: wrap;
   justify-content: space-between;
   width: 100%;
+  max-width: 650px;
+}
+
+@media only screen and (max-width: 680px) {
+  .rootNote {
+    max-width: 350px;
+  }
 }
 
 .buttonGroup {
-  margin: 0 5px 20px 5px;
+  margin: 0 0 20px 0;
 }
 
 .buttonGroup li {
@@ -41,15 +48,4 @@
 
 .buttonGroup button:focus {
   z-index: 1;
-}
-
-@media only screen and (max-width: 680px) {
-  .buttonGroup {
-    margin: 0 0 20px 0;
-  }
-
-  .buttonGroup button {
-    width: 44px;
-    height: 44px;
-  }
 }
