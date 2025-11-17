@@ -1,9 +1,8 @@
 .options {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
+  gap: var(--spacing-gap-narrow);
   margin-top: 3px;
   width: 100%;
 }
@@ -16,4 +15,10 @@
   padding: 5px 10px 5px 10px;
   text-align: left;
   width: 145px;
+}
+
+.options button:focus-visible {
+  box-shadow: 0 0 0 2px var(--color-focus);
+  outline: none;
+  z-index: 1;
 }

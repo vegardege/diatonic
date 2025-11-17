@@ -1,15 +1,14 @@
 .rootNote {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
   width: 100%;
-  max-width: 650px;
+  max-width: var(--width-control-wide);
 }
 
 @media only screen and (max-width: 680px) {
   .rootNote {
-    max-width: 350px;
+    max-width: var(--width-control-narrow);
   }
 }
 
@@ -46,6 +45,8 @@
   border-radius: 0 10px 10px 0;
 }
 
-.buttonGroup button:focus {
+.buttonGroup button:focus-visible {
+  box-shadow: 0 0 0 2px var(--color-focus);
+  outline: none;
   z-index: 1;
 }

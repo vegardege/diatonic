@@ -1,4 +1,11 @@
 :root {
+  /* Layout */
+  --width-app-max: 780px;
+  --width-control-wide: 650px;
+  --width-control-narrow: 350px;
+  --spacing-gap-wide: 20px;
+  --spacing-gap-narrow: 10px;
+
   /* Base */
   --color-background: #ebe7dd;
   --color-surface: #e3ded3;
