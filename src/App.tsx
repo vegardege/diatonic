@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import styles from "./App.module.css";
 import AppControls from "./components/AppControls/AppControls.tsx";
 import AudioControls from "./components/AudioControls/AudioControls.tsx";
-import FlexControls from "./components/FlexControls/FlexControls.tsx";
 import HelpModal from "./components/HelpModal/HelpModal.tsx";
 import KeyboardModal from "./components/KeyboardModal/KeyboardModal.tsx";
 import PatternList from "./components/PatternList/PatternList.tsx";
@@ -363,26 +362,17 @@ export default function App() {
   );
 
   /**
-   * Define control panels in mobile (narrow) and desktop mode
+   * Unified control panel for both desktop and mobile
    */
-  const fullControlPanel = (
-    <FlexControls
-      rootPanel={rootNotePanel}
-      scalesPanel={scalesPanel}
-      chordsPanel={chordsPanel}
-      searchPanel={searchPanel}
-    />
-  );
-
-  const narrowControlPanel = (
-    <div className={styles.narrowControls}>
+  const controlPanel = (
+    <div className={styles.controls}>
       {rootNotePanel}
-      <div className={styles.twoColumn}>
-        <div className={styles.column}>
+      <div className={styles.patternRow}>
+        <div className={styles.patternColumn}>
           <h2 className={styles.columnHeader}>Scales</h2>
           {scalesPanel}
         </div>
-        <div className={styles.column}>
+        <div className={styles.patternColumn}>
           <h2 className={styles.columnHeader}>Chords</h2>
           {chordsPanel}
         </div>
@@ -426,7 +416,7 @@ export default function App() {
           onBlur={clearHighlight}
         />
       </div>
-      {narrowMode ? narrowControlPanel : fullControlPanel}
+      {controlPanel}
     </div>
   );
 }

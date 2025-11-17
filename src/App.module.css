@@ -64,21 +64,33 @@
   margin-top: -1px;
 }
 
-.narrowControls {
+.controls {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  width: 310px;
+  max-width: 650px;
 }
 
-.twoColumn {
+@media only screen and (max-width: 680px) {
+  .controls {
+    max-width: 350px;
+  }
+}
+
+.patternRow {
   display: flex;
-  gap: 10px;
+  gap: 20px;
   width: 100%;
 }
 
-.column {
+@media only screen and (max-width: 680px) {
+  .patternRow {
+    gap: 10px;
+  }
+}
+
+.patternColumn {
   flex: 1;
   display: flex;
   flex-direction: column;
