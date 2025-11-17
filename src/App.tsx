@@ -384,11 +384,11 @@ export default function App() {
       {rootNotePanel}
       <div className={styles.twoColumn}>
         <div className={styles.column}>
-          <h3 className={styles.columnHeader}>Scales</h3>
+          <h2 className={styles.columnHeader}>Scales</h2>
           {scalesPanel}
         </div>
         <div className={styles.column}>
-          <h3 className={styles.columnHeader}>Chords</h3>
+          <h2 className={styles.columnHeader}>Chords</h2>
           {chordsPanel}
         </div>
       </div>
