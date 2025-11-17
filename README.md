@@ -55,7 +55,7 @@ npm test            # Run tests with Vitest
 
 ### Core Technologies
 
-- **[React 19](https://react.dev/)** - UI framework
+- **[Preact](https://preactjs.com/)** - React compatibile UI framework, chosen for small bundle size
 - **[TypeScript](https://www.typescriptlang.org/)** - Type-safe JavaScript
 - **[Vite](https://vitejs.dev/)** - Fast build tooling and dev server
 
