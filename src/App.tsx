@@ -358,7 +358,10 @@ export default function App() {
   );
 
   const searchPanel = (
-    <Search text={search} onChange={(e) => setSearch(e.target.value)} />
+    <Search
+      text={search}
+      onChange={(e) => setSearch(e.currentTarget.value)}
+    />
   );
 
   /**

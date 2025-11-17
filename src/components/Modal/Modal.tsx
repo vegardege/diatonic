@@ -9,7 +9,7 @@ interface ModalProps {
 }
 
 export default function Modal(props: ModalProps) {
-  const stopPropagation = (e: MouseEvent) => e.stopPropagation();
+  const stopPropagation = (e: MouseEvent<HTMLElement>) => e.stopPropagation();
 
   return (
     <div
