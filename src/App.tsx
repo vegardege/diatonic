@@ -297,25 +297,20 @@ export default function App() {
   }
 
   /**
-   * Prepare data for selection lists. We filter by pressed notes and search.
-   * In desktop mode (full width), we limit to 12 results. In narrow mode,
-   * we show all matching results.
+   * Prepare data for selection lists. We filter by pressed notes and search,
+   * then limit to 12 results.
    */
   const scales = Object.keys(SCALES);
   const filteredScales = scales
     .filter((scale) => pressed.supersets().scales().includes(scale))
-    .filter((scale) => search.length === 0 || scale.includes(search));
-  const displayScales = narrowMode
-    ? filteredScales
-    : filteredScales.slice(0, 12);
+    .filter((scale) => search.length === 0 || scale.includes(search))
+    .slice(0, 12);
 
   const chords = Object.keys(CHORDS);
   const filteredChords = chords
     .filter((chord) => pressed.supersets().chords().includes(chord))
-    .filter((chord) => search.length === 0 || chord.includes(search));
-  const displayChords = narrowMode
-    ? filteredChords
-    : filteredChords.slice(0, 12);
+    .filter((chord) => search.length === 0 || chord.includes(search))
+    .slice(0, 12);
 
   /**
    * Control panel components
@@ -335,7 +330,7 @@ export default function App() {
 
   const scalesPanel = (
     <PatternList
-      patterns={displayScales}
+      patterns={filteredScales}
       pressed={pressed.exact().scales()}
       highlighted={highlighted.exact().scales()}
       onClick={(name, pressed) =>
@@ -350,7 +345,7 @@ export default function App() {
 
   const chordsPanel = (
     <PatternList
-      patterns={displayChords}
+      patterns={filteredChords}
       pressed={pressed.exact().chords()}
       highlighted={highlighted.exact().chords()}
       onClick={(name, pressed) =>
