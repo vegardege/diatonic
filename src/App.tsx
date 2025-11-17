@@ -381,13 +381,15 @@ export default function App() {
   );
 
   const narrowControlPanel = (
-    <TabControls
-      tabs={[
-        { id: "rootTab", text: "Root Note", panel: rootNotePanel },
-        { id: "scaleTab", text: "Scales", panel: scalesPanel },
-        { id: "chordTab", text: "Chords", panel: chordsPanel },
-      ]}
-    />
+    <div className={styles.narrowControls}>
+      <div className={styles.alwaysVisible}>{rootNotePanel}</div>
+      <TabControls
+        tabs={[
+          { id: "scaleTab", text: "Scales", panel: scalesPanel },
+          { id: "chordTab", text: "Chords", panel: chordsPanel },
+        ]}
+      />
+    </div>
   );
 
   return (
