@@ -407,13 +407,11 @@ export default function App() {
           octaves={narrowMode ? 2 : 3}
           pressed={pressed}
           highlighted={highlighted}
+          interactive={true}
           keyboardShortcuts={true}
-          focusable={true}
-          onClick={handlePianoChange}
-          onMouseEnter={handlePianoFocus}
-          onMouseLeave={clearHighlight}
-          onFocus={handlePianoFocus}
-          onBlur={clearHighlight}
+          onPress={handlePianoChange}
+          onHighlightStart={handlePianoFocus}
+          onHighlightEnd={clearHighlight}
         />
       </div>
       {controlPanel}

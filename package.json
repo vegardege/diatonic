@@ -3,7 +3,7 @@
   "version": "0.5.1",
   "private": true,
   "dependencies": {
-    "@diatonic/piano": "^0.3.0",
+    "@diatonic/piano": "^0.4.0",
     "@preact/preset-vite": "^2.9.3",
     "kamasi": "^0.3.0",
     "modern-normalize": "^3.0.1",
