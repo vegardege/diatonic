@@ -38,15 +38,15 @@
   --piano-key-diatonic-highlighted-fill: #eca088;
   --piano-key-diatonic-highlighted-stroke: #b8624c;
   --piano-key-diatonic-pressed-fill: #e07858;
-  --piano-key-diatonic-pressed-stroke: #3d3530;
+  --piano-key-diatonic-pressed-stroke: #b8624c;
 
   /* Piano keys - chromatic (black keys) - dark burgundy-red */
   --piano-key-chromatic-fill: #4a423c;
   --piano-key-chromatic-stroke: #4a423c;
   --piano-key-chromatic-highlighted-fill: #b86850;
-  --piano-key-chromatic-highlighted-stroke: #503028;
+  --piano-key-chromatic-highlighted-stroke: #4a423c;
   --piano-key-chromatic-pressed-fill: #c04838;
-  --piano-key-chromatic-pressed-stroke: #2d2520;
+  --piano-key-chromatic-pressed-stroke: #4a423c;
 
   /* Piano stroke width */
   --piano-key-stroke-width: 2;
@@ -84,17 +84,17 @@
   --piano-key-diatonic-fill: #c5bdb5;
   --piano-key-diatonic-stroke: #5a544e;
   --piano-key-diatonic-highlighted-fill: #b88070;
-  --piano-key-diatonic-highlighted-stroke: #906050;
+  --piano-key-diatonic-highlighted-stroke: #5a544e;
   --piano-key-diatonic-pressed-fill: #a05848;
-  --piano-key-diatonic-pressed-stroke: #0a0908;
+  --piano-key-diatonic-pressed-stroke: #5a544e;
 
   /* Piano keys - chromatic (black keys) - burgundy-red for dark mode */
   --piano-key-chromatic-fill: #1f1d1b;
   --piano-key-chromatic-stroke: #38342f;
   --piano-key-chromatic-highlighted-fill: #704838;
-  --piano-key-chromatic-highlighted-stroke: #0f0e0d;
+  --piano-key-chromatic-highlighted-stroke: #38342f;
   --piano-key-chromatic-pressed-fill: #883828;
-  --piano-key-chromatic-pressed-stroke: #0a0908;
+  --piano-key-chromatic-pressed-stroke: #38342f;
 }
 
 body {

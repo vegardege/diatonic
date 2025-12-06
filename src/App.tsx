@@ -128,7 +128,7 @@ export default function App() {
    *
    * @param {string} note The note of the key that was clicked
    */
-  function handlePianoChange(note: string) {
+  function handlePianoPress(note: string) {
     // Check if the note is currently pressed before toggling
     const wasPressed = pressed.notes.some((n) => n.toString() === note);
 
@@ -145,7 +145,7 @@ export default function App() {
    *
    * @param {string} note The note of the key that is hovered
    */
-  function handlePianoFocus(note: string) {
+  function handlePianoHighlight(note: string) {
     setHighlighted(new NoteList([note]));
   }
 
@@ -409,8 +409,8 @@ export default function App() {
           highlighted={highlighted}
           interactive={true}
           keyboardShortcuts={true}
-          onPress={handlePianoChange}
-          onHighlightStart={handlePianoFocus}
+          onPress={handlePianoPress}
+          onHighlightStart={handlePianoHighlight}
           onHighlightEnd={clearHighlight}
         />
       </div>
