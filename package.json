@@ -6,7 +6,7 @@
     "@diatonic/piano": "^0.4.0",
     "kamasi": "^0.3.0",
     "modern-normalize": "^3.0.1",
-    "preact": "^10.26.3",
+    "preact": "^10.28.4",
     "tone": "^15.1.22"
   },
   "scripts": {
