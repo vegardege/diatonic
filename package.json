@@ -2,6 +2,7 @@
   "name": "@diatonic/web",
   "version": "0.5.2",
   "private": true,
+  "type": "module",
   "dependencies": {
     "@diatonic/piano": "^0.4.0",
     "kamasi": "^0.3.0",
