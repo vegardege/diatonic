@@ -30,17 +30,17 @@
     "tone": "^15.1.22"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.10",
-    "@preact/preset-vite": "^2.10.5",
-    "@testing-library/jest-dom": "^6.9.1",
-    "@testing-library/preact": "^3.2.4",
-    "@testing-library/user-event": "^14.6.1",
-    "@vitest/coverage-v8": "^4.1.3",
-    "@vitest/ui": "^4.1.3",
-    "happy-dom": "^20.8.9",
-    "typescript": "^5.9.3",
-    "vite": "^8.0.7",
-    "vitest": "^4.1.3"
+    "@biomejs/biome": "^2.6.4",
+    "@preact/preset-vite": "^2.10.6",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/preact": "^3.2.6",
+    "@testing-library/user-event": "^14.6.8",
+    "@vitest/coverage-v8": "^5.0.5",
+    "@vitest/ui": "^5.0.5",
+    "happy-dom": "^21.0.4",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.5",
+    "vitest": "^5.0.5"
   },
   "overrides": {
     "react": "npm:@preact/compat",
