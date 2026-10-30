@@ -26,7 +26,7 @@
     "@diatonic/piano": "^0.4.0",
     "kamasi": "^0.3.0",
     "modern-normalize": "^3.0.1",
-    "preact": "^10.29.1",
+    "preact": "^11.1.1",
     "tone": "^15.1.22"
   },
   "devDependencies": {
