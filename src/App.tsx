@@ -112,17 +112,6 @@ export default function App() {
   }
 
   /**
-   * Called when the user activates a modal popup.
-   *
-   * @param {string} name Name of modal popup to show
-   * @param {string} focusElement ID of element to focus on (close button)
-   */
-  function showModal(name: string, focusElement: string) {
-    setModal(name);
-    document.getElementById(focusElement)?.focus();
-  }
-
-  /**
    * Called when the user clicks a piano key, either to press or
    * unpress the key.
    *
@@ -398,8 +387,8 @@ export default function App() {
         <AppControls
           narrowMode={narrowMode}
           onReset={clearPressed}
-          onShowKeyboardShortcuts={() => showModal("keyboard", "keyboardClose")}
-          onShowHelp={() => showModal("help", "helpClose")}
+          onShowKeyboardShortcuts={() => setModal("keyboard")}
+          onShowHelp={() => setModal("help")}
         />
       </nav>
       <div className={styles.piano}>

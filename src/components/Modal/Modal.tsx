@@ -1,4 +1,5 @@
 import type { MouseEvent, ReactNode } from "react";
+import { useEffect, useRef } from "react";
 import styles from "./Modal.module.css";
 
 interface ModalProps {
@@ -10,6 +11,15 @@ interface ModalProps {
 
 export default function Modal(props: ModalProps) {
   const stopPropagation = (e: MouseEvent<HTMLElement>) => e.stopPropagation();
+  const closeButton = useRef<HTMLButtonElement>(null);
+
+  // Move keyboard focus into the dialog when it opens. This must run after
+  // render, since the modal is `display: none` until `display` is true.
+  useEffect(() => {
+    if (props.display) {
+      closeButton.current?.focus();
+    }
+  }, [props.display]);
 
   return (
     <div
@@ -20,6 +30,7 @@ export default function Modal(props: ModalProps) {
     >
       <section onClick={stopPropagation}>
         <button
+          ref={closeButton}
           type="button"
           className={styles.close}
           aria-label="Close"
